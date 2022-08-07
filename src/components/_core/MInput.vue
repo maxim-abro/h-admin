@@ -11,7 +11,7 @@
     :class="
       dark
         ? 'bg-zinc-700 text-zinc-300'
-        : 'placeholder-zinc-800 text-zinc-900 bg-gray-200'
+        : 'placeholder-zinc-800 text-zinc-900 border border-zinc-300 bg-white'
     "
   />
 </template>

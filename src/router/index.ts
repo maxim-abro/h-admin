@@ -21,6 +21,30 @@ const router = createRouter({
         layout: "auth",
       },
     },
+    {
+      path: "/post",
+      name: "posts",
+      component: () => import('@/views/post/index.vue'),
+      meta: {
+        auth: true
+      }
+    },
+    {
+      path: "/shop",
+      name: "shops",
+      component: () => import('@/views/shop/index.vue'),
+      meta: {
+        auth: true
+      }
+    },
+    {
+      path: '/shop/add',
+      name: 'add_shop',
+      component: () => import("@/views/shop/add.vue"),
+      meta: {
+        auth: true
+      }
+    },
   ],
 });
 

@@ -3,7 +3,9 @@
     <button class="text-second hover:text-primary h-full hover:duration-75 duration-75 mr-4" @click="data.openMenu = !data.openMenu">
       <font-awesome-icon icon="bars" class="text-3xl"/>
     </button>
-    <router-link to="/">
+    <router-link
+      to="/"
+    >
       <img src="@/assets/logo.png" alt="" class="h-16">
     </router-link>
   </header>
@@ -11,7 +13,40 @@
     <aside
       class="pt-16 -ml-4 w-[130px] h-[calc(100vh - 4rem)] overflow-auto bg-white shadow"
       :style="!data.openMenu ? 'margin-left: -145px' : ''"
-    >Aside</aside>
+    >
+      <template
+        v-for="(item, idx) of data.menuItems"
+        :key="idx"
+      >
+        <m-collapse v-if="!item.url">
+          <template #trigger>
+            <button
+              class="flex flex-col items-center text-lg border-b w-full py-2 hover:text-primary"
+            >
+              <font-awesome-icon v-if="item.icon" :icon="item.icon" class="mb-2"/>
+              <span>{{ item.title }}</span>
+            </button>
+          </template>
+
+          <template #content>
+            <router-link
+              v-for="child of item.children"
+              :key="child.title"
+              :to="child.url"
+              class="text-center hover:text-primary"
+            >{{ child.title }}</router-link>
+          </template>
+        </m-collapse>
+        <router-link
+          v-if="item.url"
+          :to="item.url"
+          class="flex flex-col items-center text-lg border-b w-full py-2 hover:text-primary"
+        >
+          <font-awesome-icon :icon="item.icon"/>
+          <span>{{ item.title }}</span>
+        </router-link>
+      </template>
+    </aside>
     <main class="mt-16 w-full">
       <slot/>
     </main>
@@ -20,9 +55,56 @@
 
 <script setup lang="ts">
 import { RouterLink } from "vue-router";
-import {reactive} from "vue";
+import { reactive } from "vue";
+import MCollapse from '@/components/_core/MCollapse.vue'
 
 const data = reactive({
-  openMenu: false as boolean
+  openMenu: false as boolean,
+  activeMenu: 0,
+  menuItems: [
+    {
+      title: 'Панель',
+      icon: 'laptop',
+      url: '/'
+    },
+    {
+      title: 'магазины',
+      icon: 'store',
+      children: [
+        {
+          title: 'Все магазины',
+          url: '/shop'
+        },
+        {
+          title: 'Добавить новый',
+          url: '/shop/add'
+        }
+      ]
+    },
+    {
+      title: 'Купоны',
+      icon: 'ticket',
+      children: [
+        {
+          title: 'Все купоны',
+          url: '/post'
+        },
+      ]
+    },
+    {
+      title: 'Категории',
+      icon: 'layer-group',
+      children: [
+        {
+          title: 'Все категории',
+          url: '/category'
+        },
+        {
+          title: 'Добавить новый',
+          url: '/category/add'
+        }
+      ]
+    },
+  ]
 })
 </script>
