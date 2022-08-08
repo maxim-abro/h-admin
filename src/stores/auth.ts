@@ -69,7 +69,7 @@ export const useAuthStore = defineStore({
         this.setToken(result.data.hash);
         this.setName(result.data.dataValues.email);
         this.setEmail(result.data.dataValues.login);
-        return 'ok'
+        return "ok";
       } catch (e) {
         console.log(e);
         // @ts-ignore

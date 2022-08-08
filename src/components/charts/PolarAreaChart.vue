@@ -1,59 +1,58 @@
 <template>
-<polar-area/>
+  <polar-area />
 </template>
 
 <script>
-import { PolarArea } from 'vue-chartjs'
+import { PolarArea } from "vue-chartjs";
 import {
   Chart as ChartJS,
   Title,
   Tooltip,
   Legend,
   ArcElement,
-  RadialLinearScale
-} from 'chart.js'
+  RadialLinearScale,
+} from "chart.js";
 
-ChartJS.register(Title, Tooltip, Legend, ArcElement, RadialLinearScale)
+ChartJS.register(Title, Tooltip, Legend, ArcElement, RadialLinearScale);
 
 export default {
-  name: 'PolarAreaChart',
+  name: "PolarAreaChart",
   components: { PolarArea },
   props: {
     chartId: {
       type: String,
-      default: 'bar-chart'
+      default: "bar-chart",
     },
     datasetIdKey: {
       type: String,
-      default: 'label'
+      default: "label",
     },
     width: {
       type: Number,
-      default: 400
+      default: 400,
     },
     height: {
       type: Number,
-      default: 400
+      default: 400,
     },
     cssClasses: {
-      default: '',
-      type: String
+      default: "",
+      type: String,
     },
     styles: {
       type: Object,
-      default: () => {}
+      default: () => {},
     },
     plugins: {
       type: Object,
-      default: () => {}
-    }
+      default: () => {},
+    },
   },
   data() {
     return {
       responsive: true,
-      maintainAspectRatio: false
-    }
-  }
-}
-
+      maintainAspectRatio: false,
+    };
+  },
+};
 </script>

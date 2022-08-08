@@ -53,7 +53,7 @@ const fetchForm = async () => {
   if (result === "ok") {
     router.push("/");
   } else {
-    data.err = 'Неправильная почта или пароль'
+    data.err = "Неправильная почта или пароль";
   }
 };
 </script>

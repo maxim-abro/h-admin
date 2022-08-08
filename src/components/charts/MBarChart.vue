@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { Pie } from 'vue-chartjs'
+import { Pie } from "vue-chartjs";
 import {
   Chart as ChartJS,
   Title,
@@ -21,49 +21,49 @@ import {
   Legend,
   ArcElement,
   CategoryScale,
-} from 'chart.js'
+} from "chart.js";
 
-ChartJS.register(Title, Tooltip, Legend, ArcElement, CategoryScale)
+ChartJS.register(Title, Tooltip, Legend, ArcElement, CategoryScale);
 
 export default {
-  name: 'MBarChart',
+  name: "MBarChart",
   components: { Pie },
   props: {
     chartId: {
       type: String,
-      default: 'bar-chart'
+      default: "bar-chart",
     },
     datasetIdKey: {
       type: String,
-      default: 'label'
+      default: "label",
     },
     width: {
       type: Number,
-      default: 400
+      default: 400,
     },
     height: {
       type: Number,
-      default: 400
+      default: 400,
     },
     cssClasses: {
-      default: '',
-      type: String
+      default: "",
+      type: String,
     },
     styles: {
       type: Object,
-      default: () => {}
+      default: () => {},
     },
     plugins: {
       type: Object,
-      default: () => {}
-    }
+      default: () => {},
+    },
   },
   data() {
     return {
       chartOptions: {
-        responsive: true
-      }
-    }
-  }
-}
+        responsive: true,
+      },
+    };
+  },
+};
 </script>
