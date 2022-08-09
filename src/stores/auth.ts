@@ -15,11 +15,11 @@ export const useAuthStore = defineStore({
   id: "auth",
   state: () => ({
     // @ts-ignore
-    token: $cookies.get("jwt_token") as any,
+    token: localStorage.getItem("jwt_token") as any,
     // @ts-ignore
-    name: $cookies.get("name") as any,
+    name: localStorage.getItem("name") as any,
     // @ts-ignore
-    email: $cookies.get("email") as any,
+    email: localStorage.getItem("email") as any,
   }),
   getters: {
     isAuth: (state) => !!state.token,
@@ -27,17 +27,17 @@ export const useAuthStore = defineStore({
   actions: {
     setToken(token: string) {
       // @ts-ignore
-      $cookies.set("jwt_token", token);
+      localStorage.setItem("jwt_token", token);
       this.token = token;
     },
     setEmail(email: string) {
       // @ts-ignore
-      $cookies.set("email", email);
+      localStorage.setItem("email", email);
       this.email = email;
     },
     setName(name: string) {
       // @ts-ignore
-      $cookies.set("name", name);
+      localStorage.setItem("name", name);
       this.name = name;
     },
     logout() {
@@ -45,19 +45,19 @@ export const useAuthStore = defineStore({
       this.email = "";
       this.name = "";
       // @ts-ignore
-      $cookies.remove("jwt_token");
+      localStorage.removeItem("jwt_token");
       // @ts-ignore
-      $cookies.remove("email");
+      localStorage.removeItem("email");
       // @ts-ignore
-      $cookies.remove("name");
+      localStorage.removeItem("name");
     },
     addCookie() {
       // @ts-ignore
-      this.token = $cookies.get("jwt_token");
+      this.token = localStorage.getItem("jwt_token");
       // @ts-ignore
-      this.email = $cookies.get("email");
+      this.email = localStorage.getItem("email");
       // @ts-ignore
-      this.name = $cookies.get("name");
+      this.name = localStorage.getItem("name");
     },
     async login(data: any) {
       try {

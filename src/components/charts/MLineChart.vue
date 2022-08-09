@@ -1,33 +1,35 @@
 <template>
-  <pie
-    :chart-options="chartOptions"
-    :chart-data="chartData"
-    :chart-id="chartId"
-    :dataset-id-key="datasetIdKey"
-    :plugins="plugins"
-    :css-classes="cssClasses"
-    :styles="styles"
-    :width="width"
-    :height="height"
-  />
+  <Line />
 </template>
 
 <script lang="ts">
-import { Pie } from "vue-chartjs";
+import { Line } from "vue-chartjs";
 import {
   Chart as ChartJS,
   Title,
   Tooltip,
   Legend,
-  ArcElement,
+  LineElement,
+  LinearScale,
+  PointElement,
   CategoryScale,
 } from "chart.js";
 
-ChartJS.register(Title, Tooltip, Legend, ArcElement, CategoryScale);
+ChartJS.register(
+  Title,
+  Tooltip,
+  Legend,
+  LineElement,
+  LinearScale,
+  PointElement,
+  CategoryScale
+);
 
 export default {
-  name: "MBarChart",
-  components: { Pie },
+  name: "LineChart",
+  components: {
+    Line,
+  },
   props: {
     chartId: {
       type: String,
@@ -57,13 +59,6 @@ export default {
       type: Object,
       default: () => {},
     },
-  },
-  data() {
-    return {
-      chartOptions: {
-        responsive: true,
-      },
-    };
   },
 };
 </script>

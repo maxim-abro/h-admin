@@ -115,6 +115,11 @@ const data = reactive({
       icon: "handshake",
       url: "/adv_cake",
     },
+    {
+      title: 'vk',
+      icon: "vk",
+      url: "/vk",
+    },
   ],
 });
 </script>

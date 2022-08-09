@@ -1,6 +1,5 @@
 <template>
   <button
-    @click="$emit('click', $event)"
     :type="type"
     :disabled="disabled"
     :class="getColor"
@@ -11,7 +10,7 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, onMounted, reactive, computed } from "vue";
+import { defineProps, reactive, computed } from "vue";
 
 const props = defineProps<{
   color?: string;

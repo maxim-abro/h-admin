@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import home from "../views/home.vue";
 import { useAuthStore } from "@/stores/auth";
-import http from '@/modules/api';
+import http from "@/modules/api";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -62,6 +62,14 @@ const router = createRouter({
         auth: true,
       },
     },
+    {
+      path: "/vk",
+      name: "vk",
+      component: () => import("@/views/vk.vue"),
+      meta: {
+        auth: true,
+      },
+    },
   ],
 });
 
@@ -70,7 +78,15 @@ router.beforeEach(async (to, from, next) => {
   const store = useAuthStore();
 
   if (requireAuth && store.isAuth) {
-    const result = await http.get('/auth/check')
+    const result = await http.get("/auth/check");
+
+    console.log(result.data.message)
+    if (result.data.message === 'ok') {
+      next();
+    } else {
+      next();
+    }
+
     next();
   } else if (requireAuth && !store.isAuth) {
     next("/auth?message=non_authorize");

@@ -2,7 +2,7 @@
   <polar-area />
 </template>
 
-<script>
+<script lang="ts">
 import { PolarArea } from "vue-chartjs";
 import {
   Chart as ChartJS,

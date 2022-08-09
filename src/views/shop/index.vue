@@ -1,15 +1,17 @@
 <template>
-  <div class="flex justify-between mb-5">
-    <h1 class="text-3xl font-bold">Посты</h1>
+  <div class="flex md:flex-row flex-col justify-between mb-5">
+    <h1 class="text-3xl font-bold">Магазины</h1>
 
-    <div class="flex w-max gap-5">
-      <m-input placeholder="поиск" type="search" />
-      <m-button color="primary" class="w-64">Добавить пост</m-button>
+    <div class="flex md:flex-row flex-col w-full lg:w-max gap-5">
+      <m-input class="w-full" placeholder="поиск" type="search" />
+      <m-button  @click="$router.push('/shop/add')" color="primary" class="w-auto lg:w-64">Добавить магазин</m-button>
     </div>
   </div>
 
+  <m-load v-if="data.load"/>
   <div
     class="rounded rounded-lg shadow-[0_0_4px_1px_rgba(0,0,0,0.1)] bg-white w-full p-5 mb-5"
+    v-if="!data.load"
   >
     <div class="overflow-x-auto">
       <table class="table table-auto w-full">
@@ -54,18 +56,12 @@
       </table>
     </div>
   </div>
-
-  <!--  <div class="rounded rounded-lg shadow-[0_0_4px_1px_rgba(0,0,0,0.1)] bg-white w-full p-5">-->
-  <!--    <m-pagination-->
-  <!--      v-model="data.pagination.current_page"-->
-  <!--      :page-count="data.pagination.total_page"-->
-  <!--    />-->
-  <!--  </div>-->
 </template>
 
 <script setup lang="ts">
 import MButton from "@/components/_core/MButton.vue";
 import MInput from "@/components/_core/MInput.vue";
+import MLoad from "@/components/_core/MLoad.vue";
 import { onMounted, reactive, watch } from "vue";
 import MPagination from "@/components/_core/MPagination.vue";
 import type { ShopModel } from "@/models/shop.model";
@@ -73,11 +69,14 @@ import http from "@/modules/api";
 
 const data = reactive({
   shops: [] as ShopModel[],
+  load: true as boolean,
 });
 
 onMounted(async () => {
   const resData = await http.get("/admin/shop");
 
   data.shops = resData.data;
+
+  data.load = false
 });
 </script>

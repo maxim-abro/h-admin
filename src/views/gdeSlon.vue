@@ -2,8 +2,8 @@
   <h1 class="text-2xl font-bold mb-5">Партнёрская программа gdeslon</h1>
 
   <m-card class="mb-5">
-    <div class="grid grid-cols-3 gap-5">
-      <div class="">
+    <div class="grid md:grid-cols-3 gap-5">
+      <div class="w-full">
         <span>Выберите магазин площадки:</span>
         <select
           class="mb-5 placeholder-zinc-800 text-zinc-900 border border-zinc-300 bg-white focus:outline-0 rounded p-2 box-border ml-3 focus:outline-0 focus:ring focus:ring-primary"
@@ -20,7 +20,7 @@
         </select>
       </div>
 
-      <div class="">
+      <div class="w-full">
         <span>Выберите категорию:</span>
         <select
           class="mb-5 placeholder-zinc-800 text-zinc-900 border border-zinc-300 bg-white focus:outline-0 rounded p-2 box-border ml-3 focus:outline-0 focus:ring focus:ring-primary"
@@ -36,7 +36,7 @@
         </select>
       </div>
 
-      <div class="">
+      <div class="w-full">
         <span>Выберите ваш магазин:</span>
         <select
           class="mb-5 placeholder-zinc-800 text-zinc-900 border border-zinc-300 bg-white focus:outline-0 rounded p-2 box-border ml-3 focus:outline-0 focus:ring focus:ring-primary"
@@ -115,7 +115,7 @@ onMounted(async () => {
   data.shops = shops.data;
 });
 
-const couponsToSite = computed((): object[] => data.slonCoupons.filter((i) => i.toSite));
+const couponsToSite = computed((): object[] => data.slonCoupons.filter((i:any) => i.toSite));
 
 const getCoupons = async (idShop: string) => {
   try {
@@ -136,14 +136,19 @@ const pushCoupons = async () => {
   try {
     for (const item of couponsToSite.value) {
       await http.post("/admin/post/add", {
+        // @ts-ignore
         title: item.title,
+        // @ts-ignore
         description: item.description,
         type: "sale",
         shopUin: data.shopActive,
+        // @ts-ignore
         endDate: item.endDate || "2022-08-31",
+        // @ts-ignore
         url: item.url,
         code: "",
         category: data.categoryActive,
+        // @ts-ignore
         recomended: item.recomended,
       });
     }

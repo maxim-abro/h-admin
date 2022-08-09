@@ -1,15 +1,17 @@
 <template>
-  <div class="flex justify-between mb-5">
-    <h1 class="text-3xl font-bold">Посты</h1>
+  <div class="flex md:flex-row flex-col justify-between mb-5">
+    <h1 class="text-3xl font-bold mb-5 lg:mb-0">Посты</h1>
 
-    <div class="flex w-max gap-5">
+    <div class="flex w-full lg:w-max gap-5">
       <m-input placeholder="поиск" type="search" />
-      <m-button color="primary" class="w-64">Добавить пост</m-button>
     </div>
   </div>
 
+  <m-load v-if="data.load"/>
+
   <div
     class="rounded rounded-lg shadow-[0_0_4px_1px_rgba(0,0,0,0.1)] bg-white w-full p-5 mb-5"
+    v-if="!data.load"
   >
     <div class="overflow-x-auto">
       <table class="table table-auto w-full">
@@ -19,7 +21,7 @@
             <th class="ltr:text-left rtl:text-right uppercase">Название</th>
             <th class="text-center uppercase">Просмотры</th>
             <th class="text-center uppercase">Дата</th>
-            <th class="uppercase"></th>
+            <th class="uppercase">Действия</th>
           </tr>
         </thead>
 
@@ -68,6 +70,7 @@
 <script setup lang="ts">
 import MButton from "@/components/_core/MButton.vue";
 import MInput from "@/components/_core/MInput.vue";
+import MLoad from "@/components/_core/MLoad.vue";
 import { onMounted, reactive, watch } from "vue";
 import MPagination from "@/components/_core/MPagination.vue";
 import type { PostModel } from "@/models/post.model";
@@ -78,6 +81,7 @@ const data = reactive({
   page: 1 as number,
   counter: 0 as number,
   pagination: {} as object,
+  load: true as boolean,
 });
 
 onMounted(async () => {
@@ -91,6 +95,8 @@ onMounted(async () => {
 
   data.posts = postRes.data.rows;
   data.counter = postRes.data.count;
+
+  data.load = false;
 });
 
 const updatePosts = async () => {
@@ -98,6 +104,7 @@ const updatePosts = async () => {
 };
 
 watch(
+    // @ts-ignore
   () => data.pagination.current_page,
   () => {
     console.log("12313");

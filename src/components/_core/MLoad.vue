@@ -4,6 +4,8 @@
   </div>
 </template>
 
+<script lang="ts"></script>
+
 <style scoped>
 .lds-dual-ring {
   display: inline-block;

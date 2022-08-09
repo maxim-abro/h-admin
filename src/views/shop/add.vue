@@ -53,7 +53,7 @@
         <h2 class="text-lg font-medium">Публикация</h2>
         <m-switch class="mb-3">Горячее предложение</m-switch>
 
-        <m-button class="uppercase font-bold" type="button" @click="handleForm"
+        <m-button class="uppercase font-bold" type="button" :disabled="data.loadHandle" @click="handleForm"
           >Опубликовать</m-button
         >
       </div>
@@ -97,22 +97,23 @@
 </template>
 
 <script setup lang="ts">
+import { onMounted, reactive, computed } from "vue";
+import type { ShopModel } from "@/models/shop.model";
+import http from "@/modules/api";
 import MInput from "@/components/_core/MInput.vue";
 import MButton from "@/components/_core/MButton.vue";
 import MSwitch from "@/components/_core/MSwitch.vue";
-import http from "@/modules/api";
-import { onMounted, reactive, computed } from "vue";
-import type { ShopModel } from "@/models/shop.model";
 
 const data = reactive({
   categories: [] as object[],
   shopData: {} as ShopModel,
+  loadHandle: false as boolean,
 });
 
 onMounted(async () => {
   const categories = await http.get("/category");
 
-  data.categories = categories.data.map((i) => {
+  data.categories = categories.data.map((i:any) => {
     return {
       title: i.title,
       uin: i.uin,
@@ -122,7 +123,7 @@ onMounted(async () => {
 });
 
 const checkedCategories = computed(() =>
-  data.categories.filter((i) => i.checked)
+  data.categories.filter((i:any) => i.checked)
 );
 
 const inputImage = async (event: any) => {
@@ -140,9 +141,10 @@ const inputImage = async (event: any) => {
 
 const handleForm = async () => {
   try {
-    const categories = [];
+    data.loadHandle = true
+    const categories = [] as object[];
 
-    checkedCategories.value.forEach((i) => categories.push(i.uin));
+    checkedCategories.value.forEach((i:any) => categories.push(i.uin));
 
     await http.post("/admin/shop", {
       title: data.shopData.title,

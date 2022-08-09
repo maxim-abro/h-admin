@@ -33,7 +33,7 @@ const data = reactive({
 
 const emit = defineEmits(["update:modelValue"]);
 
-function updateValue(value) {
+function updateValue(value:any) {
   emit("update:modelValue", value);
 }
 

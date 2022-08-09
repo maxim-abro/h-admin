@@ -3,7 +3,7 @@
     <router-view />
   </component>
 </template>
-<script setup>
+<script setup lang="ts">
 import { RouterView, useRoute } from "vue-router";
 import { computed } from "vue";
 

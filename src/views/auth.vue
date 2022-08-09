@@ -8,6 +8,7 @@
         color="primary"
         class="mb-4 mt-1"
         type="email"
+        :disabled="data.ok"
         v-model="data.email"
       />
 
@@ -17,12 +18,15 @@
         placeholder="Ваш пароль"
         class="mb-4 mt-1"
         type="password"
+        :disabled="data.ok"
         v-model="data.password"
       />
 
       <div class="text-red-500 text-sm" v-if="data.err">{{ data.err }}</div>
+      <div class="text-green-500 text-sm" v-if="data.ok">Авторизация прошла успешно</div>
 
-      <m-button color="primary" type="submit"> Войти </m-button>
+      <m-button color="primary" type="submit" v-if="!data.ok"> Войти </m-button>
+      <m-button v-if="data.ok" @click="window.location.href = 'http://adm.za-halyavoi.ru/'">Перейти в панель администратора</m-button>
     </form>
   </div>
 </template>
@@ -42,6 +46,7 @@ const data = reactive({
   email: "" as string,
   password: "" as string,
   err: "" as string,
+  ok: false as boolean,
 });
 
 const fetchForm = async () => {
@@ -51,7 +56,7 @@ const fetchForm = async () => {
   });
 
   if (result === "ok") {
-    router.push("/");
+    data.ok = true;
   } else {
     data.err = "Неправильная почта или пароль";
   }
