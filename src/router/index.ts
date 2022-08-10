@@ -74,24 +74,31 @@ const router = createRouter({
 });
 
 router.beforeEach(async (to, from, next) => {
-  const requireAuth = to.meta.auth;
-  const store = useAuthStore();
+  try {
+    const requireAuth = to.meta.auth;
+    const store = useAuthStore();
 
-  if (requireAuth && store.isAuth) {
-    const result = await http.get("/auth/check");
+    if (requireAuth && store.isAuth) {
+      const result = await http.get("/auth/check")
 
-    console.log(result.data.message)
-    if (result.data.message === 'ok') {
-      next();
+      if (result.data.message === "ok") {
+        console.log("ok");
+        next();
+      } else {
+        console.log("!!!ok");
+        next("/auth?message=non_authorize");
+      }
+    } else if (requireAuth && !store.isAuth) {
+      console.log("ok if");
+      next("/auth?message=non_authorize");
     } else {
       next();
     }
-
-    next();
-  } else if (requireAuth && !store.isAuth) {
+  } catch (e) {
+    const store = useAuthStore();
+    console.log("catch");
     next("/auth?message=non_authorize");
-  } else {
-    next();
+    store.logout();
   }
 });
 

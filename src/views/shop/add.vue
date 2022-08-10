@@ -53,7 +53,11 @@
         <h2 class="text-lg font-medium">Публикация</h2>
         <m-switch class="mb-3">Горячее предложение</m-switch>
 
-        <m-button class="uppercase font-bold" type="button" :disabled="data.loadHandle" @click="handleForm"
+        <m-button
+          class="uppercase font-bold"
+          type="button"
+          :disabled="data.loadHandle"
+          @click="handleForm"
           >Опубликовать</m-button
         >
       </div>
@@ -113,7 +117,7 @@ const data = reactive({
 onMounted(async () => {
   const categories = await http.get("/category");
 
-  data.categories = categories.data.map((i:any) => {
+  data.categories = categories.data.map((i: any) => {
     return {
       title: i.title,
       uin: i.uin,
@@ -123,7 +127,7 @@ onMounted(async () => {
 });
 
 const checkedCategories = computed(() =>
-  data.categories.filter((i:any) => i.checked)
+  data.categories.filter((i: any) => i.checked)
 );
 
 const inputImage = async (event: any) => {
@@ -141,10 +145,10 @@ const inputImage = async (event: any) => {
 
 const handleForm = async () => {
   try {
-    data.loadHandle = true
+    data.loadHandle = true;
     const categories = [] as object[];
 
-    checkedCategories.value.forEach((i:any) => categories.push(i.uin));
+    checkedCategories.value.forEach((i: any) => categories.push(i.uin));
 
     await http.post("/admin/shop", {
       title: data.shopData.title,

@@ -3,7 +3,6 @@ import { createPinia } from "pinia";
 import AuthLayout from "@/layouts/AuthLayout.vue";
 import DefaultLayout from "@/layouts/DefaultLayout.vue";
 import { useAuthStore } from "@/stores/auth";
-import VueCookies from "vue-cookies";
 
 import App from "./App.vue";
 import router from "./router";
@@ -18,8 +17,9 @@ import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
 /* import specific icons */
 import { fas } from "@fortawesome/free-solid-svg-icons";
+import { fab } from "@fortawesome/free-brands-svg-icons";
 
-library.add(fas);
+library.add(fas, fab);
 
 const app = createApp(App);
 app.component("font-awesome-icon", FontAwesomeIcon);
@@ -28,9 +28,5 @@ app.component("default-layout", DefaultLayout);
 app.use(createPinia());
 const authStore = useAuthStore();
 app.use(router);
-app.use(VueCookies, {
-  expire: "7d",
-  // domain: "https://za-halyavoi.ru/"
-});
 
 app.mount("#app");

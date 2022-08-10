@@ -42,7 +42,7 @@
       </table>
     </m-card>
     <m-card class="">
-      <form>
+      <form @submit.prevent>
         <label for="message" class="mb-2 font-bold block">Сообщение</label>
         <textarea
           name="description"
@@ -52,11 +52,12 @@
 
         <label for="file" class="mb-2 font-bold block">Картинка</label>
         <input
+          @change="inputImage"
           type="file"
           class="focus:outline-0 placeholder-zinc-800 bg-white border border-zinc-300 rounded p-2 w-full my-3 focus:outline-0 focus:ring focus:ring-primary"
         />
 
-        <m-button color="primary">Добавить</m-button>
+        <m-button color="primary" @click="handleForm">Добавить</m-button>
       </form>
     </m-card>
   </div>

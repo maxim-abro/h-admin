@@ -116,8 +116,8 @@ const data = reactive({
       url: "/adv_cake",
     },
     {
-      title: 'vk',
-      icon: "vk",
+      title: "vk",
+      icon: "fa-brands fa-vk",
       url: "/vk",
     },
   ],
