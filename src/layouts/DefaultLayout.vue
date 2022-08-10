@@ -5,7 +5,7 @@
     @close="alertStore.open = false"
     >{{ alertStore.text }}</m-alert
   >
-  <m-global-load/>
+  <m-global-load />
   <header
     class="px-4 drop-shadow w-full h-16 bg-white z-40 -mx flex items-center fixed top-0"
   >
@@ -131,6 +131,11 @@ const data = reactive({
       title: "vk",
       icon: "fa-brands fa-vk",
       url: "/vk",
+    },
+    {
+      title: "Библиотека",
+      icon: "image",
+      url: "/library",
     },
   ],
 });

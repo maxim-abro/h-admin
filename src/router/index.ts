@@ -70,6 +70,14 @@ const router = createRouter({
         auth: true,
       },
     },
+    {
+      path: "/library",
+      name: "library",
+      component: () => import("@/views/library.vue"),
+      meta: {
+        auth: true,
+      },
+    },
   ],
 });
 
