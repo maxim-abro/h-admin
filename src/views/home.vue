@@ -181,6 +181,9 @@ import MLoad from "@/components/_core/MLoad.vue";
 import type { PostModel } from "@/models/post.model";
 import type { CategoryModel } from "@/models/category.model";
 import type { ShopModel } from "@/models/shop.model";
+import { useAlertStore } from "@/stores/alert";
+
+const alert = useAlertStore();
 
 const data = reactive({
   shopCounter: 0 as number,
@@ -194,17 +197,22 @@ const data = reactive({
 });
 
 onMounted(async () => {
-  const res = await http.get("/admin/counter");
-  const allCategories = await http.get("/admin/category/all");
-  const emptyShops = await http.get("/shop/is/empty");
-  /////////////////////////////////
-  data.shopCounter = res.data.shop;
-  data.postCounter = res.data.post;
-  data.categoryCounter = res.data.category;
-  data.allCategories = allCategories.data;
-  data.shops = allCategories.data;
-  data.emptyShops = emptyShops.data;
-  data.load = false;
+  try {
+    const res = await http.get("/admin/counter");
+    const allCategories = await http.get("/admin/category/all");
+    const emptyShops = await http.get("/shop/is/empty");
+    /////////////////////////////////
+    data.shopCounter = res.data.shop;
+    data.postCounter = res.data.post;
+    data.categoryCounter = res.data.category;
+    data.allCategories = allCategories.data;
+    data.shops = allCategories.data;
+    data.emptyShops = emptyShops.data;
+    data.load = false;
+  } catch (e) {
+    console.log(e);
+    alert.handleAlert("Ошибка загрузки!!", "danger");
+  }
 });
 
 const categoriesChart = computed(() => {

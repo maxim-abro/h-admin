@@ -1,4 +1,10 @@
 <template>
+  <m-alert
+    :type="data.alertType"
+    :open-props="data.openAlert"
+    @close="data.openAlert = false"
+    >{{ data.alertText }}</m-alert
+  >
   <div class="flex md:flex-row flex-col justify-between mb-5">
     <h1 class="text-3xl font-bold mb-5 lg:mb-0">Посты</h1>
 
@@ -7,7 +13,7 @@
     </div>
   </div>
 
-  <m-load v-if="data.load"/>
+  <m-load v-if="data.load" />
 
   <div
     class="rounded rounded-lg shadow-[0_0_4px_1px_rgba(0,0,0,0.1)] bg-white w-full p-5 mb-5"
@@ -47,6 +53,7 @@
 
               <button
                 class="rounded text-red-500 rounded-full border border-2 border-red-500 w-10 h-10"
+                @click="deletePost(post.uin)"
               >
                 <font-awesome-icon icon="trash-can" />
               </button>
@@ -68,13 +75,16 @@
 </template>
 
 <script setup lang="ts">
-import MButton from "@/components/_core/MButton.vue";
+import MAlert from "@/components/_core/MAlert.vue";
 import MInput from "@/components/_core/MInput.vue";
 import MLoad from "@/components/_core/MLoad.vue";
 import { onMounted, reactive, watch } from "vue";
 import MPagination from "@/components/_core/MPagination.vue";
 import type { PostModel } from "@/models/post.model";
 import http from "@/modules/api";
+import { useAlertStore } from "@/stores/alert";
+
+const alert = useAlertStore();
 
 const data = reactive({
   posts: [] as PostModel[],
@@ -99,12 +109,23 @@ onMounted(async () => {
   data.load = false;
 });
 
-const updatePosts = async () => {
-  const postRes = await http.get(`/post?page=${data.pagination}`);
+// const updatePosts = async () => {
+//   const postRes = await http.get(`/post?page=${data.pagination}`);
+// };
+
+const deletePost = async (uin: string) => {
+  try {
+    await http.delete(`/admin/post/${uin}`);
+
+    alert.handleAlert("Пост успешно удалён", "success");
+  } catch (e) {
+    console.log(e);
+    alert.handleAlert("Ошибка удаления поста", "danger");
+  }
 };
 
 watch(
-    // @ts-ignore
+  // @ts-ignore
   () => data.pagination.current_page,
   () => {
     console.log("12313");

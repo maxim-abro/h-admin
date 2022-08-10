@@ -2,10 +2,10 @@
   <h1 class="text-3xl font-bold mb-5">Vk статистика</h1>
 
   <m-load v-if="data.load" />
-  <div class="grid grid-cols-2 gap-5 mb-5" v-if="!data.load">
+  <div class="grid xl:grid-cols-2 gap-5 mb-5" v-if="!data.load">
     <m-card class="">
       <h2 class="text-xl font-medium mb-2">Заходы на страницу</h2>
-      <m-line-chart :chart-data="data.statistic" />
+      <m-line-chart :chart-data="data.statistic" class="w-11/12 lg:w-full"/>
     </m-card>
     <m-card class="">
       <h2 class="text-xl font-medium mb-2">Посты в очереди</h2>
@@ -70,6 +70,9 @@ import MButton from "@/components/_core/MButton.vue";
 import MLineChart from "@/components/charts/MLineChart.vue";
 import { onMounted, reactive, computed, watch } from "vue";
 import http from "@/modules/api";
+import {useAlertStore} from "@/stores/alert";
+
+const alert = useAlertStore();
 
 const data = reactive({
   statistic: {} as object,
@@ -93,8 +96,10 @@ const deleteQueue = async (uin: string) => {
     await http.delete(`/queue_vk/delete/${uin}`);
     // @ts-ignore
     data.queues = data.queues.filter((i) => i.uin !== uin);
+    alert.handleAlert("Пост удалён", "success");
   } catch (e) {
     console.log(e);
+    alert.handleAlert("Ошибка удаления поста", "danger");
   }
 };
 
@@ -113,8 +118,11 @@ const inputImage = async (event: any) => {
     const res = await http.post("/upload_vk", formData);
 
     data.image = res.data;
+    alert.handleAlert("картинка загружена", "success");
   } catch (e) {
     console.log(e);
+
+    alert.handleAlert("Ошибка загрузки картинки", "danger");
   }
 };
 
@@ -124,8 +132,10 @@ const handleForm = async () => {
 
     data.image = "";
     data.message = "";
+    alert.handleAlert("Пост добавлен", "success");
   } catch (e) {
     console.log(e);
+    alert.handleAlert("Ошибка добавления поста", "danger");
   }
 };
 </script>

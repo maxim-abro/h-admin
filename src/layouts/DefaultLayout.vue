@@ -1,6 +1,12 @@
 <template>
+  <m-alert
+    :type="alertStore.type"
+    :open-props="alertStore.open"
+    @close="alertStore.open = false"
+    >{{ alertStore.text }}</m-alert
+  >
   <header
-    class="px-4 drop-shadow w-full h-16 bg-white z-50 -mx flex items-center fixed top-0"
+    class="px-4 drop-shadow w-full h-16 bg-white z-40 -mx flex items-center fixed top-0"
   >
     <button
       class="text-second hover:text-primary h-full hover:duration-75 duration-75 mr-4"
@@ -14,7 +20,7 @@
   </header>
   <div class="px-4 pt-4 min-h-screen bg-zinc-100 flex gap-8">
     <aside
-      class="pt-16 -ml-4 w-[130px] h-[calc(100vh - 4rem)] z-40 fixed overflow-auto bg-white shadow"
+      class="pt-16 -ml-4 w-[130px] h-[calc(100vh - 4rem)] z-30 fixed overflow-auto bg-white shadow"
       :style="!data.openMenu ? 'margin-left: -145px' : ''"
     >
       <template v-for="(item, idx) of data.menuItems" :key="idx">
@@ -60,8 +66,12 @@
 
 <script setup lang="ts">
 import { RouterLink } from "vue-router";
+import MAlert from "@/components/_core/MAlert.vue";
 import { reactive } from "vue";
 import MCollapse from "@/components/_core/MCollapse.vue";
+import { useAlertStore } from "@/stores/alert";
+
+const alertStore = useAlertStore();
 
 const data = reactive({
   openMenu: false as boolean,

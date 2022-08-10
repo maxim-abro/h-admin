@@ -4,7 +4,7 @@
   <m-load v-if="data.load" />
 
   <m-card class="mb-5" v-if="!data.load">
-    <div class="grid grid-cols-3 gap-5">
+    <div class="grid md:grid-cols-3 gap-5">
       <div class="">
         <span>Выберите магазин площадки:</span>
         <select
@@ -90,6 +90,10 @@ import http from "@/modules/api";
 import type { CategoryModel } from "@/models/category.model";
 import type { ShopModel } from "@/models/shop.model";
 import type { PostModel } from "@/models/post.model";
+import {useAlertStore} from "@/stores/alert";
+
+const alertStore = useAlertStore();
+
 type CakeShopModel = {
   id: string;
   title: string;
@@ -117,7 +121,7 @@ const couponsToSite = computed<object[]>((): object[] =>
 const getCoupons = async (idShop: string) => {
   try {
     data.loadTable = true;
-
+    data.cakeCoupons = [];
     const coupons = await http.get(`/adv_cake/coupon/${idShop}`);
 
     data.loadTable = false;
@@ -152,20 +156,28 @@ const pushCoupons = async () => {
         recomended: item.recomended,
       });
     }
+
+    alertStore.handleAlert("Все магазины добавлены", "success");
   } catch (e) {
     console.log(e);
+    alertStore.handleAlert("Ошибка добавления магазинов", "danger");
   }
 };
 
 onMounted(async () => {
-  const cakeShops = await http.get("/adv_cake/shop");
-  const shops = await http.get("/shop");
-  const categories = await http.get("/category");
+  try {
+    const cakeShops = await http.get("/adv_cake/shop");
+    const shops = await http.get("/shop");
+    const categories = await http.get("/category");
 
-  data.cakeShops = cakeShops.data;
-  data.categories = categories.data;
-  data.shops = shops.data;
+    data.cakeShops = cakeShops.data;
+    data.categories = categories.data;
+    data.shops = shops.data;
 
-  data.load = false;
+    data.load = false;
+  } catch (e) {
+    console.log(e);
+    alertStore.handleAlert("Ошибка загрузки!!!", "danger");
+  }
 });
 </script>

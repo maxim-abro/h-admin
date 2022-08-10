@@ -107,6 +107,9 @@ import http from "@/modules/api";
 import MInput from "@/components/_core/MInput.vue";
 import MButton from "@/components/_core/MButton.vue";
 import MSwitch from "@/components/_core/MSwitch.vue";
+import { useAlertStore } from "@/stores/alert";
+
+const alert = useAlertStore();
 
 const data = reactive({
   categories: [] as object[],
@@ -138,8 +141,11 @@ const inputImage = async (event: any) => {
     const res = await http.post("/upload", formData);
 
     data.shopData.image = res.data;
+
+    alert.handleAlert("Картинка загружена", "success");
   } catch (e) {
     console.log(e);
+    alert.handleAlert("Ошибка загрузки картинки", "danger");
   }
 };
 
@@ -160,8 +166,10 @@ const handleForm = async () => {
       tags: data.shopData.tags,
       categories: categories.join(","),
     });
+    alert.handleAlert("Магазин добавлен", "success");
   } catch (e) {
     console.log(e);
+    alert.handleAlert("Ошибка добавления магазина", "danger");
   }
 };
 </script>
