@@ -26,7 +26,7 @@
       <div class="text-green-500 text-sm" v-if="data.ok">Авторизация прошла успешно</div>
 
       <m-button color="primary" type="submit" v-if="!data.ok"> Войти </m-button>
-      <m-button v-if="data.ok" @click="window.location.href = 'http://adm.za-halyavoi.ru/'">Перейти в панель администратора</m-button>
+      <a v-if="data.ok" class="bg-primary hover:bg-primary-300 focus:bg-primary-700 rounded text-second block p-2" href="/">Перейти в панель администратора</a>
     </form>
   </div>
 </template>
