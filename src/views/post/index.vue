@@ -83,9 +83,10 @@ import MPagination from "@/components/_core/MPagination.vue";
 import type { PostModel } from "@/models/post.model";
 import http from "@/modules/api";
 import { useAlertStore } from "@/stores/alert";
+import {useLoadStore} from "@/stores/load";
 
 const alert = useAlertStore();
-
+const load = useLoadStore();
 const data = reactive({
   posts: [] as PostModel[],
   page: 1 as number,
@@ -115,12 +116,15 @@ onMounted(async () => {
 
 const deletePost = async (uin: string) => {
   try {
+    load.handleLoad();
     await http.delete(`/admin/post/${uin}`);
 
     alert.handleAlert("Пост успешно удалён", "success");
+    load.handleLoad();
   } catch (e) {
     console.log(e);
     alert.handleAlert("Ошибка удаления поста", "danger");
+    load.handleLoad();
   }
 };
 

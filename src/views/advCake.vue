@@ -90,9 +90,11 @@ import http from "@/modules/api";
 import type { CategoryModel } from "@/models/category.model";
 import type { ShopModel } from "@/models/shop.model";
 import type { PostModel } from "@/models/post.model";
-import {useAlertStore} from "@/stores/alert";
+import { useAlertStore } from "@/stores/alert";
+import { useLoadStore } from "@/stores/load";
 
 const alertStore = useAlertStore();
+const load = useLoadStore();
 
 type CakeShopModel = {
   id: string;
@@ -120,6 +122,7 @@ const couponsToSite = computed<object[]>((): object[] =>
 
 const getCoupons = async (idShop: string) => {
   try {
+    load.handleLoad();
     data.loadTable = true;
     data.cakeCoupons = [];
     const coupons = await http.get(`/adv_cake/coupon/${idShop}`);
@@ -127,14 +130,17 @@ const getCoupons = async (idShop: string) => {
     data.loadTable = false;
 
     data.cakeCoupons = coupons.data;
+    load.handleLoad();
   } catch (e) {
     console.log(e);
     data.loadTable = false;
+    load.handleLoad();
   }
 };
 
 const pushCoupons = async () => {
   try {
+    load.handleLoad();
     for (const item of couponsToSite.value) {
       await http.post("/admin/post/add", {
         // @ts-ignore
@@ -156,11 +162,12 @@ const pushCoupons = async () => {
         recomended: item.recomended,
       });
     }
-
+    load.handleLoad();
     alertStore.handleAlert("Все магазины добавлены", "success");
   } catch (e) {
     console.log(e);
     alertStore.handleAlert("Ошибка добавления магазинов", "danger");
+    load.handleLoad();
   }
 };
 

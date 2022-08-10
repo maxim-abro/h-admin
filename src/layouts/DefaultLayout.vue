@@ -5,6 +5,7 @@
     @close="alertStore.open = false"
     >{{ alertStore.text }}</m-alert
   >
+  <m-global-load/>
   <header
     class="px-4 drop-shadow w-full h-16 bg-white z-40 -mx flex items-center fixed top-0"
   >
@@ -65,10 +66,11 @@
 </template>
 
 <script setup lang="ts">
-import { RouterLink } from "vue-router";
 import MAlert from "@/components/_core/MAlert.vue";
-import { reactive } from "vue";
 import MCollapse from "@/components/_core/MCollapse.vue";
+import MGlobalLoad from "@/components/_core/MGlobalLoad.vue";
+import { RouterLink } from "vue-router";
+import { reactive } from "vue";
 import { useAlertStore } from "@/stores/alert";
 
 const alertStore = useAlertStore();

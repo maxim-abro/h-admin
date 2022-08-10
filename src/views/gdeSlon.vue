@@ -86,6 +86,13 @@ import http from "@/modules/api";
 import type { CategoryModel } from "@/models/category.model";
 import type { ShopModel } from "@/models/shop.model";
 import type { PostModel } from "@/models/post.model";
+import {useLoadStore} from "@/stores/load";
+import {useAlertStore} from "@/stores/alert";
+
+const alert = useAlertStore();
+
+const load = useLoadStore();
+
 type SlonShopModel = {
   id: string;
   title: string;
@@ -119,6 +126,7 @@ const couponsToSite = computed((): object[] => data.slonCoupons.filter((i:any) =
 
 const getCoupons = async (idShop: string) => {
   try {
+    load.handleLoad();
     data.loadTable = true;
 
     const coupons = await http.get(`/slon/shop/${idShop}`);
@@ -126,14 +134,17 @@ const getCoupons = async (idShop: string) => {
     data.loadTable = false;
 
     data.slonCoupons = coupons.data;
+    load.handleLoad();
   } catch (e) {
     console.log(e);
     data.loadTable = false;
+    load.handleLoad();
   }
 };
 
 const pushCoupons = async () => {
   try {
+    load.handleLoad();
     for (const item of couponsToSite.value) {
       await http.post("/admin/post/add", {
         // @ts-ignore
@@ -152,8 +163,12 @@ const pushCoupons = async () => {
         recomended: item.recomended,
       });
     }
+    load.handleLoad();
+    alert.handleAlert("Промокоды добавлены", "success");
   } catch (e) {
     console.log(e);
+    load.handleLoad();
+    alert.handleAlert("Ошибка добавления промокода", "danger");
   }
 };
 </script>

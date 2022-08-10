@@ -71,8 +71,10 @@ import MLineChart from "@/components/charts/MLineChart.vue";
 import { onMounted, reactive, computed, watch } from "vue";
 import http from "@/modules/api";
 import {useAlertStore} from "@/stores/alert";
+import {useLoadStore} from "@/stores/load";
 
 const alert = useAlertStore();
+const load = useLoadStore();
 
 const data = reactive({
   statistic: {} as object,
@@ -93,13 +95,16 @@ onMounted(async () => {
 
 const deleteQueue = async (uin: string) => {
   try {
+    load.handleLoad();
     await http.delete(`/queue_vk/delete/${uin}`);
     // @ts-ignore
     data.queues = data.queues.filter((i) => i.uin !== uin);
     alert.handleAlert("Пост удалён", "success");
+    load.handleLoad();
   } catch (e) {
     console.log(e);
     alert.handleAlert("Ошибка удаления поста", "danger");
+    load.handleLoad();
   }
 };
 
@@ -112,6 +117,7 @@ watch(
 
 const inputImage = async (event: any) => {
   try {
+    load.handleLoad();
     const formData = new FormData();
     formData.append("file", event.target.files[0]);
 
@@ -119,23 +125,28 @@ const inputImage = async (event: any) => {
 
     data.image = res.data;
     alert.handleAlert("картинка загружена", "success");
+    load.handleLoad();
   } catch (e) {
     console.log(e);
 
     alert.handleAlert("Ошибка загрузки картинки", "danger");
+    load.handleLoad();
   }
 };
 
 const handleForm = async () => {
   try {
+    load.handleLoad();
     await http.post("/queue_vk", { message: data.message, image: data.image });
 
     data.image = "";
     data.message = "";
     alert.handleAlert("Пост добавлен", "success");
+    load.handleLoad();
   } catch (e) {
     console.log(e);
     alert.handleAlert("Ошибка добавления поста", "danger");
+    load.handleLoad();
   }
 };
 </script>

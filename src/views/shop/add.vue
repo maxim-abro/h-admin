@@ -108,8 +108,10 @@ import MInput from "@/components/_core/MInput.vue";
 import MButton from "@/components/_core/MButton.vue";
 import MSwitch from "@/components/_core/MSwitch.vue";
 import { useAlertStore } from "@/stores/alert";
+import {useLoadStore} from "@/stores/load";
 
 const alert = useAlertStore();
+const load = useLoadStore();
 
 const data = reactive({
   categories: [] as object[],
@@ -135,6 +137,7 @@ const checkedCategories = computed(() =>
 
 const inputImage = async (event: any) => {
   try {
+    load.handleLoad();
     const formData = new FormData();
     formData.append("file", event.target.files[0]);
 
@@ -143,14 +146,17 @@ const inputImage = async (event: any) => {
     data.shopData.image = res.data;
 
     alert.handleAlert("Картинка загружена", "success");
+    load.handleLoad();
   } catch (e) {
     console.log(e);
     alert.handleAlert("Ошибка загрузки картинки", "danger");
+    load.handleLoad();
   }
 };
 
 const handleForm = async () => {
   try {
+    load.handleLoad();
     data.loadHandle = true;
     const categories = [] as object[];
 
@@ -167,9 +173,11 @@ const handleForm = async () => {
       categories: categories.join(","),
     });
     alert.handleAlert("Магазин добавлен", "success");
+    load.handleLoad();
   } catch (e) {
     console.log(e);
     alert.handleAlert("Ошибка добавления магазина", "danger");
+    load.handleLoad();
   }
 };
 </script>

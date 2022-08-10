@@ -182,8 +182,10 @@ import type { PostModel } from "@/models/post.model";
 import type { CategoryModel } from "@/models/category.model";
 import type { ShopModel } from "@/models/shop.model";
 import { useAlertStore } from "@/stores/alert";
+import {useLoadStore} from "@/stores/load";
 
 const alert = useAlertStore();
+const load = useLoadStore();
 
 const data = reactive({
   shopCounter: 0 as number,
@@ -237,9 +239,14 @@ const categoriesChart = computed(() => {
 
 const handleForm = async () => {
   try {
+    load.handleLoad(true);
     await http.post("/admin/post/add", data.postInput);
+    alert.handleAlert("Промокод добавлен", "success");
+    load.handleLoad(false);
   } catch (e) {
     console.log(e);
+    alert.handleAlert("Ошибка добавления промокода", "danger");
+    load.handleLoad(false);
   }
 };
 </script>

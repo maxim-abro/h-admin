@@ -1,20 +1,16 @@
 <template>
-  <div class="">
+  <div class="fixed z-50 w-[100vw] h-[100vh] bg-[#00000010] flex justify-center items-center" v-if="load.isLoad">
     <div class="flex justify-center items-center">
-      <div class="lds-dual-ring"></div>
+      <img src="@/assets/loader.png" alt="" class="w-20 h-20 animate-spin">
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { defineProps } from "vue";
+import {useLoadStore} from "@/stores/load";
 
-const props = defineProps({
-  openProps: {
-    default: false,
-    type: Boolean,
-  },
-});
+const load = useLoadStore();
 </script>
 
 <style scoped>

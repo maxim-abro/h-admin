@@ -79,9 +79,10 @@ import http from "@/modules/api";
 import { useAlertStore } from "@/stores/alert";
 // @ts-ignore
 import _ from "lodash";
+import {useLoadStore} from "@/stores/load";
 
 const alert = useAlertStore();
-
+const load = useLoadStore();
 const data = reactive({
   shops: [] as ShopModel[],
   load: true as boolean,
@@ -98,14 +99,17 @@ onMounted(async () => {
 
 const deleteShop = async (uin: string) => {
   try {
+    load.handleLoad();
     await http.delete(`/admin/shop/${uin}`);
 
     data.shops = data.shops.filter((i) => i.uin !== uin);
 
     alert.handleAlert("Магазин удалён", "success");
+    load.handleLoad();
   } catch (e) {
     console.log(e);
     alert.handleAlert("Ошибка удаления магазина", "danger");
+    load.handleLoad();
   }
 };
 
