@@ -55,9 +55,17 @@ const router = createRouter({
       },
     },
     {
-      path: "/adv_cake",
-      name: "adv_cake",
-      component: () => import("@/views/advCake.vue"),
+      path: "/adv_cake/coupons",
+      name: "coupons_cake",
+      component: () => import("@/views/advCake/coupons.vue"),
+      meta: {
+        auth: true,
+      },
+    },
+    {
+      path: "/adv_cake/images",
+      name: "images_cake",
+      component: () => import("@/views/advCake/images.vue"),
       meta: {
         auth: true,
       },

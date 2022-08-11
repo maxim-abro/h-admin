@@ -1,8 +1,8 @@
 <template>
-  <h1>Библиотека</h1>
+  <h1 class="text-2xl font-bold mb-5">Библиотека</h1>
 
-  <div class="flex flex-row gap-5">
-    <div class="grid grid-cols-3 gap-5 w-9/12">
+  <div class="flex flex-col xl:flex-row gap-5">
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 w-full xl:w-9/12">
       <m-card
         class="flex items-center cursor-pointer"
         v-if="data.folderUri.length > 1"
@@ -54,7 +54,7 @@
       </m-card>
     </div>
 
-    <aside class="w-3/12">
+    <aside class="w-full xl:w-3/12">
       <m-card>
         <font-awesome-icon
           icon="folder"

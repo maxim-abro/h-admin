@@ -125,7 +125,16 @@ const data = reactive({
     {
       title: "adv cake",
       icon: "handshake",
-      url: "/adv_cake",
+      children: [
+        {
+          title: "Купоны",
+          url: "/adv_cake/coupons",
+        },
+        {
+          title: "Изображения",
+          url: "/adv_cake/images",
+        },
+      ],
     },
     {
       title: "vk",
