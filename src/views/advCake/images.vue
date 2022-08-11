@@ -13,8 +13,8 @@
     </select>
   </m-card>
 
-  <div class="flex flex-row gap-5" v-if="data.images.length">
-    <div class="grid grid-cols-3 gap-5 w-9/12">
+  <div class="flex flex-col xl:flex-row gap-5" v-if="data.images.length">
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 w-full xl:w-9/12">
       <m-card
         v-for="image of data.images"
         :key="image.id"
@@ -31,11 +31,11 @@
       </m-card>
     </div>
 
-    <m-card class="w-3/12 h-max" v-if="!data.activeImage">
+    <m-card class="w-full xl:w-3/12" v-if="!data.activeImage">
       <div class="">Выберите файл</div>
     </m-card>
 
-    <m-card class="w-3/12 h-max" v-if="data.activeImage">
+    <m-card class="w-full xl:w-3/12" v-if="data.activeImage">
       <img
         :src="data.activeImage.banner_image_url"
         alt=""
