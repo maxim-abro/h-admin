@@ -38,7 +38,9 @@ import { computed, reactive } from "vue";
 import http from "@/modules/api";
 import { useAuthStore } from "@/stores/auth";
 import { useRouter } from "vue-router";
+import {useLoadStore} from "@/stores/load";
 
+const loader = useLoadStore();
 const authStore = useAuthStore();
 const router = useRouter();
 
@@ -50,6 +52,7 @@ const data = reactive({
 });
 
 const fetchForm = async () => {
+  loader.handleLoad();
   const result = await authStore.login({
     email: data.email,
     password: data.password,
@@ -57,8 +60,10 @@ const fetchForm = async () => {
 
   if (result === "ok") {
     data.ok = true;
+    loader.handleLoad();
   } else {
     data.err = "Неправильная почта или пароль";
+    loader.handleLoad();
   }
 };
 </script>
