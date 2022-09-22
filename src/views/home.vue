@@ -127,7 +127,7 @@
           <select
             name="shop"
             class="block mb-5 placeholder-zinc-800 text-zinc-900 border border-zinc-300 bg-white focus:outline-0 rounded p-2 box-border w-full focus:outline-0 focus:ring focus:ring-primary"
-            v-model="data.postInput.shop"
+            v-model="data.postInput.shopUin"
           >
             <option
               v-for="shop of data.shops"
@@ -202,13 +202,14 @@ onMounted(async () => {
   try {
     const res = await http.get("/admin/counter");
     const allCategories = await http.get("/admin/category/all");
+    const allShops = await http.get("/admin/shop")
     const emptyShops = await http.get("/shop/is/empty");
     /////////////////////////////////
     data.shopCounter = res.data.shop;
     data.postCounter = res.data.post;
     data.categoryCounter = res.data.category;
     data.allCategories = allCategories.data;
-    data.shops = allCategories.data;
+    data.shops = allShops.data;
     data.emptyShops = emptyShops.data;
     data.load = false;
   } catch (e) {
@@ -239,14 +240,14 @@ const categoriesChart = computed(() => {
 
 const handleForm = async () => {
   try {
-    load.handleLoad(true);
+    load.handleLoad();
     await http.post("/admin/post/add", data.postInput);
     alert.handleAlert("Промокод добавлен", "success");
-    load.handleLoad(false);
+    load.handleLoad();
   } catch (e) {
     console.log(e);
     alert.handleAlert("Ошибка добавления промокода", "danger");
-    load.handleLoad(false);
+    load.handleLoad();
   }
 };
 </script>
