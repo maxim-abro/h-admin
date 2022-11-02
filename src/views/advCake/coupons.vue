@@ -73,7 +73,7 @@
           </td>
           <td class="py-4 text-center">{{ shop.title }}</td>
           <td class="py-4 text-center">
-            {{ shop.date_end || "31.09.2022**" }}
+            {{ shop.date_end || "31.12.2022**" }}
           </td>
         </tr>
       </tbody>
@@ -152,7 +152,7 @@ const pushCoupons = async () => {
         // @ts-ignore
         shopUin: data.shopActive,
         // @ts-ignore
-        endDate: item.date_end || "2022-09-31",
+        endDate: item.date_end || "2022-12-31",
         // @ts-ignore
         url: item.landings[0].link,
         // @ts-ignore
