@@ -146,6 +146,11 @@ const data = reactive({
       icon: "image",
       url: "/library",
     },
+    {
+      title: "Праздники",
+      icon: "fa-solid fa-cake-candles",
+      url: "/holidays",
+    },
   ],
 });
 </script>
