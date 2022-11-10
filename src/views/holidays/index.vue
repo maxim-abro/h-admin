@@ -25,7 +25,8 @@
         <tbody>
           <tr
             v-for="holiday of data.holidays"
-            :ket="holiday.id_holiday"
+            :key="holiday.id_holiday"
+            @click="router.push(`/holidays/${holiday.id_holiday}`)"
             class="hover:bg-primary-100 cursor-pointer my-4 border-b"
           >
             <td class="text-center">{{ holiday.id_holiday }}</td>
@@ -49,12 +50,10 @@
 import MButton from "@/components/_core/MButton.vue";
 import MLoad from "@/components/_core/MLoad.vue";
 import { onMounted, reactive, watch, computed } from "vue";
-import { useAlertStore } from "@/stores/alert";
-import { useLoadStore } from "@/stores/load";
 import http from "@/modules/api";
+import { useRouter } from "vue-router";
 
-const alert = useAlertStore();
-const load = useLoadStore();
+const router = useRouter();
 const data = reactive({
   holidays: [],
   load: true,
