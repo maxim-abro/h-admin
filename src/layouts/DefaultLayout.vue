@@ -21,19 +21,19 @@
   </header>
   <div class="px-4 pt-4 min-h-screen bg-zinc-100 flex gap-8">
     <aside
-      class="pt-16 -ml-4 w-[130px] h-[calc(100vh - 4rem)] z-30 fixed overflow-auto bg-white shadow"
+      class="pt-16 -ml-4 w-[130px] h-[calc(100vh - 4rem)] z-30 fixed overflow-scroll bg-white shadow"
       :style="!data.openMenu ? 'margin-left: -145px' : ''"
     >
       <template v-for="(item, idx) of data.menuItems" :key="idx">
         <m-collapse v-if="!item.url">
           <template #trigger>
             <button
-              class="flex flex-col items-center text-lg border-b w-full py-2 hover:text-primary"
+                class="flex flex-col items-center text-lg border-b w-full py-2 hover:text-primary"
             >
               <font-awesome-icon
-                v-if="item.icon"
-                :icon="item.icon"
-                class="mb-2"
+                  v-if="item.icon"
+                  :icon="item.icon"
+                  class="mb-2"
               />
               <span>{{ item.title }}</span>
             </button>
@@ -41,23 +41,23 @@
 
           <template #content>
             <router-link
-              v-for="child of item.children"
-              :key="child.title"
-              :to="child.url"
-              class="text-center hover:text-primary"
-              >{{ child.title }}</router-link
+                v-for="child of item.children"
+                :key="child.title"
+                :to="child.url"
+                class="text-center hover:text-primary"
+            >{{ child.title }}</router-link
             >
           </template>
         </m-collapse>
         <router-link
-          v-if="item.url"
-          :to="item.url"
-          class="flex flex-col items-center text-lg border-b w-full py-2 hover:text-primary"
+            v-if="item.url"
+            :to="item.url"
+            class="flex flex-col items-center text-lg border-b w-full py-2 hover:text-primary"
         >
           <font-awesome-icon :icon="item.icon" />
           <span>{{ item.title }}</span>
         </router-link>
-      </template>
+    </template>
     </aside>
     <main class="mt-16 w-full">
       <slot />
@@ -142,14 +142,14 @@ const data = reactive({
       url: "/vk",
     },
     {
+      title: "Праздники",
+      icon: "fa-solid fa-cake-candles",
+      url: "/holiday",
+    },
+    {
       title: "Библиотека",
       icon: "image",
       url: "/library",
-    },
-    {
-      title: "Праздники",
-      icon: "fa-solid fa-cake-candles",
-      url: "/holidays",
     },
   ],
 });
