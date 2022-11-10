@@ -86,6 +86,30 @@ const router = createRouter({
         auth: true,
       },
     },
+    {
+      path: "/holidays",
+      name: "holidays",
+      component: () => import("@/views/holidays/index.vue"),
+      meta: {
+        auth: true,
+      },
+    },
+    {
+      path: "/holidays/add",
+      name: "add_holidays",
+      component: () => import("@/views/holidays/add.vue"),
+      meta: {
+        auth: true,
+      },
+    },
+    {
+      path: "/holidays/:id",
+      name: "holiday_id",
+      component: () => import("@/views/holidays/_id.vue"),
+      meta: {
+        auth: true,
+      },
+    },
   ],
 });
 
@@ -95,7 +119,7 @@ router.beforeEach(async (to, from, next) => {
     const store = useAuthStore();
 
     if (requireAuth && store.isAuth) {
-      const result = await http.get("/auth/check")
+      const result = await http.get("/auth/check");
 
       if (result.data.message === "ok") {
         console.log("ok");
