@@ -1,7 +1,7 @@
 <template>
   <div class="flex md:flex-row flex-col justify-between mb-5">
     <h1 class="text-3xl font-bold">Праздники</h1>
-    <m-button @click="$router.push('/holidays/add')"
+    <m-button @click="$router.push('/holiday/add')"
       >Добавить праздник</m-button
     >
   </div>
@@ -26,7 +26,7 @@
           <tr
             v-for="holiday of data.holidays"
             :key="holiday.id_holiday"
-            @click="router.push(`/holidays/${holiday.id_holiday}`)"
+            @click="router.push(`/holiday/${holiday.id_holiday}`)"
             class="hover:bg-primary-100 cursor-pointer my-4 border-b"
           >
             <td class="text-center">{{ holiday.id_holiday }}</td>

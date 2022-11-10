@@ -87,15 +87,15 @@ const router = createRouter({
       },
     },
     {
-      path: "/holidays",
-      name: "holidays",
+      path: "/holiday",
+      name: "holiday",
       component: () => import("@/views/holidays/index.vue"),
       meta: {
         auth: true,
       },
     },
     {
-      path: "/holidays/add",
+      path: "/holiday/add",
       name: "add_holidays",
       component: () => import("@/views/holidays/add.vue"),
       meta: {
@@ -103,7 +103,7 @@ const router = createRouter({
       },
     },
     {
-      path: "/holidays/:id",
+      path: "/holiday/:id",
       name: "holiday_id",
       component: () => import("@/views/holidays/_id.vue"),
       meta: {
