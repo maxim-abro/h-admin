@@ -4,15 +4,15 @@
   <m-card>
     <h2 class='text-xl font-bold mb-3'>Новая связь</h2>
     <div class='grid grid-cols-2 gap-4'>
-      <select v-model='data.linkDto.id_cake' class='block mb-5 placeholder-zinc-800 text-zinc-900 border border-zinc-300 bg-white focus:outline-0 rounded p-2 box-border w-full focus:outline-0 focus:ring focus:ring-primary'>
-        <option v-for='item of data.cakeShops' :value='item.id' :key='item.id'>{{ item.title }}</option>
+      <select v-model='data.linkDto.id_slon' class='block mb-5 placeholder-zinc-800 text-zinc-900 border border-zinc-300 bg-white focus:outline-0 rounded p-2 box-border w-full focus:outline-0 focus:ring focus:ring-primary'>
+        <option v-for='item of data.slonShops' :value='item.id' :key='item.id'>{{ item.title }}</option>
       </select>
 
       <select v-model='data.linkDto.uin_shop' class='block mb-5 placeholder-zinc-800 text-zinc-900 border border-zinc-300 bg-white focus:outline-0 rounded p-2 box-border w-full focus:outline-0 focus:ring focus:ring-primary'>
         <option v-for='item of data.shops' :value='item.uin' :key='item.id'>{{ item.title }}</option>
       </select>
     </div>
-    <m-button @click='handleLink(data.linkDto)' :disabled='!data.linkDto.id_cake || !data.linkDto.uin_shop' class='mx-auto' color='primary'>Создать связь</m-button>
+    <m-button @click='handleLink(data.linkDto)' :disabled='!data.linkDto.id_slon || !data.linkDto.uin_shop' class='mx-auto' color='primary'>Создать связь</m-button>
   </m-card>
 
   <m-card class='mb-8'>
@@ -27,7 +27,7 @@
 
       <tbody>
       <tr class='border-y border-y-2 h-10 text-center' v-for='item of data.links' :key='item.id'>
-        <td>{{ item.cake_shop.title }}</td>
+        <td>{{ item.slon_shop.title }}</td>
         <td>{{ item.shop.title }}</td>
       </tr>
       </tbody>
@@ -47,28 +47,26 @@ import { onMounted, reactive } from "vue";
 const alertStore = useAlertStore();
 const load = useLoadStore();
 
-interface CakeShopModel {
-  id: number;
+interface SlonShopModel {
+  id: string;
   title: string;
   description: string;
   url: string;
 }
-
-interface CakeLinks {
+interface SlonLinks {
   id: number;
-  id_cake: number;
   uin_shop: string;
+  id_slon: string;
   shop: object;
-  cake_shop: object;
+  slon_shop: object;
 }
 interface LinksDto {
-  id_cake: number;
+  id_slon: string;
   uin_shop: string;
 }
-
 const data = reactive({
-  cakeShops: [] as CakeShopModel[],
-  links: [] as CakeLinks[],
+  slonShops: [] as SlonShopModel[],
+  links: [] as SlonLinks[],
   shops: [] as ShopModel[],
   linkDto: {} as LinksDto,
 });
@@ -76,11 +74,11 @@ const data = reactive({
 onMounted(async () => {
   try {
     load.handleLoad();
-    const cakeShops = await http.get("/adv_cake/shop");
+    const slonShops = await http.get("/slon/shop");
     const shops = await http.get("/shop");
-    const links = await http.get("/adv_cake/link");
+    const links = await http.get("/slon/link");
 
-    data.cakeShops = cakeShops.data;
+    data.slonShops = slonShops.data;
     data.shops = shops.data;
     data.links = links.data;
     load.handleLoad();
@@ -94,15 +92,12 @@ onMounted(async () => {
 async function handleLink(dto:LinksDto):any {
   try {
     load.handleLoad();
-    await http.post("/adv_cake/link", dto);
-    const links = await http.get("/adv_cake/link");
+    await http.post("/slon/link", dto);
+    const links = await http.get("/slon/link");
     data.links = links.data;
     load.handleLoad();
-    alertStore.handleAlert("Новая связь создана", "success");
   } catch (e) {
-    console.log(e);
-    load.handleLoad();
-    alertStore.handleAlert("Ошибка создания связи", "danger");
+    console.log(e)
   }
 }
 </script>

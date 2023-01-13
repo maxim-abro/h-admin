@@ -49,7 +49,15 @@ const router = createRouter({
     {
       path: "/gde_slon",
       name: "gde_slon",
-      component: () => import("@/views/gdeSlon.vue"),
+      component: () => import("@/views/gdeSlon/gdeSlon.vue"),
+      meta: {
+        auth: true,
+      },
+    },
+    {
+      path: "/gde_slon/links",
+      name: "links_slon",
+      component: () => import("@/views/gdeSlon/links.vue"),
       meta: {
         auth: true,
       },
