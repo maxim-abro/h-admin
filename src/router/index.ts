@@ -71,6 +71,14 @@ const router = createRouter({
       },
     },
     {
+      path: "/adv_cake/links",
+      name: "links_cake",
+      component: () => import("@/views/advCake/links.vue"),
+      meta: {
+        auth: true,
+      },
+    },
+    {
       path: "/vk",
       name: "vk",
       component: () => import("@/views/vk.vue"),
@@ -122,21 +130,17 @@ router.beforeEach(async (to, from, next) => {
       const result = await http.get("/auth/check");
 
       if (result.data.message === "ok") {
-        console.log("ok");
         next();
       } else {
-        console.log("!!!ok");
         next("/auth?message=non_authorize");
       }
     } else if (requireAuth && !store.isAuth) {
-      console.log("ok if");
       next("/auth?message=non_authorize");
     } else {
       next();
     }
   } catch (e) {
     const store = useAuthStore();
-    console.log("catch");
     next("/auth?message=non_authorize");
     store.logout();
   }
