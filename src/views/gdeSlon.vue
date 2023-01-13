@@ -70,7 +70,7 @@
             <input type="checkbox" v-model="shop.toSite" />
           </td>
           <td class="py-4 text-center">{{ shop.title }}</td>
-          <td class="py-4 text-center">{{ shop.endDate || "31.12.2022**" }}</td>
+          <td class="py-4 text-center">{{ shop.endDate || "28.02.2023**" }}</td>
         </tr>
       </tbody>
     </table>
@@ -154,7 +154,7 @@ const pushCoupons = async () => {
         type: "sale",
         shopUin: data.shopActive,
         // @ts-ignore
-        endDate: item.endDate || "2022-12-31",
+        endDate: item.endDate || "2023-02-28",
         // @ts-ignore
         url: item.url,
         code: "",
