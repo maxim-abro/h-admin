@@ -45,10 +45,14 @@
       <div class="grid sm:grid-cols-4 gap-5">
         <div
           class="flex h-48 rounded rounded-lg flex-col items-center shadow-[0_0_4px_1px_rgba(0,0,0,0.1)] bg-white w-full"
-        ></div>
+        >
+          <button @click="updateCake" class='w-full h-full text-primary font-bold hover:text-second'>CAKE update</button>
+        </div>
         <div
           class="flex h-48 rounded rounded-lg flex-col items-center shadow-[0_0_4px_1px_rgba(0,0,0,0.1)] bg-white w-full"
-        ></div>
+        >
+          <button @click="updateSlon" class='w-full h-full text-primary font-bold hover:text-second'>SLON update</button>
+        </div>
         <div
           class="flex h-48 rounded rounded-lg flex-col items-center shadow-[0_0_4px_1px_rgba(0,0,0,0.1)] bg-white w-full"
         ></div>
@@ -199,23 +203,7 @@ const data = reactive({
 });
 
 onMounted(async () => {
-  try {
-    const res = await http.get("/admin/counter");
-    const allCategories = await http.get("/admin/category/all");
-    const allShops = await http.get("/admin/shop")
-    const emptyShops = await http.get("/shop/is/empty");
-    /////////////////////////////////
-    data.shopCounter = res.data.shop;
-    data.postCounter = res.data.post;
-    data.categoryCounter = res.data.category;
-    data.allCategories = allCategories.data;
-    data.shops = allShops.data;
-    data.emptyShops = emptyShops.data;
-    data.load = false;
-  } catch (e) {
-    console.log(e);
-    alert.handleAlert("Ошибка загрузки!!", "danger");
-  }
+  await updateData()
 });
 
 const categoriesChart = computed(() => {
@@ -250,4 +238,51 @@ const handleForm = async () => {
     load.handleLoad();
   }
 };
+
+async function updateData() {
+  try {
+    const res = await http.get("/admin/counter");
+    const allCategories = await http.get("/admin/category/all");
+    const allShops = await http.get("/admin/shop")
+    const emptyShops = await http.get("/shop/is/empty");
+    /////////////////////////////////
+    data.shopCounter = res.data.shop;
+    data.postCounter = res.data.post;
+    data.categoryCounter = res.data.category;
+    data.allCategories = allCategories.data;
+    data.shops = allShops.data;
+    data.emptyShops = emptyShops.data;
+    data.load = false;
+  } catch (e) {
+    console.log(e);
+    alert.handleAlert("Ошибка загрузки!!", "danger");
+  }
+}
+
+const updateCake = async () => {
+  try {
+    load.handleLoad();
+    await http.get("/cron/update_cake");
+    await updateData()
+    alert.handleAlert("Купоны обновлены", "success");
+    load.handleLoad();
+  } catch (e) {
+    alert.handleAlert("Ошибка обновления купонов", "danger");
+    load.handleLoad();
+  }
+}
+
+const updateSlon = async () => {
+  try {
+    load.handleLoad();
+    load.handleLoad();
+    await http.get("/cron/update_slon");
+    await updateData()
+    alert.handleAlert("Купоны обновлены", "success");
+    load.handleLoad();
+  } catch (e) {
+    alert.handleAlert("Ошибка обновления купонов", "danger");
+    load.handleLoad();
+  }
+}
 </script>
