@@ -39,7 +39,7 @@
       <m-input v-model="i.content" :placeholder="`тег ${i.type}`" />
     </div>
     <div v-if="i.type === 'img'" class="mb-5">
-      <m-input type="file" />
+      <m-input @change="inputImage($event, _idx)" type="file" />
     </div>
   </template>
 
@@ -48,11 +48,15 @@
 
 <script setup>
 import MButton from "@/components/_core/MButton.vue";
-import MLoad from "@/components/_core/MLoad.vue";
+import http from "@/modules/api";
 import MInput from "@/components/_core/MInput.vue";
 import { onMounted, reactive, watch, computed } from "vue";
 import { useRouter } from "vue-router";
+import {useAlertStore} from "@/stores/alert";
+import {useLoadStore} from "@/stores/load";
 
+const alert = useAlertStore();
+const load = useLoadStore();
 const router = useRouter();
 const data = reactive({
   blogData: {
@@ -70,7 +74,24 @@ const data = reactive({
 
 onMounted(async () => {});
 
-function inputImage(idx) {}
+async function inputImage(event, idx) {
+  try {
+    load.handleLoad();
+    const formData = new FormData();
+    formData.append("file", event.target.files[0]);
+
+    const res = await http.post("/upload_blog", formData);
+
+    data.blogData.body[idx].content = res.data;
+
+    alert.handleAlert("Картинка загружена", "success");
+    load.handleLoad();
+  } catch (e) {
+    console.log(e);
+    alert.handleAlert("Ошибка загрузки картинки", "danger");
+    load.handleLoad();
+  }
+}
 function addBlock(value) {
   data.blogData.body.push({
     type: value,
