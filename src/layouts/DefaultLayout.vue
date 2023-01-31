@@ -151,6 +151,16 @@ const data = reactive({
       icon: "image",
       url: "/library",
     },
+    {
+      title: "Блог",
+      icon: "newspaper",
+      children: [
+        {
+          title: "Добавить",
+          url: "/news/add",
+        },
+      ],
+    },
   ],
 });
 </script>

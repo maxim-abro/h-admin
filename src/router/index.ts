@@ -126,6 +126,14 @@ const router = createRouter({
         auth: true,
       },
     },
+    {
+      path: "/news/add",
+      name: "add_news",
+      component: () => import("@/views/news/add.vue"),
+      meta: {
+        auth: true,
+      },
+    },
   ],
 });
 
