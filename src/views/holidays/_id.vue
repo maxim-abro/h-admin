@@ -110,10 +110,9 @@ const computedPosts = computed(() => {
 const linkPostToHoliday = async (post_id) => {
   try {
     load.handleLoad();
-
     await http.post("/holiday/link", {
       post_id,
-      holiday_id: route.params.id,
+      holiday_id: data.holiday.id_holiday,
     });
 
     await loadData();

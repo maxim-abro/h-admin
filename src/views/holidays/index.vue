@@ -26,7 +26,7 @@
           <tr
             v-for="holiday of data.holidays"
             :key="holiday.id_holiday"
-            @click="router.push(`/holiday/${holiday.id_holiday}`)"
+            @click="router.push(`/holiday/${holiday.lat_title}`)"
             class="hover:bg-primary-100 cursor-pointer my-4 border-b"
           >
             <td class="text-center">{{ holiday.id_holiday }}</td>
