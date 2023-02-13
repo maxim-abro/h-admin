@@ -17,19 +17,16 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, computed, defineProps } from "vue";
+import { reactive, computed, defineProps, withDefaults, onMounted } from "vue";
+interface Props {
+  openProps?: boolean;
+  type: string;
+}
 
-const props = defineProps({
-  openProps: {
-    default: false,
-    type: Boolean,
-  },
-  type: {
-    default: "primary",
-    type: String,
-  },
+const props = withDefaults(defineProps<Props>(), {
+  openProps: false,
+  type: "primary",
 });
-
 const colors = [
   {
     type: "primary",
@@ -52,14 +49,16 @@ const colors = [
     class: "bg-green-500",
   },
 ];
-
+onMounted(() => {
+  data.open = props.openProps;
+});
 const data = reactive({
   open: false as boolean,
 });
-
 const computedType = computed(() => {
-  const comp = colors.find((i) => i.type === props.type);
-
-  return comp.class;
+  const comp: { type: string; class: string } | undefined = colors.find(
+    (i) => i.type === props.type
+  );
+  return comp.class || "bg-primary";
 });
 </script>

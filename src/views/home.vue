@@ -178,10 +178,6 @@
 <script setup lang="ts">
 import http from "@/modules/api";
 import { onMounted, reactive, computed } from "vue";
-import MButton from "@/components/_core/MButton.vue";
-import PolarAreaChart from "@/components/charts/PolarAreaChart.vue";
-import MInput from "@/components/_core/MInput.vue";
-import MLoad from "@/components/_core/MLoad.vue";
 import type { PostModel } from "@/models/post.model";
 import type { CategoryModel } from "@/models/category.model";
 import type { ShopModel } from "@/models/shop.model";

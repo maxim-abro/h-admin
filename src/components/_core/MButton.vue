@@ -3,7 +3,7 @@
     :type="type"
     :disabled="disabled"
     :class="getColor"
-    class="rounded text-second block p-2"
+    class="rounded-lg text-second block p-2"
   >
     <slot />
   </button>
@@ -11,17 +11,14 @@
 
 <script setup lang="ts">
 import { defineProps, reactive, computed } from "vue";
-
 const props = defineProps<{
   color?: string;
   type?: string;
   disabled?: boolean;
 }>();
-
 const data = reactive({
   primary: "" as string,
 });
-
 const getColor = computed((): string => {
   if (props.color === "primary") {
     if (!props.disabled) {

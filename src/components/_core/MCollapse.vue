@@ -27,7 +27,6 @@
 
 <script setup lang="ts">
 import { defineProps, reactive, watch, defineEmits } from "vue";
-
 const props = defineProps({
   isVisible: {
     type: Boolean,
@@ -50,27 +49,23 @@ const props = defineProps({
     default: false,
   },
 });
-
 const data = reactive({
   showContent: props.isVisible as boolean,
 });
-
 const emit = defineEmits(["trigger"]);
-
 watch(
   () => data.showContent,
   () => {
     emit("trigger", data.showContent);
   }
 );
-
 const close = () => {
   data.showContent = false;
 };
 </script>
 
 <style scoped>
-.collapsed .arrow {
+.collapsed> .arrow {
   transform: rotate(-180deg);
 }
 </style>

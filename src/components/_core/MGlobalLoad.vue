@@ -7,9 +7,7 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps } from "vue";
 import {useLoadStore} from "@/stores/load";
-
 const load = useLoadStore();
 </script>
 
