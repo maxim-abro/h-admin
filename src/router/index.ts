@@ -22,6 +22,14 @@ const router = createRouter({
         layout: "auth",
       },
     },
+    {
+      path: "/shops/all",
+      name: "allShops",
+      component: () => import("@/views/shops/all_shops.vue"),
+      meta: {
+        auth: true,
+      },
+    },
   ],
 });
 
