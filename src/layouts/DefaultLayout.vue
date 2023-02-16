@@ -102,7 +102,16 @@ const data = reactive({
       title: "Купоны",
       icon: "ticket",
       open: false,
-      url: "/coupons",
+      children: [
+        {
+          title: "Все купоны",
+          url: "/coupons",
+        },
+        {
+          title: "Добавить купон",
+          url: "/coupons/add",
+        }
+      ]
     },
     {
       title: "Категории",
@@ -159,7 +168,7 @@ const data = reactive({
       children: [
         {
           title: "Все блоги",
-          url: "/news/all",
+          url: "/news",
         },
         {
           title: "Добавить",

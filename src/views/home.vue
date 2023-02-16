@@ -233,6 +233,7 @@ const handleForm = async () => {
 
 async function updateData() {
   try {
+    load.handleLoad();
     const res = await http.get("/admin/counter");
     const allCategories = await http.get("/admin/category/all");
     const allShops = await http.get("/admin/shop");

@@ -30,6 +30,22 @@ const router = createRouter({
         auth: true,
       },
     },
+    {
+      path: "/shops/add",
+      name: "addShop",
+      component: () => import("@/views/shops/add_shop.vue"),
+      meta: {
+        auth: true,
+      },
+    },
+    {
+      path: "/coupons",
+      name: "allCoupons",
+      component: () => import("@/views/coupons/AllCoupons.vue"),
+      meta: {
+        auth: true,
+      },
+    },
   ],
 });
 
