@@ -46,6 +46,14 @@ const router = createRouter({
         auth: true,
       },
     },
+    {
+      path: "/coupons/add",
+      name: "addCoupon",
+      component: () => import("@/views/coupons/addCoupon.vue"),
+      meta: {
+        auth: true,
+      },
+    },
   ],
 });
 

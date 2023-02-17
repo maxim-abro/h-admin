@@ -6,17 +6,11 @@
       <h1 class="text-xl font-bold">Промокоды</h1>
 
       <div class="flex items-center">
-        <m-input
-          v-model="filterData"
-          type="search"
-          placeholder="поиск..."
-          class="mr-4"
-        />
         <select
           v-model="data.activeShop"
           class="focus:outline-0 rounded-lg p-2 box-border placeholder-zinc-300 h-full mr-4 text-zinc-900 border border-2 border-zinc-300 bg-white focus:outline-0 focus:border-primary"
         >
-          <option value="%" disabled selected>------</option>
+          <option value="%" selected>все магазины</option>
           <option v-for="shop of data.shops" :key="shop.uin" :value="shop.uin">
             {{ shop.title }}
           </option>
@@ -51,7 +45,11 @@
       </tbody>
     </table>
 
-    <m-pagination :pages="data.pagination.total_pages" />
+    <m-pagination
+      v-model="data.pagination.current_page"
+      :pages="data.pagination.total_pages"
+      @update:model-value="changePage"
+    />
   </div>
 </template>
 
@@ -70,7 +68,6 @@ const load = useLoadStore();
 const data = reactive({
   shops: [] as object[],
   coupons: [] as object[],
-  page: 1 as number,
   activeShop: "%" as string,
   orderData: {
     col: "" as string,
@@ -99,4 +96,24 @@ onMounted(async () => {
     alert.handleAlert("Ошибка загрузки!!", "danger");
   }
 });
+
+watch(() => data.activeShop, async () => await changeShop());
+
+async function changePage() {
+  load.handleLoad();
+  const result = await http.get(`/post?page=${data.pagination.current_page}&${data.activeShop !== '%' ? 'shop=' + data.activeShop : ''}`);
+
+  data.coupons = result.data.rows;
+  load.handleLoad();
+}
+
+async function changeShop() {
+  load.handleLoad();
+  data.pagination.current_page = 1;
+  const result = await http.get(`/post?page=${data.pagination.current_page}&${data.activeShop !== '%' ? 'shop=' + data.activeShop : ''}`);
+  data.pagination.total_elements = result.data.count;
+  data.pagination.total_pages = Math.ceil(result.data.count / 15);
+  data.coupons = result.data.rows;
+  load.handleLoad();
+}
 </script>

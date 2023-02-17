@@ -62,8 +62,7 @@ const innerSelected = ref(1);
 watch(
   () => props.modelValue,
   () => {
-    console.log("12");
-    emit("update:modelValue");
+    emit("update:modelValue", props.modelValue);
   }
 );
 function handlePageSelected(selected) {
