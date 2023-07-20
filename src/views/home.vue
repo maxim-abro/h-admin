@@ -135,6 +135,7 @@
       <div class="grid grid-cols-1 xl:grid-cols-7 gap-4">
         <m-card class="xl:col-span-5 p-3">
           <h3 class="text-center text-xl font-bold mb-2">Статистика сайта</h3>
+          <YandexStatistic v-if="data.allCategories.length" :chart-data="dataToChart" />
         </m-card>
         <m-card class="xl:col-span-2 p-3">
           <h3 class="text-center text-xl font-bold mb-2">
@@ -160,6 +161,8 @@ import { useAlertStore } from "@/stores/alert";
 import { useLoadStore } from "@/stores/load";
 import MCard from "@/components/_core/MCard.vue";
 import CategoriesChart from "@/components/charts/CategoriesChart.vue";
+import YandexStatistic from "@/components/charts/YandexStatistic.vue";
+import axios from "axios";
 
 const alert = useAlertStore();
 const load = useLoadStore();
@@ -172,6 +175,7 @@ const data = reactive({
   allCategories: [] as CategoryModel[],
   shops: [] as ShopModel[],
   postInput: {} as PostModel,
+  statisticYM: {} as object,
 });
 
 onMounted(async () => {
@@ -218,19 +222,6 @@ const categoriesChart = computed(() => {
   return result;
 });
 
-const handleForm = async () => {
-  try {
-    load.handleLoad();
-    await http.post("/admin/post/add", data.postInput);
-    alert.handleAlert("Промокод добавлен", "success");
-    load.handleLoad();
-  } catch (e) {
-    console.log(e);
-    alert.handleAlert("Ошибка добавления промокода", "danger");
-    load.handleLoad();
-  }
-};
-
 async function updateData() {
   try {
     load.handleLoad();
@@ -238,6 +229,9 @@ async function updateData() {
     const allCategories = await http.get("/admin/category/all");
     const allShops = await http.get("/admin/shop");
     const emptyShops = await http.get("/shop/is/empty");
+    const statisticYM = await axios.get(
+      "https://api-metrika.yandex.net/stat/v1/data/bytime?ids=89498019&date1=30daysAgo&metrics=ym:s:visits&group=day"
+    );
     /////////////////////////////////
     data.shopCounter = res.data.shop;
     data.postCounter = res.data.post;
@@ -245,6 +239,7 @@ async function updateData() {
     data.allCategories = allCategories.data;
     data.shops = allShops.data;
     data.emptyShops = emptyShops.data;
+    data.statisticYM = statisticYM.data;
     load.handleLoad();
   } catch (e) {
     console.log(e);
@@ -278,4 +273,17 @@ const updateSlon = async () => {
     load.handleLoad();
   }
 };
+
+const dataToChart = computed(() => {
+  return {
+    labels: data.statisticYM.time_intervals,
+    datasets: [
+      {
+        label: "Yandex Metric",
+        backgroundColor: "#fdb13c",
+        data: data.statisticYM.totals[0],
+      },
+    ],
+  };
+});
 </script>
