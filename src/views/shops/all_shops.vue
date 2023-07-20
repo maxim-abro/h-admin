@@ -91,14 +91,14 @@
             <img
               class="ml-auto"
               :src="`https://za-halyavoi.ru/api/static/${shop.image}`"
-              alt=""
+              :alt="shop.image"
             />
           </td>
           <td class="py-2 px-2">
             {{ shop.title }}
           </td>
           <td class="py-2 px-2">
-            {{ shop.counter }}
+            {{ shop.image }}
           </td>
           <td class="py-2 px-2"></td>
           <td class="py-2 px-2"></td>
