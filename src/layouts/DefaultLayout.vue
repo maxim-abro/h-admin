@@ -16,6 +16,7 @@
         <main class='h-full'>
           <slot/>
         </main>
+        <m-footer/>
       </div>
     </div>
   </div>
@@ -29,6 +30,7 @@ import { reactive } from "vue";
 import { useAlertStore } from "@/stores/alert";
 import MAside from "@/components/MAside.vue";
 import { useAsideStore } from "@/stores/aside";
+import MFooter from "@/components/MFooter.vue";
 
 const aside = useAsideStore();
 const alertStore = useAlertStore();

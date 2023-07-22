@@ -101,36 +101,36 @@
             </div>
           </div>
         </m-card>
-        <!--        <m-card>-->
-        <!--          <div class="p-3">-->
-        <!--            <div class="flex items-center gap-4">-->
-        <!--              <div-->
-        <!--                class="rounded-lg bg-indigo-100 text-indigo-600 dark:bg-indigo-500/20 dark:text-indigo-100"-->
-        <!--                style="-->
-        <!--                  width: 55px;-->
-        <!--                  height: 55px;-->
-        <!--                  min-width: 55px;-->
-        <!--                  line-height: 55px;-->
-        <!--                  font-size: 27px;-->
-        <!--                "-->
-        <!--              >-->
-        <!--                <span class="flex h-full items-center justify-center">-->
-        <!--                  <font-awesome-icon icon="ticket" />-->
-        <!--                </span>-->
-        <!--              </div>-->
-        <!--              <div>-->
-        <!--                <div class="flex gap-1.5 items-end mb-2">-->
-        <!--                  <h3 class="font-bold text-black text-2xl leading-none">33</h3>-->
-        <!--                  <p class="font-semibold">Купоны</p>-->
-        <!--                </div>-->
-        <!--                <p class="flex items-center gap-1">-->
-        <!--                  <span class="text-emerald-600">+10</span>-->
-        <!--                  <span>за этот день</span>-->
-        <!--                </p>-->
-        <!--              </div>-->
-        <!--            </div>-->
-        <!--          </div>-->
-        <!--        </m-card>-->
+                <m-card>
+                  <div class="p-3">
+                    <div class="flex items-center gap-4">
+                      <div
+                        class="rounded-lg bg-amber-100 text-amber-600 dark:bg-amber-500/20 dark:text-amber-100"
+                        style="
+                          width: 55px;
+                          height: 55px;
+                          min-width: 55px;
+                          line-height: 55px;
+                          font-size: 27px;
+                        "
+                      >
+                        <span class="flex h-full items-center justify-center">
+                          <font-awesome-icon icon="quote-left" />
+                        </span>
+                      </div>
+                      <div>
+                        <div class="flex gap-1.5 items-end mb-2">
+                          <h3 class="font-bold text-black text-2xl leading-none">33</h3>
+                          <p class="font-semibold">Посты</p>
+                        </div>
+                        <p class="flex items-center gap-1">
+                          <span class="text-emerald-600">+10</span>
+                          <span>за этот день</span>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </m-card>
       </div>
       <div class="grid grid-cols-1 xl:grid-cols-7 gap-4">
         <m-card class="xl:col-span-5 p-3">
@@ -145,7 +145,30 @@
         </m-card>
       </div>
       <m-card class="p-3">
-        <h3 class="text-xl font-bold">Посты</h3>
+        <h3 class="text-xl font-bold">Блог</h3>
+        <table class="w-full">
+          <thead>
+          <tr class="bg-zinc-50 font-[100]">
+            <th class="text-left">Название</th>
+            <th class="">Статус</th>
+            <th class="">Дата создания</th>
+            <th class="">Действие</th>
+          </tr>
+          </thead>
+
+          <tbody>
+          <tr v-for="i of data.blog" class="text-center hover:bg-zinc-50 border-b border-b-collapse">
+            <td class="text-left py-3">{{ i.title }}</td>
+            <td>
+              <span class="bg-emerald-100 text-emerald-600 px-1 rounded">Создано</span>
+            </td>
+            <td>{{ new Date(i.date).toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' }) }}</td>
+            <td>
+              <a :href="`/blog/edit/${i.lat_title}`" class="">изменить</a>
+            </td>
+          </tr>
+          </tbody>
+        </table>
       </m-card>
     </div>
   </div>
@@ -176,6 +199,7 @@ const data = reactive({
   shops: [] as ShopModel[],
   postInput: {} as PostModel,
   statisticYM: {} as object,
+  blog: [],
 });
 
 onMounted(async () => {
@@ -229,6 +253,7 @@ async function updateData() {
     const allCategories = await http.get("/admin/category/all");
     const allShops = await http.get("/admin/shop");
     const emptyShops = await http.get("/shop/is/empty");
+    const blog = await http.get("/blog/all");
     const statisticYM = await axios.get(
       "https://api-metrika.yandex.net/stat/v1/data/bytime?ids=89498019&date1=30daysAgo&metrics=ym:s:visits&group=day"
     );
@@ -240,6 +265,7 @@ async function updateData() {
     data.shops = allShops.data;
     data.emptyShops = emptyShops.data;
     data.statisticYM = statisticYM.data;
+    data.blog = blog.data;
     load.handleLoad();
   } catch (e) {
     console.log(e);

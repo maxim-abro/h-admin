@@ -81,7 +81,7 @@
             </svg>
           </th>
           <th>купоны</th>
-          <th></th>
+          <th>Действие</th>
         </tr>
       </thead>
 
@@ -98,7 +98,7 @@
             {{ shop.title }}
           </td>
           <td class="py-2 px-2">
-            {{ shop.image }}
+            {{ shop.counter }}
           </td>
           <td class="py-2 px-2"></td>
           <td class="py-2 px-2"></td>
