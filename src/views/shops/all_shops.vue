@@ -80,7 +80,6 @@
               />
             </svg>
           </th>
-          <th>купоны</th>
           <th>Действие</th>
         </tr>
       </thead>
@@ -100,8 +99,9 @@
           <td class="py-2 px-2">
             {{ shop.counter }}
           </td>
-          <td class="py-2 px-2"></td>
-          <td class="py-2 px-2"></td>
+          <td class="py-2 px-2">
+            <a :href="`/shop/edit/${shop.lat_title}`" class="text-center block mx-auto">изменить</a>
+          </td>
         </tr>
       </tbody>
     </table>
