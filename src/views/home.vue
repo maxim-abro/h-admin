@@ -30,7 +30,7 @@
                   <p class="font-semibold">Купоны</p>
                 </div>
                 <p class="flex items-center gap-1">
-                  <span class="text-emerald-600">+10</span>
+                  <span class="text-emerald-600" :class='{"text-emerald-600": minus(data.postCounter, data.yesterdaysStatistics.count_post) >= 0,"text-red-600": minus(data.postCounter, data.yesterdaysStatistics.count_post) < 0}'>{{ minus(data.postCounter, data.yesterdaysStatistics.count_post) }}</span>
                   <span>за этот день</span>
                 </p>
               </div>
@@ -62,7 +62,7 @@
                   <p class="font-semibold">Магазины</p>
                 </div>
                 <p class="flex items-center gap-1">
-                  <span class="text-emerald-600">+10</span>
+                  <span class="text-emerald-600" :class='{"text-emerald-600": minus(data.shopCounter, data.yesterdaysStatistics.count_shop) >= 0,"text-red-600": minus(data.shopCounter, data.yesterdaysStatistics.count_shop) < 0}'>{{ minus(data.shopCounter, data.yesterdaysStatistics.count_shop) }}</span>
                   <span>за этот день</span>
                 </p>
               </div>
@@ -94,7 +94,7 @@
                   <p class="font-semibold">Категории</p>
                 </div>
                 <p class="flex items-center gap-1">
-                  <span class="text-emerald-600">+10</span>
+                  <span class="text-emerald-600" :class='{"text-emerald-600": minus(data.categoryCounter, data.yesterdaysStatistics.count_category) >= 0,"text-red-600": minus(data.categoryCounter, data.yesterdaysStatistics.count_category) < 0}'>{{ minus(data.categoryCounter, data.yesterdaysStatistics.count_category) }}</span>
                   <span>за этот день</span>
                 </p>
               </div>
@@ -120,11 +120,11 @@
                       </div>
                       <div>
                         <div class="flex gap-1.5 items-end mb-2">
-                          <h3 class="font-bold text-black text-2xl leading-none">33</h3>
+                          <h3 class="font-bold text-black text-2xl leading-none">{{ data.blogCounter }}</h3>
                           <p class="font-semibold">Посты</p>
                         </div>
                         <p class="flex items-center gap-1">
-                          <span class="text-emerald-600">+10</span>
+                          <span class="text-emerald-600" :class='{"text-emerald-600": minus(data.blogCounter, data.yesterdaysStatistics.count_blog) >= 0,"text-red-600": minus(data.blogCounter, data.yesterdaysStatistics.count_blog) < 0}'>{{ minus(data.blogCounter, data.yesterdaysStatistics.count_blog) }}</span>
                           <span>за этот день</span>
                         </p>
                       </div>
@@ -194,12 +194,14 @@ const data = reactive({
   shopCounter: 0 as number,
   postCounter: 0 as number,
   categoryCounter: 0 as number,
+  blogCounter: 0 as number,
   emptyShops: [] as object[],
   allCategories: [] as CategoryModel[],
   shops: [] as ShopModel[],
   postInput: {} as PostModel,
   statisticYM: {} as object,
-  blog: [],
+  blog: [] as object[],
+  yesterdaysStatistics: {} as object,
 });
 
 onMounted(async () => {
@@ -254,6 +256,7 @@ async function updateData() {
     const allShops = await http.get("/admin/shop");
     const emptyShops = await http.get("/shop/is/empty");
     const blog = await http.get("/blog/all");
+    const yesterdaysStatistics = await http.get("/admin/statistic/db");
     const statisticYM = await axios.get(
       "https://api-metrika.yandex.net/stat/v1/data/bytime?ids=89498019&date1=30daysAgo&metrics=ym:s:visits&group=day"
     );
@@ -261,11 +264,13 @@ async function updateData() {
     data.shopCounter = res.data.shop;
     data.postCounter = res.data.post;
     data.categoryCounter = res.data.category;
+    data.blogCounter = res.data.blog;
     data.allCategories = allCategories.data;
     data.shops = allShops.data;
     data.emptyShops = emptyShops.data;
     data.statisticYM = statisticYM.data;
     data.blog = blog.data;
+    data.yesterdaysStatistics = yesterdaysStatistics.data;
     load.handleLoad();
   } catch (e) {
     console.log(e);
@@ -299,6 +304,8 @@ const updateSlon = async () => {
     load.handleLoad();
   }
 };
+
+const minus = (a,b) => a-b;
 
 const dataToChart = computed(() => {
   return {
