@@ -69,37 +69,37 @@ const data = reactive({
         },
       ],
     },
-    {
-      title: "Заработок",
-      icon: "money-bill",
-      open: false,
-      children: [
-        {
-          title: "Adv Cake",
-          url: "/money/adv_cake",
-        },
-        {
-          title: "Gde Slon",
-          url: "/money/gde_slon",
-        },
-        {
-          title: "City Ads",
-          url: "/money/city_ads",
-        },
-        {
-          title: "perfluence",
-          url: "/money/perfluence",
-        },
-        {
-          title: "admitad",
-          url: "/money/admitad",
-        },
-        {
-          title: "РСЯ",
-          url: "/money/rca",
-        },
-      ],
-    },
+    // {
+    //   title: "Заработок",
+    //   icon: "money-bill",
+    //   open: false,
+    //   children: [
+    //     {
+    //       title: "Adv Cake",
+    //       url: "/money/adv_cake",
+    //     },
+    //     {
+    //       title: "Gde Slon",
+    //       url: "/money/gde_slon",
+    //     },
+    //     {
+    //       title: "City Ads",
+    //       url: "/money/city_ads",
+    //     },
+    //     {
+    //       title: "perfluence",
+    //       url: "/money/perfluence",
+    //     },
+    //     {
+    //       title: "admitad",
+    //       url: "/money/admitad",
+    //     },
+    //     {
+    //       title: "РСЯ",
+    //       url: "/money/rca",
+    //     },
+    //   ],
+    // },
     {
       title: "Купоны",
       icon: "ticket",
@@ -135,6 +135,16 @@ const data = reactive({
       icon: "handshake",
       open: false,
       url: "/gde_slon",
+      children: [
+        {
+          title: "Дашборд",
+          url: "/gde_slon"
+        },
+        {
+          title: "Линки",
+          url: "/gde_slon/link",
+        },
+      ]
     },
     {
       title: "adv cake",
@@ -142,14 +152,14 @@ const data = reactive({
       open: false,
       children: [
         {
-          title: "Купоны",
-          url: "/adv_cake/coupons",
+          title: "Дашборд",
+          url: "/adv_cake"
         },
         {
-          title: "Изображения",
-          url: "/adv_cake/images",
+          title: "Линки",
+          url: "/adv_cake/link",
         },
-      ],
+      ]
     },
     {
       title: "vk",

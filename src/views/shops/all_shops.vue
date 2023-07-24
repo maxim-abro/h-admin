@@ -144,7 +144,7 @@ watch(
   () => filterData.value,
   () => {
     if (filterData.value) {
-      orderedShops.value = orderedShops.value.filter((i) => {
+      orderedShops.value = allShops.value.filter((i) => {
         return i.title.toLowerCase().includes(filterData.value.toLowerCase());
       });
     } else {

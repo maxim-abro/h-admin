@@ -54,6 +54,14 @@ const router = createRouter({
         auth: true,
       },
     },
+    {
+      path: "/gde_slon",
+      name: "gde slon dash",
+      component: () => import("@/views/gde_slon/index.vue"),
+      meta: {
+        auth: true,
+      },
+    },
   ],
 });
 

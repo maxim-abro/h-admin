@@ -30,7 +30,27 @@
                   <p class="font-semibold">Купоны</p>
                 </div>
                 <p class="flex items-center gap-1">
-                  <span class="text-emerald-600" :class='{"text-emerald-600": minus(data.postCounter, data.yesterdaysStatistics.count_post) >= 0,"text-red-600": minus(data.postCounter, data.yesterdaysStatistics.count_post) < 0}'>{{ minus(data.postCounter, data.yesterdaysStatistics.count_post) }}</span>
+                  <span
+                    class="text-emerald-600"
+                    :class="{
+                      'text-emerald-600':
+                        minus(
+                          data.postCounter,
+                          data.yesterdaysStatistics.count_post
+                        ) >= 0,
+                      'text-red-600':
+                        minus(
+                          data.postCounter,
+                          data.yesterdaysStatistics.count_post
+                        ) < 0,
+                    }"
+                    >{{
+                      minus(
+                        data.postCounter,
+                        data.yesterdaysStatistics.count_post
+                      )
+                    }}</span
+                  >
                   <span>за этот день</span>
                 </p>
               </div>
@@ -62,7 +82,27 @@
                   <p class="font-semibold">Магазины</p>
                 </div>
                 <p class="flex items-center gap-1">
-                  <span class="text-emerald-600" :class='{"text-emerald-600": minus(data.shopCounter, data.yesterdaysStatistics.count_shop) >= 0,"text-red-600": minus(data.shopCounter, data.yesterdaysStatistics.count_shop) < 0}'>{{ minus(data.shopCounter, data.yesterdaysStatistics.count_shop) }}</span>
+                  <span
+                    class="text-emerald-600"
+                    :class="{
+                      'text-emerald-600':
+                        minus(
+                          data.shopCounter,
+                          data.yesterdaysStatistics.count_shop
+                        ) >= 0,
+                      'text-red-600':
+                        minus(
+                          data.shopCounter,
+                          data.yesterdaysStatistics.count_shop
+                        ) < 0,
+                    }"
+                    >{{
+                      minus(
+                        data.shopCounter,
+                        data.yesterdaysStatistics.count_shop
+                      )
+                    }}</span
+                  >
                   <span>за этот день</span>
                 </p>
               </div>
@@ -94,48 +134,93 @@
                   <p class="font-semibold">Категории</p>
                 </div>
                 <p class="flex items-center gap-1">
-                  <span class="text-emerald-600" :class='{"text-emerald-600": minus(data.categoryCounter, data.yesterdaysStatistics.count_category) >= 0,"text-red-600": minus(data.categoryCounter, data.yesterdaysStatistics.count_category) < 0}'>{{ minus(data.categoryCounter, data.yesterdaysStatistics.count_category) }}</span>
+                  <span
+                    class="text-emerald-600"
+                    :class="{
+                      'text-emerald-600':
+                        minus(
+                          data.categoryCounter,
+                          data.yesterdaysStatistics.count_category
+                        ) >= 0,
+                      'text-red-600':
+                        minus(
+                          data.categoryCounter,
+                          data.yesterdaysStatistics.count_category
+                        ) < 0,
+                    }"
+                    >{{
+                      minus(
+                        data.categoryCounter,
+                        data.yesterdaysStatistics.count_category
+                      )
+                    }}</span
+                  >
                   <span>за этот день</span>
                 </p>
               </div>
             </div>
           </div>
         </m-card>
-                <m-card>
-                  <div class="p-3">
-                    <div class="flex items-center gap-4">
-                      <div
-                        class="rounded-lg bg-amber-100 text-amber-600 dark:bg-amber-500/20 dark:text-amber-100"
-                        style="
-                          width: 55px;
-                          height: 55px;
-                          min-width: 55px;
-                          line-height: 55px;
-                          font-size: 27px;
-                        "
-                      >
-                        <span class="flex h-full items-center justify-center">
-                          <font-awesome-icon icon="quote-left" />
-                        </span>
-                      </div>
-                      <div>
-                        <div class="flex gap-1.5 items-end mb-2">
-                          <h3 class="font-bold text-black text-2xl leading-none">{{ data.blogCounter }}</h3>
-                          <p class="font-semibold">Посты</p>
-                        </div>
-                        <p class="flex items-center gap-1">
-                          <span class="text-emerald-600" :class='{"text-emerald-600": minus(data.blogCounter, data.yesterdaysStatistics.count_blog) >= 0,"text-red-600": minus(data.blogCounter, data.yesterdaysStatistics.count_blog) < 0}'>{{ minus(data.blogCounter, data.yesterdaysStatistics.count_blog) }}</span>
-                          <span>за этот день</span>
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </m-card>
+        <m-card>
+          <div class="p-3">
+            <div class="flex items-center gap-4">
+              <div
+                class="rounded-lg bg-amber-100 text-amber-600 dark:bg-amber-500/20 dark:text-amber-100"
+                style="
+                  width: 55px;
+                  height: 55px;
+                  min-width: 55px;
+                  line-height: 55px;
+                  font-size: 27px;
+                "
+              >
+                <span class="flex h-full items-center justify-center">
+                  <font-awesome-icon icon="quote-left" />
+                </span>
+              </div>
+              <div>
+                <div class="flex gap-1.5 items-end mb-2">
+                  <h3 class="font-bold text-black text-2xl leading-none">
+                    {{ data.blogCounter }}
+                  </h3>
+                  <p class="font-semibold">Посты</p>
+                </div>
+                <p class="flex items-center gap-1">
+                  <span
+                    class="text-emerald-600"
+                    :class="{
+                      'text-emerald-600':
+                        minus(
+                          data.blogCounter,
+                          data.yesterdaysStatistics.count_blog
+                        ) >= 0,
+                      'text-red-600':
+                        minus(
+                          data.blogCounter,
+                          data.yesterdaysStatistics.count_blog
+                        ) < 0,
+                    }"
+                    >{{
+                      minus(
+                        data.blogCounter,
+                        data.yesterdaysStatistics.count_blog
+                      )
+                    }}</span
+                  >
+                  <span>за этот день</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </m-card>
       </div>
       <div class="grid grid-cols-1 xl:grid-cols-7 gap-4">
         <m-card class="xl:col-span-5 p-3">
           <h3 class="text-center text-xl font-bold mb-2">Статистика сайта</h3>
-          <YandexStatistic v-if="data.allCategories.length" :chart-data="dataToChart" />
+          <YandexStatistic
+            v-if="data.allCategories.length"
+            :chart-data="dataToChart"
+          />
         </m-card>
         <m-card class="xl:col-span-2 p-3">
           <h3 class="text-center text-xl font-bold mb-2">
@@ -148,25 +233,38 @@
         <h3 class="text-xl font-bold">Блог</h3>
         <table class="w-full">
           <thead>
-          <tr class="bg-zinc-50 font-[100]">
-            <th class="text-left">Название</th>
-            <th class="">Статус</th>
-            <th class="">Дата создания</th>
-            <th class="">Действие</th>
-          </tr>
+            <tr class="bg-zinc-50 font-[100]">
+              <th class="text-left">Название</th>
+              <th class="">Статус</th>
+              <th class="">Дата создания</th>
+              <th class="">Действие</th>
+            </tr>
           </thead>
 
           <tbody>
-          <tr v-for="i of data.blog" class="text-center hover:bg-zinc-50 border-b border-b-collapse">
-            <td class="text-left py-3">{{ i.title }}</td>
-            <td>
-              <span class="bg-emerald-100 text-emerald-600 px-1 rounded">Создано</span>
-            </td>
-            <td>{{ new Date(i.date).toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' }) }}</td>
-            <td>
-              <a :href="`/blog/edit/${i.lat_title}`" class="">изменить</a>
-            </td>
-          </tr>
+            <tr
+              v-for="i of data.blog"
+              class="text-center hover:bg-zinc-50 border-b border-b-collapse"
+            >
+              <td class="text-left py-3">{{ i.title }}</td>
+              <td>
+                <span class="bg-emerald-100 text-emerald-600 px-1 rounded"
+                  >Создано</span
+                >
+              </td>
+              <td>
+                {{
+                  new Date(i.date).toLocaleDateString("ru-RU", {
+                    day: "numeric",
+                    month: "long",
+                    year: "numeric",
+                  })
+                }}
+              </td>
+              <td>
+                <a :href="`/blog/edit/${i.lat_title}`" class="">изменить</a>
+              </td>
+            </tr>
           </tbody>
         </table>
       </m-card>
@@ -305,7 +403,7 @@ const updateSlon = async () => {
   }
 };
 
-const minus = (a,b) => a-b;
+const minus = (a, b) => a - b;
 
 const dataToChart = computed(() => {
   return {
