@@ -261,10 +261,12 @@ async function deleteLinksSlon() {
 }
 
 async function loadData() {
+  load.handleLoad();
   const slonShop = await http.get("/adv_cake/shop");
   const slonLink = await http.get("/adv_cake/link");
   data.slonShop = slonShop.data;
   data.filteredSlonShop = slonShop.data;
   data.slonLink = slonLink.data;
+  load.handleLoad();
 }
 </script>
