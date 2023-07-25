@@ -1,6 +1,6 @@
 <template>
   <div class="flex fixed top-0 left-0 w-full h-full z-50">
-    <div class="w-9/12 h-full bg-white dark:bg-zinc-800 overflow-auto z-50 p-3">
+    <div class="w-9/12 h-full bg-white overflow-auto z-50 p-3">
       <div
         class="h-16 flex items-center justify-center uppercase text-light text-primary-900 text-center"
       >
