@@ -108,7 +108,7 @@ import MButton from "@/components/_core/MButton.vue";
 import type { ShopModel } from "@/models/shop.model";
 import type { CategoryModel } from "@/models/category.model";
 import type { PostModel } from "@/models/post.model";
-import axios from 'axios';
+import axios from "axios";
 
 const load = useLoadStore();
 const alert = useAlertStore();
@@ -131,7 +131,7 @@ onMounted(async () => {
   }
 });
 
-async function handleForm(form: PostModel):string {
+async function handleForm(form: PostModel): string {
   try {
     load.handleLoad();
     await http.post("/admin/post/add", form);

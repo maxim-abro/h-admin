@@ -231,42 +231,44 @@
       </div>
       <m-card class="p-3">
         <h3 class="text-xl font-bold">Блог</h3>
-        <table class="w-full">
-          <thead>
-            <tr class="bg-zinc-50 font-[100]">
-              <th class="text-left">Название</th>
-              <th class="">Статус</th>
-              <th class="">Дата создания</th>
-              <th class="">Действие</th>
-            </tr>
-          </thead>
+        <div class="w-full overflow-x-scroll">
+          <table class="min-w-full">
+            <thead>
+              <tr class="bg-zinc-50 font-[100]">
+                <th class="text-left">Название</th>
+                <th class="">Статус</th>
+                <th class="">Дата создания</th>
+                <th class="">Действие</th>
+              </tr>
+            </thead>
 
-          <tbody>
-            <tr
-              v-for="i of data.blog"
-              class="text-center hover:bg-zinc-50 border-b border-b-collapse"
-            >
-              <td class="text-left py-3">{{ i.title }}</td>
-              <td>
-                <span class="bg-emerald-100 text-emerald-600 px-1 rounded"
-                  >Создано</span
-                >
-              </td>
-              <td>
-                {{
-                  new Date(i.date).toLocaleDateString("ru-RU", {
-                    day: "numeric",
-                    month: "long",
-                    year: "numeric",
-                  })
-                }}
-              </td>
-              <td>
-                <a :href="`/blog/edit/${i.lat_title}`" class="">изменить</a>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+            <tbody>
+              <tr
+                v-for="i of data.blog"
+                class="text-center hover:bg-zinc-50 border-b border-b-collapse"
+              >
+                <td class="text-left py-3 min-w-[200px]">{{ i.title }}</td>
+                <td>
+                  <span class="bg-emerald-100 text-emerald-600 px-1 rounded"
+                    >Создано</span
+                  >
+                </td>
+                <td>
+                  {{
+                    new Date(i.date).toLocaleDateString("ru-RU", {
+                      day: "numeric",
+                      month: "long",
+                      year: "numeric",
+                    })
+                  }}
+                </td>
+                <td>
+                  <a :href="`/blog/edit/${i.lat_title}`" class="">изменить</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </m-card>
     </div>
   </div>

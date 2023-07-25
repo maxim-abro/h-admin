@@ -4,8 +4,14 @@
   >
     <div class="h-16 flex justify-between items-center px-4 relative w-full">
       <button
+        @click="popup.toggleMenu"
+        class="text-zinc-600 sm:hidden block rounded-full hover:bg-zinc-300 h-[28px] w-[28px] hover:text-black"
+      >
+        <font-awesome-icon icon="bars" />
+      </button>
+      <button
         @click="aside.toggleAside"
-        class="text-zinc-600 rounded-full hover:bg-zinc-300 h-[28px] w-[28px] hover:text-black"
+        class="text-zinc-600 hidden sm:block rounded-full hover:bg-zinc-300 h-[28px] w-[28px] hover:text-black"
       >
         <font-awesome-icon icon="bars" />
       </button>
@@ -33,6 +39,9 @@
 <script setup lang="ts">
 import { useAsideStore } from "@/stores/aside";
 import { useAuthStore } from '@/stores/auth';
+import { usePopupStore } from '@/stores/popup';
+
 const auth = useAuthStore();
 const aside = useAsideStore();
+const popup = usePopupStore();
 </script>

@@ -123,7 +123,9 @@
 
     <m-card>
       <div class="p-3">
-        <div class="flex justify-between items-center mb-4">
+        <div
+          class="flex justify-between items-center flex-col sm:flex-row mb-4"
+        >
           <h3 class="text-xl font-bold">Магазины gde slon</h3>
 
           <div class="flex items-center">
@@ -143,31 +145,33 @@
           </div>
         </div>
 
-        <table class="w-full">
-          <thead>
-            <tr class="bg-zinc-50 font-[100]">
-              <th class="text-left">id</th>
-              <th class="">Название</th>
-              <th class="">url</th>
-            </tr>
-          </thead>
+        <div class="max-w-full overflow-x-scroll">
+          <table class="w-full">
+            <thead>
+              <tr class="bg-zinc-50 font-[100]">
+                <th class="text-left">id</th>
+                <th class="">Название</th>
+                <th class="">url</th>
+              </tr>
+            </thead>
 
-          <tbody>
-            <tr
-              v-for="i of data.filteredSlonShop"
-              :key="i.id"
-              class="text-center hover:bg-zinc-50 border-b border-b-collapse"
-            >
-              <td class="text-left py-3">{{ i.id }}</td>
-              <td>
-                {{ i.title }}
-              </td>
-              <td>
-                {{ i.url }}
-              </td>
-            </tr>
-          </tbody>
-        </table>
+            <tbody>
+              <tr
+                v-for="i of data.filteredSlonShop"
+                :key="i.id"
+                class="text-center hover:bg-zinc-50 border-b border-b-collapse"
+              >
+                <td class="text-left py-3">{{ i.id }}</td>
+                <td>
+                  {{ i.title }}
+                </td>
+                <td>
+                  {{ i.url }}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </m-card>
   </div>

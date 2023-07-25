@@ -7,16 +7,25 @@
   >
   <m-global-load />
   <div class="flex flex-auto min-w-0 text-zinc-700">
-    <m-aside :menu="data.menuItems" @toggle-menu="toggleMenu($event)" />
+    <m-aside
+      class="hidden sm:block"
+      :menu="data.menuItems"
+      @toggle-menu="toggleMenu($event)"
+    />
     <div
       class="flex flex-col flex-auto min-h-screen relative w-full bg-white border-1 border-gray200"
     >
       <m-head />
-      <div class='h-full flex flex-auto flex-col justify-between'>
-        <main class='h-full'>
-          <slot/>
+      <m-mobile-aside
+        v-if="popup.openMobileMenu"
+        :menu="data.menuItems"
+        @toggle-menu="toggleMenu($event)"
+      />
+      <div class="h-full flex flex-auto flex-col justify-between">
+        <main class="h-full">
+          <slot />
         </main>
-        <m-footer/>
+        <m-footer />
       </div>
     </div>
   </div>
@@ -31,9 +40,12 @@ import { useAlertStore } from "@/stores/alert";
 import MAside from "@/components/MAside.vue";
 import { useAsideStore } from "@/stores/aside";
 import MFooter from "@/components/MFooter.vue";
+import MMobileAside from "@/components/MMobileAside.vue";
+import { usePopupStore } from '@/stores/popup';
 
 const aside = useAsideStore();
 const alertStore = useAlertStore();
+const popup = usePopupStore();
 
 const data = reactive({
   openMenu: false as boolean,
@@ -112,8 +124,8 @@ const data = reactive({
         {
           title: "Добавить купон",
           url: "/coupons/add",
-        }
-      ]
+        },
+      ],
     },
     {
       title: "Категории",
@@ -138,13 +150,13 @@ const data = reactive({
       children: [
         {
           title: "Дашборд",
-          url: "/gde_slon"
+          url: "/gde_slon",
         },
         {
           title: "Линки",
           url: "/gde_slon/link",
         },
-      ]
+      ],
     },
     {
       title: "adv cake",
@@ -153,13 +165,13 @@ const data = reactive({
       children: [
         {
           title: "Дашборд",
-          url: "/adv_cake"
+          url: "/adv_cake",
         },
         {
           title: "Линки",
           url: "/adv_cake/link",
         },
-      ]
+      ],
     },
     {
       title: "vk",
@@ -192,13 +204,11 @@ const data = reactive({
 });
 
 function toggleMenu(idx: number) {
-  if (aside.open) {
-    const result = data.menuItems.find((i, _idx) => {
-      return idx === _idx;
-    });
-    if (result) {
-      result.open = !result.open;
-    }
+  const result = data.menuItems.find((i, _idx) => {
+    return idx === _idx;
+  });
+  if (result) {
+    result.open = !result.open;
   }
 }
 </script>

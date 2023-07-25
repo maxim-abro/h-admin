@@ -2,8 +2,8 @@
   <div
     class="relative h-full flex flex-auto flex-col px-4 sm:px-6 md:px-8 py-4 sm:py-6 md:px-8"
   >
-    <div class="flex justify-between items-center mb-4">
-      <h1 class="text-xl font-bold">Промокоды</h1>
+    <div class="flex justify-between items-center flex-col sm:flex-row mb-4">
+      <h1 class="text-xl font-bold mb-2 sm: mb-0">Промокоды</h1>
 
       <div class="flex items-center">
         <select
@@ -15,35 +15,39 @@
             {{ shop.title }}
           </option>
         </select>
-        <m-button class="" @click="$router.push('/shops/add/')"
-          >добавить&nbsp;магазин</m-button
+        <m-button
+          class="text-xs sm:text-base"
+          @click="$router.push('/shops/add/')"
+          >добавить&nbsp;промокод</m-button
         >
       </div>
     </div>
 
-    <table>
-      <thead>
-        <tr class="bg-zinc-100">
-          <th>Название</th>
-          <th>Магазин</th>
-          <th>Просмотры</th>
-          <th>Лайки</th>
-          <th>Тип</th>
-        </tr>
-      </thead>
+    <div class="min-w-full overflow-x-scroll">
+      <table>
+        <thead>
+          <tr class="bg-zinc-100">
+            <th>Название</th>
+            <th>Магазин</th>
+            <th>Просмотры</th>
+            <th>Лайки</th>
+            <th>Тип</th>
+          </tr>
+        </thead>
 
-      <tbody>
-        <tr v-for="post of data.coupons" class="border-y">
-          <th class="py-2 px-2">{{ post.title }}</th>
-          <th class="py-2 px-2">{{ post.shop.title }}</th>
-          <th class="py-2 px-2">{{ post.counter }}</th>
-          <th class="py-2 px-2">{{ post.rating }}</th>
-          <th class="py-2 px-2">
-            {{ post.type === "promoCode" ? "Промокод" : "Скидка" }}
-          </th>
-        </tr>
-      </tbody>
-    </table>
+        <tbody>
+          <tr v-for="post of data.coupons" class="border-y">
+            <th class="py-2 px-2 min-w-[200px]">{{ post.title }}</th>
+            <th class="py-2 px-2">{{ post.shop.title }}</th>
+            <th class="py-2 px-2">{{ post.counter }}</th>
+            <th class="py-2 px-2">{{ post.rating }}</th>
+            <th class="py-2 px-2">
+              {{ post.type === "promoCode" ? "Промокод" : "Скидка" }}
+            </th>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
     <m-pagination
       v-model="data.pagination.current_page"
@@ -97,11 +101,18 @@ onMounted(async () => {
   }
 });
 
-watch(() => data.activeShop, async () => await changeShop());
+watch(
+  () => data.activeShop,
+  async () => await changeShop()
+);
 
 async function changePage() {
   load.handleLoad();
-  const result = await http.get(`/post?page=${data.pagination.current_page}&${data.activeShop !== '%' ? 'shop=' + data.activeShop : ''}`);
+  const result = await http.get(
+    `/post?page=${data.pagination.current_page}&${
+      data.activeShop !== "%" ? "shop=" + data.activeShop : ""
+    }`
+  );
 
   data.coupons = result.data.rows;
   load.handleLoad();
@@ -110,7 +121,11 @@ async function changePage() {
 async function changeShop() {
   load.handleLoad();
   data.pagination.current_page = 1;
-  const result = await http.get(`/post?page=${data.pagination.current_page}&${data.activeShop !== '%' ? 'shop=' + data.activeShop : ''}`);
+  const result = await http.get(
+    `/post?page=${data.pagination.current_page}&${
+      data.activeShop !== "%" ? "shop=" + data.activeShop : ""
+    }`
+  );
   data.pagination.total_elements = result.data.count;
   data.pagination.total_pages = Math.ceil(result.data.count / 15);
   data.coupons = result.data.rows;

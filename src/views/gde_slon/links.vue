@@ -5,13 +5,9 @@
     <h1 class="mb-4 text-2xl font-bold">Добавить линк с CPA gde slon</h1>
     <m-card>
       <div class="p-3">
-        <div class='flex justify-between items-center'>
-          <div class=''>
-            gdeSlon {{ data.links.length }} Магазинов
-          </div>
-          <div class=''>
-            za halyavoi {{ data.shops.length }} Магазинов
-          </div>
+        <div class="flex justify-between items-center">
+          <div class="">gdeSlon {{ data.links.length }} Магазинов</div>
+          <div class="">za halyavoi {{ data.shops.length }} Магазинов</div>
         </div>
         <div class="grid grid-cols-2 gap-4">
           <select

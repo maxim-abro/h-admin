@@ -42,6 +42,7 @@
 <script setup lang="ts">
 import { RouterLink } from "vue-router";
 import { useAsideStore } from "@/stores/aside";
+import { defineProps } from "vue";
 
 interface Menu {
   title: string;
