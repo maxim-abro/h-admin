@@ -250,7 +250,6 @@ async function deleteLinksSlon() {
     alert.handleAlert("Магазины обновлены", "success");
     load.handleLoad();
   } catch (e) {
-    // todo Надо добавить обновление данных.
     console.log(e);
     alert.handleAlert("Произошла ошибка", "danger");
     load.handleLoad();
