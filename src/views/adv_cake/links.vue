@@ -2,16 +2,12 @@
   <div
     class="relative h-full flex flex-auto flex-col px-4 sm:px-6 md:px-8 py-4 sm:py-6 md:px-8"
   >
-    <h1 class="mb-4 text-2xl font-bold">Добавить линк с CPA gde slon</h1>
+    <h1 class="mb-4 text-2xl font-bold">Добавить линк с CPA adv cake</h1>
     <m-card>
       <div class="p-3">
-        <div class='flex justify-between items-center'>
-          <div class=''>
-            gdeSlon {{ data.links.length }} Магазинов
-          </div>
-          <div class=''>
-            za halyavoi {{ data.shops.length }} Магазинов
-          </div>
+        <div class="flex justify-between items-center">
+          <div class="">advCake {{ data.links.length }} Магазинов</div>
+          <div class="">za halyavoi {{ data.shops.length }} Магазинов</div>
         </div>
         <div class="grid grid-cols-2 gap-4">
           <select
@@ -77,9 +73,9 @@ const data = reactive({
 onMounted(async () => {
   try {
     load.handleLoad();
-    const slonShops = await http.get("/slon/shop");
+    const slonShops = await http.get("/adv_cake/shop");
     const shops = await http.get("/shop");
-    const links = await http.get("/slon/link");
+    const links = await http.get("/adv_cake/link");
 
     data.slonShops = slonShops.data;
     data.shops = shops.data;
@@ -95,8 +91,8 @@ onMounted(async () => {
 async function handleLink(dto: LinksDto) {
   try {
     load.handleLoad();
-    await http.post("/slon/link", dto);
-    const links = await http.get("/slon/link");
+    await http.post("/adv_cake/link", dto);
+    const links = await http.get("/adv_cake/link");
     data.links = links.data;
     load.handleLoad();
   } catch (e) {
@@ -107,7 +103,7 @@ async function handleLink(dto: LinksDto) {
 const notAddedShops = computed(() => {
   return data.slonShops.filter((c) => {
     const find = data.links.find((l) => {
-      return l.slon_shop.title === c.title;
+      return l.cake_shop.title === c.title;
     });
     return !find;
   });

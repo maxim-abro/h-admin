@@ -9,7 +9,7 @@
   <div class="flex flex-auto min-w-0 text-zinc-700">
     <m-aside :menu="data.menuItems" @toggle-menu="toggleMenu($event)" />
     <div
-      class="flex flex-col flex-auto min-h-screen relative w-full bg-white dark:bg-gray-800 border-1 border-gray200 dark:border-gray-700"
+      class="flex flex-col flex-auto min-h-screen relative w-full bg-white border-1 border-gray200"
     >
       <m-head />
       <div class='h-full flex flex-auto flex-col justify-between'>

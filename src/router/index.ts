@@ -70,6 +70,22 @@ const router = createRouter({
         auth: true,
       },
     },
+    {
+      path: "/adv_cake",
+      name: "adv cake dash",
+      component: () => import("@/views/adv_cake/index.vue"),
+      meta: {
+        auth: true,
+      },
+    },
+    {
+      path: "/adv_cake/link",
+      name: "adv cake link",
+      component: () => import("@/views/adv_cake/links.vue"),
+      meta: {
+        auth: true,
+      },
+    },
   ],
 });
 

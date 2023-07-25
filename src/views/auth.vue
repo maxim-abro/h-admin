@@ -11,7 +11,7 @@
     </div>
 
     <div
-      class="col-span-2 flex flex-col justify-center items-center bg-white dark:bg-gray-800"
+      class="col-span-2 flex flex-col justify-center items-center bg-white"
     >
       <div class="xl:w-[450px] px-8 text-zinc-700">
         <div class="mb-8"></div>

@@ -9,7 +9,7 @@
           <div class="p-3">
             <div class="flex items-center gap-4">
               <div
-                class="rounded-lg bg-indigo-100 text-indigo-600 dark:bg-indigo-500/20 dark:text-indigo-100"
+                class="rounded-lg bg-indigo-100 text-indigo-600"
                 style="
                   width: 55px;
                   height: 55px;
@@ -61,7 +61,7 @@
           <div class="p-3">
             <div class="flex items-center gap-4">
               <div
-                class="rounded-lg bg-cyan-100 text-cyan-600 dark:bg-cyan-500/20 dark:text-cyan-100"
+                class="rounded-lg bg-cyan-100 text-cyan-600"
                 style="
                   width: 55px;
                   height: 55px;
@@ -113,7 +113,7 @@
           <div class="p-3">
             <div class="flex items-center gap-4">
               <div
-                class="rounded-lg bg-emerald-100 text-emerald-600 dark:bg-emerald-500/20 dark:text-emerald-100"
+                class="rounded-lg bg-emerald-100 text-emerald-600"
                 style="
                   width: 55px;
                   height: 55px;
@@ -165,7 +165,7 @@
           <div class="p-3">
             <div class="flex items-center gap-4">
               <div
-                class="rounded-lg bg-amber-100 text-amber-600 dark:bg-amber-500/20 dark:text-amber-100"
+                class="rounded-lg bg-amber-100 text-amber-600"
                 style="
                   width: 55px;
                   height: 55px;

@@ -2,7 +2,7 @@
   <div
     class="relative h-full flex flex-auto flex-col px-4 sm:px-6 md:px-8 py-4 sm:py-6 md:px-8"
   >
-    <h1 class="mb-4 text-2xl font-bold">Дашборд CPA gde slon</h1>
+    <h1 class="mb-4 text-2xl font-bold">Дашборд CPA adv cake</h1>
 
     <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-4 my-4">
       <m-card>
@@ -124,7 +124,7 @@
     <m-card>
       <div class="p-3">
         <div class="flex justify-between items-center mb-4">
-          <h3 class="text-xl font-bold">Магазины gde slon</h3>
+          <h3 class="text-xl font-bold">Магазины adv cake</h3>
 
           <div class="flex items-center">
             <input
@@ -224,7 +224,7 @@ function filterData() {
 function filterAddedShops(shops: SlonShop[]): SlonShop[] {
   return shops.filter((c) => {
     const find = data.slonLink.find((l) => {
-      return l.slon_shop.title === c.title;
+      return l.cake_shop.title === c.title;
     });
     return !find;
   });
@@ -233,7 +233,7 @@ function filterAddedShops(shops: SlonShop[]): SlonShop[] {
 async function updateSlonShops() {
   try {
     load.handleLoad();
-    await http.get("/cron/update_slon");
+    await http.get("/cron/update_cake");
     alert.handleAlert("Магазины обновлены", "success");
     load.handleLoad();
   } catch (e) {
@@ -246,7 +246,7 @@ async function updateSlonShops() {
 async function deleteLinksSlon() {
   try {
     load.handleLoad();
-    await http.get("/cron/delete_links_slon");
+    await http.get("/cron/delete_links_cake");
     alert.handleAlert("Магазины обновлены", "success");
     load.handleLoad();
   } catch (e) {
@@ -257,8 +257,8 @@ async function deleteLinksSlon() {
 }
 
 async function loadData() {
-  const slonShop = await http.get("/slon/shop");
-  const slonLink = await http.get("/slon/link");
+  const slonShop = await http.get("/adv_cake/shop");
+  const slonLink = await http.get("/adv_cake/link");
   data.slonShop = slonShop.data;
   data.filteredSlonShop = slonShop.data;
   data.slonLink = slonLink.data;
