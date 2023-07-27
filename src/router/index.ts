@@ -56,7 +56,7 @@ const router = createRouter({
     },
     {
       path: "/gde_slon",
-      name: "gde slon dash",
+      name: "gdeSlonDash",
       component: () => import("@/views/gde_slon/index.vue"),
       meta: {
         auth: true,
@@ -64,7 +64,7 @@ const router = createRouter({
     },
     {
       path: "/gde_slon/link",
-      name: "gde slon links",
+      name: "gdeSlonLinks",
       component: () => import("@/views/gde_slon/links.vue"),
       meta: {
         auth: true,
@@ -72,7 +72,7 @@ const router = createRouter({
     },
     {
       path: "/adv_cake",
-      name: "adv cake dash",
+      name: "advCakeDash",
       component: () => import("@/views/adv_cake/index.vue"),
       meta: {
         auth: true,
@@ -80,8 +80,32 @@ const router = createRouter({
     },
     {
       path: "/adv_cake/link",
-      name: "adv cake link",
+      name: "advCakeLink",
       component: () => import("@/views/adv_cake/links.vue"),
+      meta: {
+        auth: true,
+      },
+    },
+    {
+      path: "/holiday",
+      name: "allHolidays",
+      component: () => import("@/views/holiday/index.vue"),
+      meta: {
+        auth: true,
+      },
+    },
+    {
+      path: "/holiday/add",
+      name: "addHoliday",
+      component: () => import("@/views/holiday/add.vue"),
+      meta: {
+        auth: true,
+      },
+    },
+    {
+      path: "/holiday/:id",
+      name: "idHoliday",
+      component: () => import("@/views/holiday/_id.vue"),
       meta: {
         auth: true,
       },

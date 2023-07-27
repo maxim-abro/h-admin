@@ -24,7 +24,7 @@
     </div>
 
     <div class="min-w-full overflow-x-scroll">
-      <table>
+      <table class="w-full">
         <thead>
           <tr class="bg-zinc-100">
             <th>Название</th>

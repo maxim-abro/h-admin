@@ -19,7 +19,7 @@
     </div>
 
     <div class="max-w-full overflow-x-scroll">
-      <table>
+      <table class="w-full">
         <thead>
           <tr class="bg-zinc-100">
             <th></th>

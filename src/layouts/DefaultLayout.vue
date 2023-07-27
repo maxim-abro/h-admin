@@ -184,6 +184,12 @@ const data = reactive({
       icon: "fa-solid fa-cake-candles",
       open: false,
       url: "/holiday",
+      children: [
+        {
+          title: "Все события",
+          url: "/holiday",
+        },
+      ],
     },
     {
       title: "Блог",
