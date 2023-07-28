@@ -237,7 +237,7 @@ function filterAddedShops(shops: SlonShop[]): SlonShop[] {
 async function updateSlonShops() {
   try {
     load.handleLoad();
-    await http.get("/cron/update_slon");
+    await http.get("/slon/parse");
     alert.handleAlert("Магазины обновлены", "success");
     load.handleLoad();
   } catch (e) {

@@ -407,13 +407,13 @@ function getTimer() {
 const minus = (a: number, b: number) => a - b;
 
 const getHours = computed(() => {
-  return data.time.getHours();
+  return addZero(data.time.getHours());
 });
 const getMinutes = computed(() => {
-  return data.time.getMinutes();
+  return addZero(data.time.getMinutes());
 });
 const getSeconds = computed(() => {
-  return data.time.getSeconds();
+  return addZero(data.time.getSeconds());
 });
 
 const dataToChart = computed(() => {
@@ -428,6 +428,8 @@ const dataToChart = computed(() => {
     ],
   };
 });
+
+const addZero = n => n<10 ? '0'+n : n;
 
 const getWelcome = computed(() => {
   if (getHours.value >= 5 && getHours.value < 12) {
