@@ -35,17 +35,19 @@
 import MAlert from "@/components/_core/MAlert.vue";
 import MGlobalLoad from "@/components/_core/MGlobalLoad.vue";
 import MHead from "@/components/MHead.vue";
-import { reactive } from "vue";
+import { onMounted, reactive } from "vue";
 import { useAlertStore } from "@/stores/alert";
 import MAside from "@/components/MAside.vue";
 import { useAsideStore } from "@/stores/aside";
 import MFooter from "@/components/MFooter.vue";
 import MMobileAside from "@/components/MMobileAside.vue";
-import { usePopupStore } from '@/stores/popup';
+import { usePopupStore } from "@/stores/popup";
+import { useAuthStore } from "@/stores/auth";
 
 const aside = useAsideStore();
 const alertStore = useAlertStore();
 const popup = usePopupStore();
+const auth = useAuthStore();
 
 const data = reactive({
   openMenu: false as boolean,
@@ -81,37 +83,6 @@ const data = reactive({
         },
       ],
     },
-    // {
-    //   title: "Заработок",
-    //   icon: "money-bill",
-    //   open: false,
-    //   children: [
-    //     {
-    //       title: "Adv Cake",
-    //       url: "/money/adv_cake",
-    //     },
-    //     {
-    //       title: "Gde Slon",
-    //       url: "/money/gde_slon",
-    //     },
-    //     {
-    //       title: "City Ads",
-    //       url: "/money/city_ads",
-    //     },
-    //     {
-    //       title: "perfluence",
-    //       url: "/money/perfluence",
-    //     },
-    //     {
-    //       title: "admitad",
-    //       url: "/money/admitad",
-    //     },
-    //     {
-    //       title: "РСЯ",
-    //       url: "/money/rca",
-    //     },
-    //   ],
-    // },
     {
       title: "Купоны",
       icon: "ticket",
@@ -207,6 +178,10 @@ const data = reactive({
       ],
     },
   ],
+});
+
+onMounted(async () => {
+  await auth.getLoginData();
 });
 
 function toggleMenu(idx: number) {

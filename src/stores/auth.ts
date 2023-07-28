@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import http from "@/modules/api";
+import type { AxiosResponse } from 'axios';
 
 type ResultAuth = {
   avatar?: string;
@@ -14,9 +15,10 @@ type ResultAuth = {
 export const useAuthStore = defineStore({
   id: "auth",
   state: () => ({
-    token: localStorage.getItem("jwt_token") as any,
-    name: localStorage.getItem("name") as any,
-    email: localStorage.getItem("email") as any,
+    token: localStorage.getItem("jwt_token") as string,
+    name: localStorage.getItem("name") as string,
+    email: localStorage.getItem("email") as string,
+    userData: null,
   }),
   getters: {
     isAuth: (state) => !!state.token,
@@ -34,6 +36,9 @@ export const useAuthStore = defineStore({
       localStorage.setItem("name", name);
       this.name = name;
     },
+    setUserData(data: object) {
+      this.userData = data;
+    },
     logout() {
       this.token = "";
       this.email = "";
@@ -47,7 +52,7 @@ export const useAuthStore = defineStore({
       this.email = localStorage.getItem("email");
       this.name = localStorage.getItem("name");
     },
-    async login(data: any) {
+    async login(data: object) {
       try {
         const result = await http.post("/auth/login", {
           email: data.email,
@@ -64,5 +69,9 @@ export const useAuthStore = defineStore({
         return e.response.status;
       }
     },
+    async getLoginData() {
+      const result = await http.get("/auth/get");
+      this.setUserData(result.data);
+    }
   },
 });

@@ -3,6 +3,24 @@
     v-if="!load.isLoad"
     class="relative h-full flex flex-auto flex-col px-4 sm:px-6 md:px-8 py-4 sm:py-6 md:px-8"
   >
+    <div
+      class="flex justify-between flex-col sm:flex-row items-center mb-4"
+      v-if="data.time"
+    >
+      <div class="text-xl font-bold">
+        {{ getWelcome }}, {{ auth.userData.login }}
+      </div>
+      <div class="text-xl font-bold">
+        Сегодня
+        {{
+          data.time.toLocaleDateString({
+            day: "numeric",
+            month: "long",
+            year: "numeric",
+          })
+        }}, {{ getHours }}:{{ getMinutes }}:{{ getSeconds }}
+      </div>
+    </div>
     <div class="flex flex-col gap-4 h-full">
       <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-4">
         <m-card>
@@ -286,9 +304,11 @@ import MCard from "@/components/_core/MCard.vue";
 import CategoriesChart from "@/components/charts/CategoriesChart.vue";
 import YandexStatistic from "@/components/charts/YandexStatistic.vue";
 import axios from "axios";
+import { useAuthStore } from "@/stores/auth";
 
 const alert = useAlertStore();
 const load = useLoadStore();
+const auth = useAuthStore();
 
 const data = reactive({
   shopCounter: 0 as number,
@@ -302,10 +322,12 @@ const data = reactive({
   statisticYM: {} as object,
   blog: [] as object[],
   yesterdaysStatistics: {} as object,
+  time: null,
 });
 
 onMounted(async () => {
   await updateData();
+  setInterval(getTimer, 1000);
 });
 
 const categoriesChart = computed(() => {
@@ -378,34 +400,21 @@ async function updateData() {
   }
 }
 
-const updateCake = async () => {
-  try {
-    load.handleLoad();
-    await http.get("/cron/update_cake");
-    await updateData();
-    alert.handleAlert("Купоны обновлены", "success");
-    load.handleLoad();
-  } catch (e) {
-    alert.handleAlert("Ошибка обновления купонов", "danger");
-    load.handleLoad();
-  }
-};
+function getTimer() {
+  data.time = new Date();
+}
 
-const updateSlon = async () => {
-  try {
-    load.handleLoad();
-    load.handleLoad();
-    await http.get("/cron/update_slon");
-    await updateData();
-    alert.handleAlert("Купоны обновлены", "success");
-    load.handleLoad();
-  } catch (e) {
-    alert.handleAlert("Ошибка обновления купонов", "danger");
-    load.handleLoad();
-  }
-};
+const minus = (a: number, b: number) => a - b;
 
-const minus = (a, b) => a - b;
+const getHours = computed(() => {
+  return data.time.getHours();
+});
+const getMinutes = computed(() => {
+  return data.time.getMinutes();
+});
+const getSeconds = computed(() => {
+  return data.time.getSeconds();
+});
 
 const dataToChart = computed(() => {
   return {
@@ -418,5 +427,17 @@ const dataToChart = computed(() => {
       },
     ],
   };
+});
+
+const getWelcome = computed(() => {
+  if (getHours.value >= 5 && getHours.value < 12) {
+    return "Доброе утро";
+  } else if (getHours.value >= 12 && getHours.value < 16) {
+    return "Добрый день";
+  } else if (getHours.value >= 16 && getHours.value < 23) {
+    return "Добрый вечер";
+  } else {
+    return "Доброй ночи";
+  }
 });
 </script>

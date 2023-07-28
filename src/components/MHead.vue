@@ -16,19 +16,25 @@
         <font-awesome-icon icon="bars" />
       </button>
 
-      <div class='flex justify-center items-center'>
+      <div class="flex justify-center items-center">
         <button
           class="text-zinc-600 rounded-full hover:bg-zinc-300 h-[28px] w-[28px] hover:text-black mr-4"
         >
           <font-awesome-icon icon="bell" />
         </button>
-        <div class='flex justify-center items-center'>
-          <div class='h-[28px] w-[28px] mr-2 rounded-full flex justify-center items-center bg-zinc-400'>
-            <font-awesome-icon class='' icon='user' />
+        <div class="flex justify-center items-center">
+          <div
+            class="h-[28px] w-[28px] mr-2 rounded-full flex justify-center items-center bg-zinc-400"
+          >
+            <font-awesome-icon class="" icon="user" />
           </div>
-          <div class='text-xs'>
-            <div class='font-medium'>Админ</div>
-            <div class='font-bold'>{{ auth.name }}</div>
+          <div class="text-xs">
+            <div class="font-medium">
+              {{ auth.userData ? auth.userData.title : "" }}
+            </div>
+            <div class="font-bold">
+              {{ auth.userData ? auth.userData.email : "" }}
+            </div>
           </div>
         </div>
       </div>
@@ -38,8 +44,8 @@
 
 <script setup lang="ts">
 import { useAsideStore } from "@/stores/aside";
-import { useAuthStore } from '@/stores/auth';
-import { usePopupStore } from '@/stores/popup';
+import { useAuthStore } from "@/stores/auth";
+import { usePopupStore } from "@/stores/popup";
 
 const auth = useAuthStore();
 const aside = useAsideStore();
