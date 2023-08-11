@@ -22,7 +22,7 @@
             v-model="data.linkDto.uin_shop"
             class="block mb-5 placeholder-zinc-800 text-zinc-900 border border-zinc-300 bg-white focus:outline-0 rounded p-2 box-border w-full focus:outline-0 focus:ring focus:ring-primary"
           >
-            <option :value="i.id" v-for="i of orderShops" :key="i.id">
+            <option :value="i.uin" v-for="i of orderShops" :key="i.id">
               {{ i.title }}
             </option>
           </select>
