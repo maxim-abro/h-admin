@@ -379,9 +379,6 @@ async function updateData() {
     const emptyShops = await http.get("/shop/is/empty");
     const blog = await http.get("/blog/all");
     const yesterdaysStatistics = await http.get("/admin/statistic/db");
-    const statisticYM = await axios.get(
-      "https://api-metrika.yandex.net/stat/v1/data/bytime?ids=89498019&date1=30daysAgo&metrics=ym:s:visits&group=day"
-    );
     /////////////////////////////////
     data.shopCounter = res.data.shop;
     data.postCounter = res.data.post;
@@ -390,12 +387,16 @@ async function updateData() {
     data.allCategories = allCategories.data;
     data.shops = allShops.data;
     data.emptyShops = emptyShops.data;
-    data.statisticYM = statisticYM.data;
     data.blog = blog.data;
     data.yesterdaysStatistics = yesterdaysStatistics.data;
+    const statisticYM = await axios.get(
+      "https://api-metrika.yandex.net/stat/v1/data/bytime?ids=89498019&date1=30daysAgo&metrics=ym:s:visits&group=day"
+    );
+    data.statisticYM = statisticYM.data;
     load.handleLoad();
   } catch (e) {
     console.log(e);
+    load.handleLoad();
     alert.handleAlert("Ошибка загрузки!!", "danger");
   }
 }
