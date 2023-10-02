@@ -110,6 +110,14 @@ const router = createRouter({
         auth: true,
       },
     },
+    {
+      path: "/scrum",
+      name: "scrum",
+      component: () => import("@/views/scrum/index.vue"),
+      meta: {
+        auth: true,
+      },
+    },
   ],
 });
 

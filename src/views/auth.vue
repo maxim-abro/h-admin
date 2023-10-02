@@ -6,7 +6,7 @@
       <img src="@/assets/logo.png" alt="" />
 
       <p class="text-white">
-        Copyright © 2022-2023 <span class="font-bold">Za halyavoi</span>
+        Copyright © 2022-2023 <span class="font-bold">Za halyavoi</span> {{ configStore.version }}
       </p>
     </div>
 
@@ -66,11 +66,13 @@ import { useLoadStore } from "@/stores/load";
 import MInput from "@/components/_core/MInput.vue";
 import MButton from "@/components/_core/MButton.vue";
 import { useAlertStore } from "@/stores/alert";
+import {useConfigStore} from "@/stores/config";
 
 const loader = useLoadStore();
 const alert = useAlertStore();
 const authStore = useAuthStore();
 const router = useRouter();
+const configStore = useConfigStore();
 
 const data = reactive({
   email: "" as string,
