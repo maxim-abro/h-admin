@@ -1,23 +1,52 @@
 <template>
-  <div class="grid grid-cols-8 gap-4 overflow-auto">
-    <div class="" v-for="board of props.boards" :key="board.title">
-      <h2 class="flex justify-between items-center font-bold mb-4">
-        <span>{{ board.title }}</span>
-        <button>...</button>
-      </h2>
+  <div class="w-full bg-zinc-100 h-full mb-2 overflow-x-scroll relative">
+    <div class="flex gap-4 h-full mt-4 absolute">
+      <div class="w-[300px]" v-for="board of boardsIn" :key="board.title">
+        <h2 class="flex justify-between items-center font-bold mb-4">
+          <span>{{ board.title }}</span>
+          <button class="relative">
+            <font-awesome-icon icon="ellipsis" />
+            <span class="absolute left-0 bottom-0">
+              <!--
+                -- todo dropdown
+               -->
+            </span>
+          </button>
+        </h2>
 
-      <div class="shadow-2xl p-1 border rounded bg-white cursor-grab" v-for="scrum of board.scrums" :key="scrum.title">
-        <div><span class="text-xs border rounded-2xl px-1 mr-2" v-for="type of scrum.types">{{ type }}</span></div>
-        <h3 class="font-bold">{{ scrum.title }}</h3>
+        <draggableComponent
+          class="list-group"
+          :list="board.scrums"
+          group="scrums"
+          @change="remove"
+        >
+          <template #item="{ element, idx }">
+            <div class="shadow p-2 border rounded bg-white cursor-grab mb-4">
+              <div>
+                <span
+                  class="text-xs border rounded-2xl px-1 mr-2"
+                  v-for="type of element.types"
+                  :key="type"
+                  >{{ type }} {{ idx }}</span
+                >
+              </div>
+              <h3 class="font-bold">{{ element.title }}</h3>
 
-        <div class="flex justify-end">comments {{ scrum.comment_length }}</div>
+              <div class="flex items-center justify-end font-bold">
+                <font-awesome-icon icon="comments" class="mr-2" />
+                {{ element.comment_length }}
+              </div>
+            </div>
+          </template>
+        </draggableComponent>
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { withDefaults, defineProps } from "vue";
+import { defineProps, ref } from "vue";
+import draggableComponent from "vuedraggable";
 
 interface ScrumBoardItem {
   title: string;
@@ -35,20 +64,18 @@ interface ComponentType {
   boards: ScrumBoard[];
 }
 
-const props = withDefaults(defineProps<ComponentType>(), {
-  boards: [
-    {
-      title: "To Do",
-      scrums: [
-        {
-          title: "Unable to upload file",
-          date: new Date(),
-          types: ["Task", "Live issue"],
-          comment_length: 3,
-          is_close: false,
-        },
-      ],
-    },
-  ] as ScrumBoard[],
-});
+interface Ref<T> {
+  value: T;
+}
+
+const props = defineProps<ComponentType>();
+
+const emit = defineEmits(["remove"]);
+
+const boardsIn: Ref<ScrumBoard[]> = ref(props.boards);
+function remove(evt: { removed: string }) {
+  if (evt.removed) {
+    emit("remove", boardsIn.value);
+  }
+}
 </script>
