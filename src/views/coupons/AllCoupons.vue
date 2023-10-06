@@ -23,7 +23,7 @@
       </div>
     </div>
 
-    <div class="min-w-full overflow-x-scroll">
+    <m-card class="min-w-full overflow-x-scroll p-3">
       <table class="w-full">
         <thead>
           <tr class="bg-zinc-100">
@@ -70,7 +70,7 @@
           </tr>
         </tbody>
       </table>
-    </div>
+    </m-card>
 
     <m-pagination
       v-model="data.pagination.current_page"
@@ -88,6 +88,7 @@ import MButton from "@/components/_core/MButton.vue";
 import http from "@/modules/api";
 import MPagination from "@/components/_core/MPagination.vue";
 import { useRouter } from "vue-router";
+import MCard from "@/components/_core/MCard.vue";
 
 const alert = useAlertStore();
 const load = useLoadStore();

@@ -7,113 +7,120 @@
 
       <div class="flex items-center">
         <m-input
-          v-model="filterData"
-          type="search"
-          placeholder="поиск..."
-          class="mr-4"
+            v-model="filterData"
+            type="search"
+            placeholder="поиск..."
+            class="mr-4"
         />
         <m-button class="" @click="$router.push('/shops/add/')"
-          >добавить&nbsp;магазин</m-button
+        >добавить&nbsp;магазин</m-button
         >
       </div>
     </div>
+    <m-card class="p-3">
 
-    <div class="max-w-full overflow-x-scroll">
-      <table class="w-full">
-        <thead>
-          <tr class="bg-zinc-100">
-            <th></th>
-            <th @click="handleOrder('title')" class="text-start cursor-pointer">
-              <span class="mr-2">Название</span>
-              <svg
-                v-if="orderData.col === 'title' && orderData.type === 'DESC'"
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                fill="currentColor"
-                class="inline bi bi-caret-down-fill"
-                viewBox="0 0 16 16"
+      <div class="max-w-full overflow-x-scroll">
+        <table class="w-full">
+          <thead>
+            <tr class="bg-zinc-100">
+              <th></th>
+              <th
+                @click="handleOrder('title')"
+                class="text-start cursor-pointer"
               >
-                <path
-                  d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"
-                />
-              </svg>
-              <svg
-                v-if="orderData.col === 'title' && orderData.type === 'ASC'"
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                fill="currentColor"
-                class="inline bi bi-caret-up-fill"
-                viewBox="0 0 16 16"
+                <span class="mr-2">Название</span>
+                <svg
+                  v-if="orderData.col === 'title' && orderData.type === 'DESC'"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  class="inline bi bi-caret-down-fill"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"
+                  />
+                </svg>
+                <svg
+                  v-if="orderData.col === 'title' && orderData.type === 'ASC'"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  class="inline bi bi-caret-up-fill"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z"
+                  />
+                </svg>
+              </th>
+              <th
+                @click="handleOrder('counter')"
+                class="text-start cursor-pointer"
               >
-                <path
-                  d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z"
-                />
-              </svg>
-            </th>
-            <th
-              @click="handleOrder('counter')"
-              class="text-start cursor-pointer"
-            >
-              <span class="mr-2">Просмотры</span>
-              <svg
-                v-if="orderData.col === 'counter' && orderData.type === 'DESC'"
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                fill="currentColor"
-                class="inline bi bi-caret-down-fill"
-                viewBox="0 0 16 16"
-              >
-                <path
-                  d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"
-                />
-              </svg>
-              <svg
-                v-if="orderData.col === 'counter' && orderData.type === 'ASC'"
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                fill="currentColor"
-                class="inline bi bi-caret-up-fill"
-                viewBox="0 0 16 16"
-              >
-                <path
-                  d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z"
-                />
-              </svg>
-            </th>
-            <th>Действие</th>
-          </tr>
-        </thead>
+                <span class="mr-2">Просмотры</span>
+                <svg
+                  v-if="
+                    orderData.col === 'counter' && orderData.type === 'DESC'
+                  "
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  class="inline bi bi-caret-down-fill"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"
+                  />
+                </svg>
+                <svg
+                  v-if="orderData.col === 'counter' && orderData.type === 'ASC'"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  class="inline bi bi-caret-up-fill"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z"
+                  />
+                </svg>
+              </th>
+              <th>Действие</th>
+            </tr>
+          </thead>
 
-        <tbody>
-          <tr v-for="shop of orderedShops" :key="shop.uin" class="border-y">
-            <td class="py-2 px-2 w-24">
-              <img
-                class="ml-auto"
-                :src="`https://za-halyavoi.ru/api/static/${shop.image}`"
-                :alt="shop.image"
-              />
-            </td>
-            <td class="py-2 px-2">
-              {{ shop.title }}
-            </td>
-            <td class="py-2 px-2">
-              {{ shop.counter }}
-            </td>
-            <td class="py-2 px-2">
-              <a
-                :href="`/shop/edit/${shop.lat_title}`"
-                class="text-center block mx-auto"
-                >изменить</a
-              >
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+          <tbody>
+            <tr v-for="shop of orderedShops" :key="shop.uin" class="border-y">
+              <td class="py-2 px-2 w-24">
+                <img
+                  class="ml-auto"
+                  :src="`https://za-halyavoi.ru/api/static/${shop.image}`"
+                  :alt="shop.image"
+                />
+              </td>
+              <td class="py-2 px-2">
+                {{ shop.title }}
+              </td>
+              <td class="py-2 px-2">
+                {{ shop.counter }}
+              </td>
+              <td class="py-2 px-2">
+                <a
+                  :href="`/shop/edit/${shop.lat_title}`"
+                  class="text-center block mx-auto"
+                  >изменить</a
+                >
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </m-card>
   </div>
 </template>
 
@@ -124,6 +131,7 @@ import { useLoadStore } from "@/stores/load";
 import MInput from "@/components/_core/MInput.vue";
 import MButton from "@/components/_core/MButton.vue";
 import http from "@/modules/api";
+import MCard from "@/components/_core/MCard.vue";
 
 const alert = useAlertStore();
 const load = useLoadStore();

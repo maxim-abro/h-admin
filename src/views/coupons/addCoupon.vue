@@ -5,8 +5,8 @@
     <h1 class="mb-4 text-2xl font-bold">Добавить новый промокод</h1>
 
     <form @submit.prevent="handleForm(data.postInput)">
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
-        <div class="lg:col-span-2">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-3">
+        <m-card class="lg:col-span-2 p-3">
           <div class="flex flex-col mb-8">
             <label class="mb-2">Название промокод</label>
             <m-input placeholder="название" v-model="data.postInput.title" />
@@ -29,8 +29,8 @@
               v-model="data.postInput.url"
             />
           </div>
-        </div>
-        <div class="col-span-1">
+        </m-card>
+        <m-card class="col-span-1 p-3">
           <div class="flex flex-col mb-8">
             <label class="mb-2">Тип скидки</label>
             <select
@@ -87,7 +87,7 @@
               </option>
             </select>
           </div>
-        </div>
+        </m-card>
       </div>
       <div
         class="sticky z-10 border-t-2 -bottom-1 -mx-8 px-8 flex items-center justify-end py-4 bg-white"
@@ -108,7 +108,7 @@ import MButton from "@/components/_core/MButton.vue";
 import type { ShopModel } from "@/models/shop.model";
 import type { CategoryModel } from "@/models/category.model";
 import type { PostModel } from "@/models/post.model";
-import axios from "axios";
+import MCard from "@/components/_core/MCard.vue";
 
 const load = useLoadStore();
 const alert = useAlertStore();
