@@ -1,7 +1,7 @@
 <template>
   <div class="w-full bg-zinc-100 h-full mb-2 overflow-x-scroll relative">
     <div class="flex gap-4 h-full mt-4 absolute">
-      <div class="w-[300px]" v-for="board of boardsIn" :key="board.title">
+      <div class="w-[300px]" v-for="(board, _idx) of boardsIn" :key="_idx">
         <h2 class="flex justify-between items-center font-bold mb-4">
           <span>{{ board.title }}</span>
           <button class="relative">
@@ -16,7 +16,7 @@
 
         <draggableComponent
           class="list-group"
-          :list="board.scrums"
+          :list="board.scrum_tickets"
           group="scrums"
           @change="remove"
         >
@@ -25,16 +25,16 @@
               <div>
                 <span
                   class="text-xs border rounded-2xl px-1 mr-2"
-                  v-for="type of element.types"
-                  :key="type"
-                  >{{ type }} {{ idx }}</span
+                  v-for="tag of element.scrum_tags"
+                  :key="tag.id"
+                  >{{ tag.title }} {{ idx }}</span
                 >
               </div>
               <h3 class="font-bold">{{ element.title }}</h3>
 
               <div class="flex items-center justify-end font-bold">
                 <font-awesome-icon icon="comments" class="mr-2" />
-                {{ element.comment_length }}
+                <!-- @todo               {{ element.comment_length }}-->
               </div>
             </div>
           </template>
@@ -45,23 +45,31 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, ref } from "vue";
+import { defineProps, ref, watch } from "vue";
 import draggableComponent from "vuedraggable";
 
+interface ScrumTagItem {
+  title: string;
+  id_tag: number;
+}
+
 interface ScrumBoardItem {
+  id: number;
   title: string;
   date: Date;
-  types: string[];
-  comment_length: number;
   is_close: boolean;
+  order: number;
+  scrum_tags: ScrumTagItem[];
 }
-interface ScrumBoard {
+interface ScrumBoardType {
+  id: number;
   title: string;
-  scrums: ScrumBoardItem[];
+  cards: string;
+  scrum_tickets: ScrumBoardItem[];
 }
 
 interface ComponentType {
-  boards: ScrumBoard[];
+  boards: ScrumBoardType[];
 }
 
 interface Ref<T> {
@@ -72,9 +80,16 @@ const props = defineProps<ComponentType>();
 
 const emit = defineEmits(["remove"]);
 
-const boardsIn: Ref<ScrumBoard[]> = ref(props.boards);
-function remove(evt: { removed: string }) {
-  if (evt.removed) {
+const boardsIn: Ref<ScrumBoardType[]> = ref([]);
+
+watch(
+  () => props.boards,
+  () => {
+    boardsIn.value = props.boards;
+  }
+);
+function remove(evt: { removed: string, moved: string }) {
+  if (evt.removed || evt.moved) {
     emit("remove", boardsIn.value);
   }
 }

@@ -430,7 +430,7 @@ const dataToChart = computed(() => {
   };
 });
 
-const addZero = n => n<10 ? '0'+n : n;
+const addZero = (n: number) => (n < 10 ? "0" + n : n);
 
 const getWelcome = computed(() => {
   if (getHours.value >= 5 && getHours.value < 12) {
