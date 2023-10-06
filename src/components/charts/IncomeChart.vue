@@ -26,7 +26,7 @@ ChartJS.register(
 );
 
 export default {
-  name: "LineChart",
+  name: "IncomeChart",
   components: {
     Line,
   },

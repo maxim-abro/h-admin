@@ -234,7 +234,9 @@
       </div>
       <div class="grid grid-cols-1 xl:grid-cols-7 gap-4">
         <m-card class="xl:col-span-5 p-3">
-          <h3 class="text-center text-xl font-bold mb-2">Статистика сайта</h3>
+          <h3 class="text-center text-xl font-bold mb-2">
+            Статистика просмотров
+          </h3>
           <YandexStatistic
             v-if="data.allCategories.length"
             :chart-data="dataToChart"
@@ -288,6 +290,17 @@
           </table>
         </div>
       </m-card>
+
+      <div class="grid grid-cols-1 sm:grid-cols-12 gap-4">
+        <m-card class="p-3 sm:col-span-8">
+          <h3 class="text-center text-xl font-bold mb-2">Статистика сайта</h3>
+          <income-chart :chart-data="data.siteStatistics" />
+        </m-card>
+        <m-card class="p-3 sm:col-span-4">
+          <h3 class="text-center text-xl font-bold mb-2">Статистика сайта</h3>
+          <income-chart :chart-data="data.incomeStatistics" />
+        </m-card>
+      </div>
     </div>
   </div>
 </template>
@@ -305,6 +318,7 @@ import CategoriesChart from "@/components/charts/CategoriesChart.vue";
 import YandexStatistic from "@/components/charts/YandexStatistic.vue";
 import axios from "axios";
 import { useAuthStore } from "@/stores/auth";
+import IncomeChart from "@/components/charts/IncomeChart.vue";
 
 const alert = useAlertStore();
 const load = useLoadStore();
@@ -323,6 +337,8 @@ const data = reactive({
   blog: [] as object[],
   yesterdaysStatistics: {} as object,
   time: null,
+  siteStatistics: [],
+  incomeStatistics: [],
 });
 
 onMounted(async () => {
@@ -379,6 +395,9 @@ async function updateData() {
     const emptyShops = await http.get("/shop/is/empty");
     const blog = await http.get("/blog/all");
     const yesterdaysStatistics = await http.get("/admin/statistic/db");
+    const siteStatistics = await http.get("/statistic/site");
+    const incomeStatistics = await http.get("/statistic/income");
+
     /////////////////////////////////
     data.shopCounter = res.data.shop;
     data.postCounter = res.data.post;
@@ -389,6 +408,8 @@ async function updateData() {
     data.emptyShops = emptyShops.data;
     data.blog = blog.data;
     data.yesterdaysStatistics = yesterdaysStatistics.data;
+    data.siteStatistics = siteStatistics.data;
+    data.incomeStatistics = incomeStatistics.data;
     const statisticYM = await axios.get(
       "https://api-metrika.yandex.net/stat/v1/data/bytime?ids=89498019&date1=30daysAgo&metrics=ym:s:visits&group=day"
     );
