@@ -4,13 +4,19 @@
       <div class="w-[300px]" v-for="(board, _idx) of boardsIn" :key="_idx">
         <h2 class="flex justify-between items-center font-bold mb-4">
           <span>{{ board.title }}</span>
-          <button class="relative">
+          <button
+            class="relative overflow-visible hover:bg-zinc-300 px-2 rounded"
+            @click="board.isSettingsOpen = !board.isSettingsOpen"
+          >
             <font-awesome-icon icon="ellipsis" />
-            <span class="absolute left-0 bottom-0">
-              <!--
-                -- todo dropdown
-               -->
-            </span>
+            <ul
+              v-if="board.isSettingsOpen"
+              class="absolute right -0 bottom-0 translate-y-full -translate-x-full shadow-sm bg-white p-2 rounded"
+            >
+              <li class="hover:bg-zinc-200 rounded px-1 text">Переименовать</li>
+              <li class="hover:bg-zinc-200 rounded px-1 text">Новая карточка</li>
+              <li class="hover:bg-zinc-200 rounded px-1 text">Удалить</li>
+            </ul>
           </button>
         </h2>
 
@@ -21,7 +27,7 @@
           @change="remove"
         >
           <template #item="{ element, idx }">
-            <div class="shadow p-2 border rounded bg-white cursor-grab mb-4">
+            <div class="p-2 border rounded bg-white cursor-grab mb-4 hover:drop-shadow-xl">
               <div>
                 <span
                   class="text-xs border rounded-2xl px-1 mr-2"
@@ -66,6 +72,7 @@ interface ScrumBoardType {
   title: string;
   cards: string;
   scrum_tickets: ScrumBoardItem[];
+  isSettingsOpen?: boolean;
 }
 
 interface ComponentType {
