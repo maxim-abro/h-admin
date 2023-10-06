@@ -118,6 +118,14 @@ const router = createRouter({
         auth: true,
       },
     },
+    {
+      path: "/coupons/edit/:uin",
+      name: "editCoupon",
+      component: () => import("@/views/coupons/editCoupon.vue"),
+      meta: {
+        auth: true,
+      },
+    },
   ],
 });
 
@@ -130,7 +138,6 @@ router.beforeEach(async (to, from, next) => {
       const result = await http.get("/auth/check");
 
       if (result.data.message === "ok") {
-
         next();
       } else {
         next("/auth?message=non_authorize");

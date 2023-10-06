@@ -25,13 +25,10 @@ const props = defineProps<{
   dark?: boolean;
 }>();
 const data = reactive({
-  inputData: "" as any,
+  inputData: props.inputProp,
 });
 const emit = defineEmits(["update:modelValue"]);
 function updateValue(value: any) {
   emit("update:modelValue", value);
 }
-onMounted(() => {
-  data.inputData = props.inputProp;
-});
 </script>

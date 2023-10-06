@@ -17,7 +17,7 @@
         </select>
         <m-button
           class="text-xs sm:text-base"
-          @click="$router.push('/shops/add/')"
+          @click="$router.push('/coupons/add/')"
           >добавить&nbsp;промокод</m-button
         >
       </div>
@@ -32,17 +32,40 @@
             <th>Просмотры</th>
             <th>Лайки</th>
             <th>Тип</th>
+            <th>Действие</th>
+            <th>Топ</th>
           </tr>
         </thead>
 
         <tbody>
           <tr v-for="post of data.coupons" class="border-y">
-            <th class="py-2 px-2 min-w-[200px]">{{ post.title }}</th>
+            <th class="py-2 px-2 min-w-[150px]">{{ post.title }}</th>
             <th class="py-2 px-2">{{ post.shop.title }}</th>
             <th class="py-2 px-2">{{ post.counter }}</th>
             <th class="py-2 px-2">{{ post.rating }}</th>
             <th class="py-2 px-2">
               {{ post.type === "promoCode" ? "Промокод" : "Скидка" }}
+            </th>
+            <th class="flex min-w-[100px] items-center justify-center">
+              <button
+                class="hover:bg-zinc-200 rounded-full w-8 h-8"
+                @click="router.push(`/coupons/edit/${post.uin}`)"
+              >
+                <font-awesome-icon icon="pen" />
+              </button>
+              <button
+                class="hover:bg-zinc-200 rounded-full w-8 h-8 text-red-500"
+                @click="deleteCoupon(post.uin)"
+              >
+                <font-awesome-icon icon="ban" />
+              </button>
+            </th>
+            <th>
+              <input
+                type="checkbox"
+                v-model="post.recomended"
+                @change="toggleChecked(post.uin, $event.target.checked)"
+              />
             </th>
           </tr>
         </tbody>
@@ -61,13 +84,14 @@
 import { onMounted, reactive, watch } from "vue";
 import { useAlertStore } from "@/stores/alert";
 import { useLoadStore } from "@/stores/load";
-import MInput from "@/components/_core/MInput.vue";
 import MButton from "@/components/_core/MButton.vue";
 import http from "@/modules/api";
 import MPagination from "@/components/_core/MPagination.vue";
+import { useRouter } from "vue-router";
 
 const alert = useAlertStore();
 const load = useLoadStore();
+const router = useRouter();
 
 const data = reactive({
   shops: [] as object[],
@@ -88,11 +112,11 @@ onMounted(async () => {
   try {
     load.handleLoad();
     const shops = await http.get("/admin/v2/shop/all");
-    const coupons = await http.get("/post?page=1");
+    const coupons = await http.get("/admin/post?page=1");
     data.shops = shops.data;
     data.coupons = coupons.data.rows;
     data.pagination.total_elements = coupons.data.count;
-    data.pagination.total_pages = Math.ceil(coupons.data.count / 15);
+    data.pagination.total_pages = Math.ceil(coupons.data.count / 100);
     load.handleLoad();
   } catch (e) {
     console.log(e);
@@ -109,7 +133,7 @@ watch(
 async function changePage() {
   load.handleLoad();
   const result = await http.get(
-    `/post?page=${data.pagination.current_page}&${
+    `/admin/post?page=${data.pagination.current_page}&${
       data.activeShop !== "%" ? "shop=" + data.activeShop : ""
     }`
   );
@@ -129,6 +153,20 @@ async function changeShop() {
   data.pagination.total_elements = result.data.count;
   data.pagination.total_pages = Math.ceil(result.data.count / 15);
   data.coupons = result.data.rows;
+  load.handleLoad();
+}
+
+async function toggleChecked(uin: string, val: boolean): Promise<void> {
+  load.handleLoad();
+  await http.patch(`/admin/post/${uin}`, {
+    recomended: val,
+  });
+  load.handleLoad();
+}
+
+async function deleteCoupon(uin: string) {
+  load.handleLoad();
+  await http.delete(`/admin/post/${uin}`);
   load.handleLoad();
 }
 </script>
