@@ -128,14 +128,16 @@
         >
           <h3 class="text-xl font-bold">Магазины gde slon</h3>
 
-          <div class="flex items-center">
-            <input
-              type="checkbox"
-              class="mr-1"
-              id="not_added"
-              v-model="data.isNotAddedShops"
-            />
-            <label class="mr-4" for="not_added">Только не добавленные</label>
+          <div class="flex items-center flex-col-reverse sm:flex-row">
+            <div class="">
+              <input
+                type="checkbox"
+                class="mr-1"
+                id="not_added"
+                v-model="data.isNotAddedShops"
+              />
+              <label class="mr-4" for="not_added">Только не добавленные</label>
+            </div>
             <m-input
               v-model="data.filterData"
               type="search"
