@@ -378,7 +378,10 @@
       <div class="grid grid-cols-1 sm:grid-cols-12 gap-4">
         <m-card class="p-3 sm:col-span-8">
           <h3 class="text-center text-xl font-bold mb-2">Статистика сайта</h3>
-          <income-chart v-if="data.siteStatistics.datasets" :chart-data="data.siteStatistics" />
+          <income-chart
+            v-if="data.siteStatistics.datasets"
+            :chart-data="data.siteStatistics"
+          />
           <div v-if="!data.siteStatistics.datasets" class="animate-pulse">
             <div class="bg-slate-700 h-6 mb-2 w-96 rounded"></div>
             <div class="bg-slate-700 h-6 mb-2 w-80 rounded"></div>
@@ -391,7 +394,10 @@
         </m-card>
         <m-card class="p-3 sm:col-span-4">
           <h3 class="text-center text-xl font-bold mb-2">Статистика сайта</h3>
-          <income-chart v-if="data.incomeStatistics.datasets" :chart-data="data.incomeStatistics.datasets" />
+          <income-chart
+            v-if="data.incomeStatistics.datasets"
+            :chart-data="data.incomeStatistics.datasets"
+          />
           <div v-if="!data.incomeStatistics.datasets" class="animate-pulse">
             <div class="bg-slate-700 h-6 mb-2 w-96 rounded"></div>
             <div class="bg-slate-700 h-6 mb-2 w-80 rounded"></div>
