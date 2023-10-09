@@ -1,7 +1,6 @@
 <template>
   <div
-    v-if="!load.isLoad"
-    class="relative h-full flex flex-auto flex-col px-4 sm:px-6 md:px-8 py-4 sm:py-6 md:px-8"
+    class="relative h-full flex flex-auto flex-col px-4 sm:px-6 py-4 sm:py-6 md:px-8"
   >
     <div
       class="flex justify-between flex-col sm:flex-row items-center mb-4"
@@ -41,13 +40,20 @@
                 </span>
               </div>
               <div>
-                <div class="flex gap-1.5 items-end mb-2">
+                <div
+                  class="flex gap-1.5 items-end mb-2"
+                  v-if="data.postCounter"
+                >
                   <h3 class="font-bold text-black text-2xl leading-none">
                     {{ data.postCounter }}
                   </h3>
                   <p class="font-semibold">Купоны</p>
                 </div>
-                <p class="flex items-center gap-1">
+                <div
+                  v-if="!data.postCounter"
+                  class="animate-pulse bg-slate-700 h-5 rounded w-20 mb-2"
+                ></div>
+                <p v-if="data.postCounter" class="flex items-center gap-1">
                   <span
                     class="text-emerald-600"
                     :class="{
@@ -71,6 +77,10 @@
                   >
                   <span>за этот день</span>
                 </p>
+                <div
+                  v-if="!data.postCounter"
+                  class="animate-pulse bg-slate-700 h-3 rounded w-24"
+                ></div>
               </div>
             </div>
           </div>
@@ -93,13 +103,20 @@
                 </span>
               </div>
               <div>
-                <div class="flex gap-1.5 items-end mb-2">
+                <div
+                  v-if="data.shopCounter"
+                  class="flex gap-1.5 items-end mb-2"
+                >
                   <h3 class="font-bold text-black text-2xl leading-none">
                     {{ data.shopCounter }}
                   </h3>
                   <p class="font-semibold">Магазины</p>
                 </div>
-                <p class="flex items-center gap-1">
+                <div
+                  v-if="!data.shopCounter"
+                  class="animate-pulse bg-slate-700 rounded w-20 h-5 mb-2"
+                ></div>
+                <p v-if="data.shopCounter" class="flex items-center gap-1">
                   <span
                     class="text-emerald-600"
                     :class="{
@@ -123,6 +140,10 @@
                   >
                   <span>за этот день</span>
                 </p>
+                <div
+                  v-if="!data.shopCounter"
+                  class="animate-pulse bg-slate-700 h-3 rounded w-24"
+                ></div>
               </div>
             </div>
           </div>
@@ -145,13 +166,20 @@
                 </span>
               </div>
               <div>
-                <div class="flex gap-1.5 items-end mb-2">
+                <div
+                  v-if="data.categoryCounter"
+                  class="flex gap-1.5 items-end mb-2"
+                >
                   <h3 class="font-bold text-black text-2xl leading-none">
                     {{ data.categoryCounter }}
                   </h3>
                   <p class="font-semibold">Категории</p>
                 </div>
-                <p class="flex items-center gap-1">
+                <div
+                  v-if="!data.categoryCounter"
+                  class="animate-pulse bg-slate-700 h-5 rounded w-20 mb-2"
+                ></div>
+                <p v-if="data.categoryCounter" class="flex items-center gap-1">
                   <span
                     class="text-emerald-600"
                     :class="{
@@ -175,6 +203,10 @@
                   >
                   <span>за этот день</span>
                 </p>
+                <div
+                  v-if="!data.categoryCounter"
+                  class="animate-pulse bg-slate-700 h-3 rounded w-24"
+                ></div>
               </div>
             </div>
           </div>
@@ -197,13 +229,20 @@
                 </span>
               </div>
               <div>
-                <div class="flex gap-1.5 items-end mb-2">
+                <div
+                  v-if="data.blogCounter"
+                  class="flex gap-1.5 items-end mb-2"
+                >
                   <h3 class="font-bold text-black text-2xl leading-none">
                     {{ data.blogCounter }}
                   </h3>
                   <p class="font-semibold">Посты</p>
                 </div>
-                <p class="flex items-center gap-1">
+                <div
+                  v-if="!data.blogCounter"
+                  class="animate-pulse bg-slate-700 h-5 rounded mb-2 w-20"
+                ></div>
+                <p v-if="data.blogCounter" class="flex items-center gap-1">
                   <span
                     class="text-emerald-600"
                     :class="{
@@ -227,6 +266,10 @@
                   >
                   <span>за этот день</span>
                 </p>
+                <div
+                  v-if="!data.blogCounter"
+                  class="animate-pulse bg-slate-700 h-3 rounded w-24"
+                ></div>
               </div>
             </div>
           </div>
@@ -238,21 +281,37 @@
             Статистика просмотров
           </h3>
           <YandexStatistic
-            v-if="data.allCategories.length"
+            v-if="data.statisticYM.totals.length"
             :chart-data="dataToChart"
           />
+          <div v-if="!data.statisticYM.totals.length" class="animate-pulse">
+            <div class="bg-slate-700 h-6 mb-2 w-96 rounded"></div>
+            <div class="bg-slate-700 h-6 mb-2 w-80 rounded"></div>
+            <div class="bg-slate-700 h-6 mb-2 w-72 rounded"></div>
+            <div class="bg-slate-700 h-6 mb-2 w-64 rounded"></div>
+            <div class="bg-slate-700 h-6 mb-2 w-56 rounded"></div>
+            <div class="bg-slate-700 h-6 mb-2 w-44 rounded"></div>
+            <div class="bg-slate-700 h-6 mb-2 w-32 rounded"></div>
+          </div>
         </m-card>
         <m-card class="xl:col-span-2 p-3">
           <h3 class="text-center text-xl font-bold mb-2">
             Статистика категорий
           </h3>
-          <categories-chart :chart-data="categoriesChart" />
+          <categories-chart
+            v-if="categoriesChart.labels.length"
+            :chart-data="categoriesChart"
+          />
+          <div
+            v-if="!categoriesChart.labels.length"
+            class="animate-pulse bg-slate-700 h-64 w-64 rounded-full mx-auto"
+          ></div>
         </m-card>
       </div>
       <m-card class="p-3">
         <h3 class="text-xl font-bold">Блог</h3>
         <div class="w-full overflow-x-scroll">
-          <table class="min-w-full">
+          <table v-if="data.blog.length" class="min-w-full">
             <thead>
               <tr class="bg-zinc-50 font-[100]">
                 <th class="text-left">Название</th>
@@ -288,17 +347,60 @@
               </tr>
             </tbody>
           </table>
+          <div
+            v-if="!data.blog.length"
+            class="animate-pulse grid grid-cols-5 gap-1"
+          >
+            <div class="bg-slate-700 h-7 rounded"></div>
+            <div class="bg-slate-700 h-7 rounded"></div>
+            <div class="bg-slate-700 h-7 rounded"></div>
+            <div class="bg-slate-700 h-7 rounded"></div>
+            <div class="bg-slate-700 h-7 rounded"></div>
+            <div class="bg-slate-700 h-5 rounded"></div>
+            <div class="bg-slate-700 h-5 rounded"></div>
+            <div class="bg-slate-700 h-5 rounded"></div>
+            <div class="bg-slate-700 h-5 rounded"></div>
+            <div class="bg-slate-700 h-5 rounded"></div>
+            <div class="bg-slate-700 h-5 rounded"></div>
+            <div class="bg-slate-700 h-5 rounded"></div>
+            <div class="bg-slate-700 h-5 rounded"></div>
+            <div class="bg-slate-700 h-5 rounded"></div>
+            <div class="bg-slate-700 h-5 rounded"></div>
+            <div class="bg-slate-700 h-5 rounded"></div>
+            <div class="bg-slate-700 h-5 rounded"></div>
+            <div class="bg-slate-700 h-5 rounded"></div>
+            <div class="bg-slate-700 h-5 rounded"></div>
+            <div class="bg-slate-700 h-5 rounded"></div>
+          </div>
         </div>
       </m-card>
 
       <div class="grid grid-cols-1 sm:grid-cols-12 gap-4">
         <m-card class="p-3 sm:col-span-8">
           <h3 class="text-center text-xl font-bold mb-2">Статистика сайта</h3>
-          <income-chart :chart-data="data.siteStatistics" />
+          <income-chart v-if="data.siteStatistics.datasets" :chart-data="data.siteStatistics" />
+          <div v-if="!data.siteStatistics.datasets" class="animate-pulse">
+            <div class="bg-slate-700 h-6 mb-2 w-96 rounded"></div>
+            <div class="bg-slate-700 h-6 mb-2 w-80 rounded"></div>
+            <div class="bg-slate-700 h-6 mb-2 w-72 rounded"></div>
+            <div class="bg-slate-700 h-6 mb-2 w-64 rounded"></div>
+            <div class="bg-slate-700 h-6 mb-2 w-56 rounded"></div>
+            <div class="bg-slate-700 h-6 mb-2 w-44 rounded"></div>
+            <div class="bg-slate-700 h-6 mb-2 w-32 rounded"></div>
+          </div>
         </m-card>
         <m-card class="p-3 sm:col-span-4">
           <h3 class="text-center text-xl font-bold mb-2">Статистика сайта</h3>
-          <income-chart :chart-data="data.incomeStatistics" />
+          <income-chart v-if="data.incomeStatistics.datasets" :chart-data="data.incomeStatistics.datasets" />
+          <div v-if="!data.incomeStatistics.datasets" class="animate-pulse">
+            <div class="bg-slate-700 h-6 mb-2 w-96 rounded"></div>
+            <div class="bg-slate-700 h-6 mb-2 w-80 rounded"></div>
+            <div class="bg-slate-700 h-6 mb-2 w-72 rounded"></div>
+            <div class="bg-slate-700 h-6 mb-2 w-64 rounded"></div>
+            <div class="bg-slate-700 h-6 mb-2 w-56 rounded"></div>
+            <div class="bg-slate-700 h-6 mb-2 w-44 rounded"></div>
+            <div class="bg-slate-700 h-6 mb-2 w-32 rounded"></div>
+          </div>
         </m-card>
       </div>
     </div>
@@ -333,12 +435,22 @@ const data = reactive({
   allCategories: [] as CategoryModel[],
   shops: [] as ShopModel[],
   postInput: {} as PostModel,
-  statisticYM: {} as object,
+  statisticYM: {
+    query: {},
+    totals: [],
+    data: [],
+  } as object,
   blog: [] as object[],
   yesterdaysStatistics: {} as object,
   time: null,
-  siteStatistics: [],
-  incomeStatistics: [],
+  siteStatistics: {
+    // datasets: [],
+    // labels: [],
+  },
+  incomeStatistics: {
+    // datasets: [],
+    // labels: [],
+  },
 });
 
 onMounted(async () => {
@@ -388,7 +500,6 @@ const categoriesChart = computed(() => {
 
 async function updateData() {
   try {
-    load.handleLoad();
     const res = await http.get("/admin/counter");
     const allCategories = await http.get("/admin/category/all");
     const allShops = await http.get("/admin/shop");
@@ -414,10 +525,8 @@ async function updateData() {
       "https://api-metrika.yandex.net/stat/v1/data/bytime?ids=89498019&date1=30daysAgo&metrics=ym:s:visits&group=day"
     );
     data.statisticYM = statisticYM.data;
-    load.handleLoad();
   } catch (e) {
     console.log(e);
-    load.handleLoad();
     alert.handleAlert("Ошибка загрузки!!", "danger");
   }
 }
@@ -445,7 +554,7 @@ const dataToChart = computed(() => {
       {
         label: "Yandex Metric",
         backgroundColor: "#fdb13c",
-        data: data.statisticYM.totals[0],
+        data: data?.statisticYM?.totals[0],
       },
     ],
   };
