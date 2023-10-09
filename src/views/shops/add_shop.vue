@@ -6,54 +6,54 @@
 
     <form @submit.prevent="handleForm">
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-3">
-          <m-card class="lg:col-span-2 p-3">
-            <div class="flex flex-col mb-8">
-              <label class="mb-2">Название магазина</label>
-              <m-input v-model="shopForm.title" placeholder="название" />
-            </div>
+        <m-card class="lg:col-span-2 p-3">
+          <div class="flex flex-col mb-8">
+            <label class="mb-2">Название магазина</label>
+            <m-input v-model="shopForm.title" placeholder="название" />
+          </div>
 
-            <div class="flex flex-col mb-8">
-              <label class="mb-2">Контакт сайта</label>
-              <m-input v-model="shopForm.contacts" placeholder="контакт" />
-            </div>
+          <div class="flex flex-col mb-8">
+            <label class="mb-2">Контакт сайта</label>
+            <m-input v-model="shopForm.contacts" placeholder="контакт" />
+          </div>
 
-            <div class="flex flex-col mb-8">
-              <label class="mb-2">Ссылка на сайт</label>
-              <m-input v-model="shopForm.url" placeholder="ссылка" />
-            </div>
+          <div class="flex flex-col mb-8">
+            <label class="mb-2">Ссылка на сайт</label>
+            <m-input v-model="shopForm.url" placeholder="ссылка" />
+          </div>
 
-            <div class="flex flex-col mb-8">
-              <label class="mb-2">Виды доставки</label>
-              <m-input v-model="shopForm.dostavka" placeholder="доставка" />
-            </div>
+          <div class="flex flex-col mb-8">
+            <label class="mb-2">Виды доставки</label>
+            <m-input v-model="shopForm.dostavka" placeholder="доставка" />
+          </div>
 
-            <div class="flex flex-col mb-8">
-              <label class="mb-2">Описание магазина</label>
-              <textarea
-                  v-model="shopForm.description"
-                  placeholder="описание"
-                  class="focus:outline-0 rounded-lg p-2 box-border placeholder-zinc-300 h-40 text-zinc-900 border border-2 border-zinc-300 bg-white w-full focus:outline-0 focus:border-primary"
-              />
-            </div>
+          <div class="flex flex-col mb-8">
+            <label class="mb-2">Описание магазина</label>
+            <textarea
+              v-model="shopForm.description"
+              placeholder="описание"
+              class="focus:outline-0 rounded-lg p-2 box-border placeholder-zinc-300 h-40 text-zinc-900 border border-2 border-zinc-300 bg-white w-full focus:outline-0 focus:border-primary"
+            />
+          </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div class="flex flex-col mb-8">
-                <label class="mb-2">Теги для поиска</label>
-                <m-input v-model="shopForm.tags" placeholder="теги" />
-              </div>
-              <div class="flex flex-col mb-8">
-                <label class="mb-2">Категории</label>
-                <select
-                    class="focus:outline-0 rounded-lg p-2 box-border placeholder-zinc-300 h-40 text-zinc-900 border border-2 border-zinc-300 bg-white w-full focus:outline-0 focus:border-primary"
-                    v-model="shopForm.categories"
-                    multiple
-                >
-                  <option v-for="c of categories" :key="c.uin" :value="c.uin">
-                    {{ c.title }}
-                  </option>
-                </select>
-              </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="flex flex-col mb-8">
+              <label class="mb-2">Теги для поиска</label>
+              <m-input v-model="shopForm.tags" placeholder="теги" />
             </div>
+            <div class="flex flex-col mb-8">
+              <label class="mb-2">Категории</label>
+              <select
+                class="focus:outline-0 rounded-lg p-2 box-border placeholder-zinc-300 h-40 text-zinc-900 border border-2 border-zinc-300 bg-white w-full focus:outline-0 focus:border-primary"
+                v-model="shopForm.categories"
+                multiple
+              >
+                <option v-for="c of categories" :key="c.uin" :value="c.uin">
+                  {{ c.title }}
+                </option>
+              </select>
+            </div>
+          </div>
         </m-card>
         <m-card class="lg:col-span-1 p-3">
           <div

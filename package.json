@@ -1,6 +1,6 @@
 {
   "name": "h-admin",
-  "version": "2.1.4",
+  "version": "2.1.5",
   "scripts": {
     "dev": "vite",
     "build": "run-p type-check build-only",
@@ -23,6 +23,7 @@
     "vue": "^3.2.37",
     "vue-chartjs": "^4.1.1",
     "vue-cookies": "^1.8.1",
+    "vue-multiselect": "^3.0.0-beta.2",
     "vue-router": "^4.1.2",
     "vuedraggable": "^4.1.0"
   },

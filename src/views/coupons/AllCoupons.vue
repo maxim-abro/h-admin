@@ -6,15 +6,16 @@
       <h1 class="text-xl font-bold mb-2 sm: mb-0">Промокоды</h1>
 
       <div class="flex items-center">
-        <select
+        <VueMultiselect
+          class="mr-4"
+          style="transition: none"
+          v-if="data.shops.length"
           v-model="data.activeShop"
-          class="focus:outline-0 rounded-lg p-2 box-border placeholder-zinc-300 h-full mr-4 text-zinc-900 border border-2 border-zinc-300 bg-white focus:outline-0 focus:border-primary"
-        >
-          <option value="%" selected>все магазины</option>
-          <option v-for="shop of data.shops" :key="shop.uin" :value="shop.uin">
-            {{ shop.title }}
-          </option>
-        </select>
+          :options="[{ uin: '%', title: 'Выберите магазин' }, ...data.shops]"
+          track-by="uin"
+          label="title"
+          placeholder="Выберите магазин"
+        ></VueMultiselect>
         <m-button
           class="text-xs sm:text-base"
           @click="$router.push('/coupons/add/')"
@@ -38,7 +39,7 @@
         </thead>
 
         <tbody>
-          <tr v-for="post of data.coupons" class="border-y">
+          <tr v-for="post of data.coupons" :key="post.uin" class="border-y">
             <th class="py-2 px-2 min-w-[150px]">{{ post.title }}</th>
             <th class="py-2 px-2">{{ post.shop.title }}</th>
             <th class="py-2 px-2">{{ post.counter }}</th>
@@ -89,6 +90,7 @@ import http from "@/modules/api";
 import MPagination from "@/components/_core/MPagination.vue";
 import { useRouter } from "vue-router";
 import MCard from "@/components/_core/MCard.vue";
+import VueMultiselect from "vue-multiselect";
 
 const alert = useAlertStore();
 const load = useLoadStore();
@@ -97,7 +99,10 @@ const router = useRouter();
 const data = reactive({
   shops: [] as object[],
   coupons: [] as object[],
-  activeShop: "%" as string,
+  activeShop: {
+    uin: "%",
+    title: "Выберите магазин",
+  } as object,
   orderData: {
     col: "" as string,
     type: "" as string,
@@ -135,7 +140,7 @@ async function changePage() {
   load.handleLoad();
   const result = await http.get(
     `/admin/post?page=${data.pagination.current_page}&${
-      data.activeShop !== "%" ? "shop=" + data.activeShop : ""
+      data.activeShop.uin !== "%" ? "shop=" + data.activeShop.uin : ""
     }`
   );
 
@@ -147,12 +152,12 @@ async function changeShop() {
   load.handleLoad();
   data.pagination.current_page = 1;
   const result = await http.get(
-    `/post?page=${data.pagination.current_page}&${
-      data.activeShop !== "%" ? "shop=" + data.activeShop : ""
+    `/admin/post?page=${data.pagination.current_page}&${
+      data.activeShop.uin !== "%" ? "shop=" + data.activeShop.uin : ""
     }`
   );
   data.pagination.total_elements = result.data.count;
-  data.pagination.total_pages = Math.ceil(result.data.count / 15);
+  data.pagination.total_pages = Math.ceil(result.data.count / 100);
   data.coupons = result.data.rows;
   load.handleLoad();
 }
@@ -171,3 +176,5 @@ async function deleteCoupon(uin: string) {
   load.handleLoad();
 }
 </script>
+
+<style src="vue-multiselect/dist/vue-multiselect.css"></style>

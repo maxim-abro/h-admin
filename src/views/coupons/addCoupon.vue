@@ -34,7 +34,7 @@
           <div class="flex flex-col mb-8">
             <label class="mb-2">Тип скидки</label>
             <select
-              class="focus:outline-0 rounded-lg p-2 box-border w-full focus:outline-0 focus:border-primary placeholder-zinc-300 text-zinc-900 border border-2 border-zinc-300 bg-white"
+              class="focus:outline-0 rounded-lg p-2 box-border w-full focus:border-primary placeholder-zinc-300 text-zinc-900 border border-2 border-zinc-300 bg-white"
               v-model="data.postInput.type"
             >
               <option value="promoCode">Промокод</option>
@@ -43,18 +43,27 @@
           </div>
           <div class="flex flex-col mb-8">
             <label class="mb-2">Магазин</label>
-            <select
-              class="focus:outline-0 rounded-lg p-2 box-border w-full focus:outline-0 focus:border-primary placeholder-zinc-300 text-zinc-900 border border-2 border-zinc-300 bg-white"
+            <!--            <select-->
+            <!--              class="focus:outline-0 rounded-lg p-2 box-border w-full focus:outline-0 focus:border-primary placeholder-zinc-300 text-zinc-900 border border-2 border-zinc-300 bg-white"-->
+            <!--              v-model="data.postInput.shopUin"-->
+            <!--            >-->
+            <!--              <option-->
+            <!--                v-for="shop of data.shops"-->
+            <!--                :key="shop.uin"-->
+            <!--                :value="shop.uin"-->
+            <!--              >-->
+            <!--                {{ shop.title }}-->
+            <!--              </option>-->
+            <!--            </select>-->
+            <vue-multiselect
+                class="rounded-lg box-border w-full focus:outline-0 focus:border-primary placeholder-zinc-300 text-zinc-900 border border-2 border-zinc-300 bg-white"
               v-model="data.postInput.shopUin"
-            >
-              <option
-                v-for="shop of data.shops"
-                :key="shop.uin"
-                :value="shop.uin"
-              >
-                {{ shop.title }}
-              </option>
-            </select>
+              :options="data.shops"
+              track-by="uin"
+              value="uin"
+              label="title"
+              placeholder="Выберите магазин"
+            ></vue-multiselect>
           </div>
           <div class="flex flex-col mb-8">
             <label class="mb-2">Дата окончания промокода</label>
@@ -109,6 +118,7 @@ import type { ShopModel } from "@/models/shop.model";
 import type { CategoryModel } from "@/models/category.model";
 import type { PostModel } from "@/models/post.model";
 import MCard from "@/components/_core/MCard.vue";
+import VueMultiselect from "vue-multiselect";
 
 const load = useLoadStore();
 const alert = useAlertStore();
@@ -131,9 +141,10 @@ onMounted(async () => {
   }
 });
 
-async function handleForm(form: PostModel): string {
+async function handleForm(form: PostModel): Promise<string> {
   try {
     load.handleLoad();
+    form.shopUin = form.shopUin.uin;
     await http.post("/admin/post/add", form);
     alert.handleAlert("Промокод добавлен", "success");
     load.handleLoad();
@@ -146,3 +157,5 @@ async function handleForm(form: PostModel): string {
   }
 }
 </script>
+
+<style src="vue-multiselect/dist/vue-multiselect.css"></style>
