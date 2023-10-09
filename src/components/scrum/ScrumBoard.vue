@@ -14,7 +14,9 @@
               class="absolute right -0 bottom-0 translate-y-full -translate-x-full shadow-sm bg-white p-2 rounded"
             >
               <li class="hover:bg-zinc-200 rounded px-1 text">Переименовать</li>
-              <li class="hover:bg-zinc-200 rounded px-1 text">Новая карточка</li>
+              <li class="hover:bg-zinc-200 rounded px-1 text">
+                Новая карточка
+              </li>
               <li class="hover:bg-zinc-200 rounded px-1 text">Удалить</li>
             </ul>
           </button>
@@ -27,7 +29,9 @@
           @change="remove"
         >
           <template #item="{ element, idx }">
-            <div class="p-2 border rounded bg-white cursor-grab mb-4 hover:drop-shadow-xl">
+            <div
+              class="p-2 border rounded bg-white cursor-grab mb-4 hover:drop-shadow-xl"
+            >
               <div>
                 <span
                   class="text-xs border rounded-2xl px-1 mr-2"
@@ -95,7 +99,7 @@ watch(
     boardsIn.value = props.boards;
   }
 );
-function remove(evt: { removed: string, moved: string }) {
+function remove(evt: { removed: string; moved: string }) {
   if (evt.removed || evt.moved) {
     emit("remove", boardsIn.value);
   }

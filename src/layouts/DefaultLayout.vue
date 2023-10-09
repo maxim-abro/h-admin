@@ -177,6 +177,17 @@ const data = reactive({
         },
       ],
     },
+    {
+      title: "База помощи",
+      icon: "book-open",
+      open: false,
+      children: [
+        {
+          title: "Помощь",
+          url: "/help",
+        },
+      ],
+    },
   ],
 });
 

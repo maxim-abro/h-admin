@@ -33,10 +33,7 @@
         </template>
       </template>
     </div>
-    <div
-      class="w-3/12 h-full bg-[#00000090]"
-      @click="popup.toggleMenu"
-    ></div>
+    <div class="w-3/12 h-full bg-[#00000090]" @click="popup.toggleMenu"></div>
   </div>
 </template>
 

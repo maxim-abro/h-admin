@@ -126,6 +126,14 @@ const router = createRouter({
         auth: true,
       },
     },
+    {
+      path: "/help",
+      name: "help",
+      component: () => import("@/views/help/index.vue"),
+      meta: {
+        auth: true,
+      },
+    },
   ],
 });
 
