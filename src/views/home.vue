@@ -51,7 +51,7 @@
                 </div>
                 <div
                   v-if="!data.postCounter"
-                  class="animate-pulse bg-slate-700 h-5 rounded w-20 mb-2"
+                  class="animate-pulse bg-slate-400 h-5 rounded w-20 mb-2"
                 ></div>
                 <p v-if="data.postCounter" class="flex items-center gap-1">
                   <span
@@ -79,7 +79,7 @@
                 </p>
                 <div
                   v-if="!data.postCounter"
-                  class="animate-pulse bg-slate-700 h-3 rounded w-24"
+                  class="animate-pulse bg-slate-400 h-3 rounded w-24"
                 ></div>
               </div>
             </div>
@@ -114,7 +114,7 @@
                 </div>
                 <div
                   v-if="!data.shopCounter"
-                  class="animate-pulse bg-slate-700 rounded w-20 h-5 mb-2"
+                  class="animate-pulse bg-slate-400 rounded w-20 h-5 mb-2"
                 ></div>
                 <p v-if="data.shopCounter" class="flex items-center gap-1">
                   <span
@@ -142,7 +142,7 @@
                 </p>
                 <div
                   v-if="!data.shopCounter"
-                  class="animate-pulse bg-slate-700 h-3 rounded w-24"
+                  class="animate-pulse bg-slate-400 h-3 rounded w-24"
                 ></div>
               </div>
             </div>
@@ -177,7 +177,7 @@
                 </div>
                 <div
                   v-if="!data.categoryCounter"
-                  class="animate-pulse bg-slate-700 h-5 rounded w-20 mb-2"
+                  class="animate-pulse bg-slate-400 h-5 rounded w-20 mb-2"
                 ></div>
                 <p v-if="data.categoryCounter" class="flex items-center gap-1">
                   <span
@@ -205,7 +205,7 @@
                 </p>
                 <div
                   v-if="!data.categoryCounter"
-                  class="animate-pulse bg-slate-700 h-3 rounded w-24"
+                  class="animate-pulse bg-slate-400 h-3 rounded w-24"
                 ></div>
               </div>
             </div>
@@ -240,7 +240,7 @@
                 </div>
                 <div
                   v-if="!data.blogCounter"
-                  class="animate-pulse bg-slate-700 h-5 rounded mb-2 w-20"
+                  class="animate-pulse bg-slate-400 h-5 rounded mb-2 w-20"
                 ></div>
                 <p v-if="data.blogCounter" class="flex items-center gap-1">
                   <span
@@ -268,7 +268,7 @@
                 </p>
                 <div
                   v-if="!data.blogCounter"
-                  class="animate-pulse bg-slate-700 h-3 rounded w-24"
+                  class="animate-pulse bg-slate-400 h-3 rounded w-24"
                 ></div>
               </div>
             </div>
@@ -285,13 +285,13 @@
             :chart-data="dataToChart"
           />
           <div v-if="!data.statisticYM.totals.length" class="animate-pulse">
-            <div class="bg-slate-700 h-6 mb-2 w-96 rounded"></div>
-            <div class="bg-slate-700 h-6 mb-2 w-80 rounded"></div>
-            <div class="bg-slate-700 h-6 mb-2 w-72 rounded"></div>
-            <div class="bg-slate-700 h-6 mb-2 w-64 rounded"></div>
-            <div class="bg-slate-700 h-6 mb-2 w-56 rounded"></div>
-            <div class="bg-slate-700 h-6 mb-2 w-44 rounded"></div>
-            <div class="bg-slate-700 h-6 mb-2 w-32 rounded"></div>
+            <div class="bg-slate-400 h-6 mb-2 w-96 rounded"></div>
+            <div class="bg-slate-400 h-6 mb-2 w-80 rounded"></div>
+            <div class="bg-slate-400 h-6 mb-2 w-72 rounded"></div>
+            <div class="bg-slate-400 h-6 mb-2 w-64 rounded"></div>
+            <div class="bg-slate-400 h-6 mb-2 w-56 rounded"></div>
+            <div class="bg-slate-400 h-6 mb-2 w-44 rounded"></div>
+            <div class="bg-slate-400 h-6 mb-2 w-32 rounded"></div>
           </div>
         </m-card>
         <m-card class="xl:col-span-2 p-3">
@@ -304,7 +304,7 @@
           />
           <div
             v-if="!categoriesChart.labels.length"
-            class="animate-pulse bg-slate-700 h-64 w-64 rounded-full mx-auto"
+            class="animate-pulse bg-slate-400 h-64 w-64 rounded-full mx-auto"
           ></div>
         </m-card>
       </div>
@@ -351,26 +351,26 @@
             v-if="!data.blog.length"
             class="animate-pulse grid grid-cols-5 gap-1"
           >
-            <div class="bg-slate-700 h-7 rounded"></div>
-            <div class="bg-slate-700 h-7 rounded"></div>
-            <div class="bg-slate-700 h-7 rounded"></div>
-            <div class="bg-slate-700 h-7 rounded"></div>
-            <div class="bg-slate-700 h-7 rounded"></div>
-            <div class="bg-slate-700 h-5 rounded"></div>
-            <div class="bg-slate-700 h-5 rounded"></div>
-            <div class="bg-slate-700 h-5 rounded"></div>
-            <div class="bg-slate-700 h-5 rounded"></div>
-            <div class="bg-slate-700 h-5 rounded"></div>
-            <div class="bg-slate-700 h-5 rounded"></div>
-            <div class="bg-slate-700 h-5 rounded"></div>
-            <div class="bg-slate-700 h-5 rounded"></div>
-            <div class="bg-slate-700 h-5 rounded"></div>
-            <div class="bg-slate-700 h-5 rounded"></div>
-            <div class="bg-slate-700 h-5 rounded"></div>
-            <div class="bg-slate-700 h-5 rounded"></div>
-            <div class="bg-slate-700 h-5 rounded"></div>
-            <div class="bg-slate-700 h-5 rounded"></div>
-            <div class="bg-slate-700 h-5 rounded"></div>
+            <div class="bg-slate-400 h-7 rounded"></div>
+            <div class="bg-slate-400 h-7 rounded"></div>
+            <div class="bg-slate-400 h-7 rounded"></div>
+            <div class="bg-slate-400 h-7 rounded"></div>
+            <div class="bg-slate-400 h-7 rounded"></div>
+            <div class="bg-slate-400 h-5 rounded"></div>
+            <div class="bg-slate-400 h-5 rounded"></div>
+            <div class="bg-slate-400 h-5 rounded"></div>
+            <div class="bg-slate-400 h-5 rounded"></div>
+            <div class="bg-slate-400 h-5 rounded"></div>
+            <div class="bg-slate-400 h-5 rounded"></div>
+            <div class="bg-slate-400 h-5 rounded"></div>
+            <div class="bg-slate-400 h-5 rounded"></div>
+            <div class="bg-slate-400 h-5 rounded"></div>
+            <div class="bg-slate-400 h-5 rounded"></div>
+            <div class="bg-slate-400 h-5 rounded"></div>
+            <div class="bg-slate-400 h-5 rounded"></div>
+            <div class="bg-slate-400 h-5 rounded"></div>
+            <div class="bg-slate-400 h-5 rounded"></div>
+            <div class="bg-slate-400 h-5 rounded"></div>
           </div>
         </div>
       </m-card>
@@ -383,13 +383,13 @@
             :chart-data="data.siteStatistics"
           />
           <div v-if="!data.siteStatistics.datasets" class="animate-pulse">
-            <div class="bg-slate-700 h-6 mb-2 w-96 rounded"></div>
-            <div class="bg-slate-700 h-6 mb-2 w-80 rounded"></div>
-            <div class="bg-slate-700 h-6 mb-2 w-72 rounded"></div>
-            <div class="bg-slate-700 h-6 mb-2 w-64 rounded"></div>
-            <div class="bg-slate-700 h-6 mb-2 w-56 rounded"></div>
-            <div class="bg-slate-700 h-6 mb-2 w-44 rounded"></div>
-            <div class="bg-slate-700 h-6 mb-2 w-32 rounded"></div>
+            <div class="bg-slate-400 h-6 mb-2 w-96 rounded"></div>
+            <div class="bg-slate-400 h-6 mb-2 w-80 rounded"></div>
+            <div class="bg-slate-400 h-6 mb-2 w-72 rounded"></div>
+            <div class="bg-slate-400 h-6 mb-2 w-64 rounded"></div>
+            <div class="bg-slate-400 h-6 mb-2 w-56 rounded"></div>
+            <div class="bg-slate-400 h-6 mb-2 w-44 rounded"></div>
+            <div class="bg-slate-400 h-6 mb-2 w-32 rounded"></div>
           </div>
         </m-card>
         <m-card class="p-3 sm:col-span-4">
@@ -399,13 +399,13 @@
             :chart-data="data.incomeStatistics.datasets"
           />
           <div v-if="!data.incomeStatistics.datasets" class="animate-pulse">
-            <div class="bg-slate-700 h-6 mb-2 w-96 rounded"></div>
-            <div class="bg-slate-700 h-6 mb-2 w-80 rounded"></div>
-            <div class="bg-slate-700 h-6 mb-2 w-72 rounded"></div>
-            <div class="bg-slate-700 h-6 mb-2 w-64 rounded"></div>
-            <div class="bg-slate-700 h-6 mb-2 w-56 rounded"></div>
-            <div class="bg-slate-700 h-6 mb-2 w-44 rounded"></div>
-            <div class="bg-slate-700 h-6 mb-2 w-32 rounded"></div>
+            <div class="bg-slate-400 h-6 mb-2 w-96 rounded"></div>
+            <div class="bg-slate-400 h-6 mb-2 w-80 rounded"></div>
+            <div class="bg-slate-400 h-6 mb-2 w-72 rounded"></div>
+            <div class="bg-slate-400 h-6 mb-2 w-64 rounded"></div>
+            <div class="bg-slate-400 h-6 mb-2 w-56 rounded"></div>
+            <div class="bg-slate-400 h-6 mb-2 w-44 rounded"></div>
+            <div class="bg-slate-400 h-6 mb-2 w-32 rounded"></div>
           </div>
         </m-card>
       </div>
