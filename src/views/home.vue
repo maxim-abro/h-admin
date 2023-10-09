@@ -396,7 +396,7 @@
           <h3 class="text-center text-xl font-bold mb-2">Статистика сайта</h3>
           <income-chart
             v-if="data.incomeStatistics.datasets"
-            :chart-data="data.incomeStatistics.datasets"
+            :chart-data="data.incomeStatistics"
           />
           <div v-if="!data.incomeStatistics.datasets" class="animate-pulse">
             <div class="bg-slate-400 h-6 mb-2 w-96 rounded"></div>
