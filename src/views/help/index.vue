@@ -12,13 +12,20 @@
         :key="help.id"
         class="p-3 hover:drop-shadow-xl"
       >
-        <router-link :to="`/help/${help.id}`">
+        <router-link
+          class="flex flex-col justify-between h-full"
+          :to="`/help/${help.id}`"
+        >
           <h2 class="font-bold mb-4 lg:text-lg">{{ help.title }}</h2>
-          <p><span class="font-bold">Автор:</span> {{ help.account.login }}</p>
-          <p>
-            <span class="font-bold">Дата обновления гайда: </span
-            >{{ getRussianDate(help.date) }}
-          </p>
+          <div class="">
+            <p>
+              <span class="font-bold">Автор:</span> {{ help.account.login }}
+            </p>
+            <p>
+              <span class="font-bold">Дата обновления гайда: </span
+              >{{ getRussianDate(help.date) }}
+            </p>
+          </div>
         </router-link>
       </m-card>
     </div>
