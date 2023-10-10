@@ -6,10 +6,14 @@
       Инструкции по панели управления сайтом.
     </h1>
 
-    <div class="grid grid-cols-3 gap-3" v-for="help of helps" :key="help.id">
-      <m-card class="p-3 hover:drop-shadow-xl">
+    <div class="grid lg:grid-cols-2 xl:grid-cols-3 gap-3">
+      <m-card
+        v-for="help of helps"
+        :key="help.id"
+        class="p-3 hover:drop-shadow-xl"
+      >
         <router-link :to="`/help/${help.id}`">
-          <h2 class="font-bold mb-4 text-lg">{{ help.title }}</h2>
+          <h2 class="font-bold mb-4 lg:text-lg">{{ help.title }}</h2>
           <p><span class="font-bold">Автор:</span> {{ help.account.login }}</p>
           <p>
             <span class="font-bold">Дата обновления гайда: </span

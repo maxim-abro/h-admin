@@ -285,7 +285,7 @@
             :chart-data="dataToChart"
           />
           <div v-if="!data.statisticYM.totals.length" class="animate-pulse">
-            <div class="bg-slate-400 h-6 mb-2 w-96 rounded"></div>
+            <div class="bg-slate-400 h-6 mb-2 w-80 sm:w-96 rounded"></div>
             <div class="bg-slate-400 h-6 mb-2 w-80 rounded"></div>
             <div class="bg-slate-400 h-6 mb-2 w-72 rounded"></div>
             <div class="bg-slate-400 h-6 mb-2 w-64 rounded"></div>
@@ -383,7 +383,7 @@
             :chart-data="data.siteStatistics"
           />
           <div v-if="!data.siteStatistics.datasets" class="animate-pulse">
-            <div class="bg-slate-400 h-6 mb-2 w-96 rounded"></div>
+            <div class="bg-slate-400 h-6 mb-2 w-80 sm:w-96 rounded"></div>
             <div class="bg-slate-400 h-6 mb-2 w-80 rounded"></div>
             <div class="bg-slate-400 h-6 mb-2 w-72 rounded"></div>
             <div class="bg-slate-400 h-6 mb-2 w-64 rounded"></div>
@@ -399,7 +399,7 @@
             :chart-data="data.incomeStatistics"
           />
           <div v-if="!data.incomeStatistics.datasets" class="animate-pulse">
-            <div class="bg-slate-400 h-6 mb-2 w-96 rounded"></div>
+            <div class="bg-slate-400 h-6 mb-2 w-80 sm:w-96 rounded"></div>
             <div class="bg-slate-400 h-6 mb-2 w-80 rounded"></div>
             <div class="bg-slate-400 h-6 mb-2 w-72 rounded"></div>
             <div class="bg-slate-400 h-6 mb-2 w-64 rounded"></div>
@@ -449,14 +449,8 @@ const data = reactive({
   blog: [] as object[],
   yesterdaysStatistics: {} as object,
   time: null,
-  siteStatistics: {
-    // datasets: [],
-    // labels: [],
-  },
-  incomeStatistics: {
-    // datasets: [],
-    // labels: [],
-  },
+  siteStatistics: {},
+  incomeStatistics: {},
 });
 
 onMounted(async () => {
