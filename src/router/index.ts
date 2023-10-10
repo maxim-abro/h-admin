@@ -152,6 +152,7 @@ router.beforeEach(async (to, from, next) => {
 
     if (requireAuth && store.isAuth) {
       if (!store.userData.id) {
+        // todo здесь остановился
         await store.getLoginData();
       }
       next();
