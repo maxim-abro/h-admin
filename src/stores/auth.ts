@@ -1,6 +1,17 @@
 import { defineStore } from "pinia";
 import http from "@/modules/api";
 import type { AxiosResponse } from "axios";
+type LoginDto = {
+  email: string;
+  password: string;
+};
+
+type UserData = {
+  id: number;
+  email: string;
+  login: string;
+  avatar: string;
+};
 
 type ResultAuth = {
   avatar?: string;
@@ -16,58 +27,17 @@ export const useAuthStore = defineStore({
   id: "auth",
   state: () => ({
     token: localStorage.getItem("jwt_token") as string,
-    name: localStorage.getItem("name") as string,
-    email: localStorage.getItem("email") as string,
-    userData: {} as object,
+    userData: {} as UserData,
   }),
   getters: {
     isAuth: (state) => !!state.token,
   },
   actions: {
-    setToken(token: string) {
-      localStorage.setItem("jwt_token", token);
-      this.token = token;
-    },
-    setEmail(email: string) {
-      localStorage.setItem("email", email);
-      this.email = email;
-    },
-    setName(name: string) {
-      localStorage.setItem("name", name);
-      this.name = name;
-    },
-    setUserData(data: object) {
-      this.userData = data;
-    },
-    logout() {
-      this.token = "";
-      this.email = "";
-      this.name = "";
-      localStorage.removeItem("jwt_token");
-      localStorage.removeItem("email");
-      localStorage.removeItem("name");
-    },
-    addCookie() {
-      this.token = localStorage.getItem("jwt_token") || "";
-      this.email = localStorage.getItem("email") || "";
-      this.name = localStorage.getItem("name") || "";
-    },
-    async login(data: {
-      password: string;
-      email: string;
-    }): Promise<"ok" | unknown> {
+    async login(data: LoginDto): Promise<any> {
       try {
-        const result: AxiosResponse<
-          { hash: string; dataValues: { email: string; login: string } },
-          { email: string; password: string }
-        > = await http.post("/auth/login", {
-          email: data.email,
-          password: data.password,
-        });
+        const result = await http.post("/user/login", data);
 
-        this.setToken(result.data.hash);
-        this.setName(result.data.dataValues.email);
-        this.setEmail(result.data.dataValues.login);
+        this.setToken(result.data.token);
         return "ok";
       } catch (e) {
         console.log(e);
@@ -75,9 +45,31 @@ export const useAuthStore = defineStore({
         return e.response.status;
       }
     },
-    async getLoginData() {
-      const result = await http.get("/auth/get");
-      this.setUserData(result.data);
+    setToken(token: string): void {
+      localStorage.setItem("jwt_token", token);
+      this.token = token;
+    },
+    setUserData(data: UserData): void {
+      this.userData = data;
+    },
+    async getLoginData(): Promise<void> {
+      const result = await http.get("/user/get");
+      this.setUserData({
+        id: result.data.userId,
+        email: result.data.email,
+        login: result.data.login,
+        avatar: result.data.avatar,
+      });
+    },
+    logout(): void {
+      this.token = "";
+      this.userData = {
+        id: 0,
+        email: "",
+        login: "",
+        avatar: "",
+      };
+      localStorage.removeItem("jwt_token");
     },
   },
 });

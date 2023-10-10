@@ -151,22 +151,17 @@ router.beforeEach(async (to, from, next) => {
     const store = useAuthStore();
 
     if (requireAuth && store.isAuth) {
-      const result = await http.get("/auth/check");
-
-      if (result.data.message === "ok") {
-        next();
-      } else {
-        next("/auth?message=non_authorize");
+      if (!store.userData.id) {
+        await store.getLoginData();
       }
+      next();
     } else if (requireAuth && !store.isAuth) {
-      next("/auth?message=non_authorize");
+      next("/auth?message=unauthorized");
     } else {
       next();
     }
   } catch (e) {
-    const store = useAuthStore();
-    next("/auth?message=non_authorize");
-    store.logout();
+    console.log(e);
   }
 });
 
