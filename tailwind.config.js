@@ -51,6 +51,18 @@ module.exports = {
         display: ["Roboto", "normal"],
         body: ["Roboto", "normal"],
       },
+      typography: {
+        DEFAULT: {
+          css: {
+            a: {
+              background: "#fdb13c60",
+              "&:hover": {
+                background: "#fdb13c",
+              },
+            },
+          },
+        },
+      },
     },
     screens: {
       sm: "540px",
@@ -70,7 +82,5 @@ module.exports = {
       },
     },
   },
-  plugins: [
-    // require('@tailwindcss/forms')
-  ],
+  plugins: [require("@tailwindcss/typography")],
 };

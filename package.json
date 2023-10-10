@@ -1,6 +1,6 @@
 {
   "name": "h-admin",
-  "version": "2.1.5",
+  "version": "2.2.0",
   "scripts": {
     "dev": "vite",
     "build": "run-p type-check build-only",
@@ -29,6 +29,7 @@
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.1.0",
+    "@tailwindcss/typography": "^0.5.10",
     "@types/node": "^16.11.45",
     "@vitejs/plugin-vue": "^3.0.1",
     "@vue/eslint-config-prettier": "^7.0.0",
