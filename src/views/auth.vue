@@ -6,7 +6,8 @@
       <img src="@/assets/logo.png" alt="" />
 
       <p class="text-white">
-        Copyright © 2022-2023 <span class="font-bold">Za halyavoi</span> {{ configStore.version }}
+        Copyright © 2022-2023 <span class="font-bold">Za halyavoi</span>
+        {{ configStore.version }}
       </p>
     </div>
 
@@ -66,7 +67,7 @@ import { useLoadStore } from "@/stores/load";
 import MInput from "@/components/_core/MInput.vue";
 import MButton from "@/components/_core/MButton.vue";
 import { useAlertStore } from "@/stores/alert";
-import {useConfigStore} from "@/stores/config";
+import { useConfigStore } from "@/stores/config";
 
 const loader = useLoadStore();
 const alert = useAlertStore();
@@ -82,17 +83,22 @@ const data = reactive({
 });
 
 const fetchForm = async () => {
-  loader.handleLoad();
-  const result = await authStore.login({
-    email: data.email,
-    password: data.password,
-  });
-
-  if (result === "ok") {
-    data.ok = true;
+  try {
     loader.handleLoad();
-  } else {
-    alert.handleAlert("Неправильная почта или пароль", "danger");
+    const result = await authStore.login({
+      email: data.email,
+      password: data.password,
+    });
+
+    if (result === "ok") {
+      data.ok = true;
+      loader.handleLoad();
+    } else {
+      alert.handleAlert("Неправильная почта или пароль", "danger");
+      loader.handleLoad();
+    }
+  } catch (e) {
+    console.log(e);
     loader.handleLoad();
   }
 };

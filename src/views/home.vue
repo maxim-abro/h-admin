@@ -7,7 +7,7 @@
       v-if="data.time"
     >
       <div class="text-xl font-bold">
-        {{ getWelcome }}, {{ auth.userData.login }}
+        {{ getWelcome }}, {{ auth.userData.name }}
       </div>
       <div class="text-xl font-bold">
         Сегодня

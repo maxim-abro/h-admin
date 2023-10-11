@@ -59,7 +59,6 @@ async function removeBoard(event: ScrumBoardType[]) {
     i.scrum_tickets.forEach((ticket) => {
       tickets.push(String(ticket.id));
     });
-    console.log(tickets.join(","));
     i.cards = tickets.join(",");
   });
   await api.post("/scrum/board/change", {

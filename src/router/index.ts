@@ -146,13 +146,12 @@ const router = createRouter({
 });
 
 router.beforeEach(async (to, from, next) => {
+  const store = useAuthStore();
   try {
     const requireAuth = to.meta.auth;
-    const store = useAuthStore();
 
     if (requireAuth && store.isAuth) {
       if (!store.userData.id) {
-        // todo здесь остановился
         await store.getLoginData();
       }
       next();
@@ -161,8 +160,12 @@ router.beforeEach(async (to, from, next) => {
     } else {
       next();
     }
-  } catch (e) {
+  } catch (e:any) {
     console.log(e);
+    if (e.response.status === 401) {
+      store.logout();
+      next("/auth?message=unauthorized");
+    }
   }
 });
 

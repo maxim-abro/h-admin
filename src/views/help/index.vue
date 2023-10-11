@@ -19,7 +19,7 @@
           <h2 class="font-bold mb-4 lg:text-lg">{{ help.title }}</h2>
           <div class="">
             <p>
-              <span class="font-bold">Автор:</span> {{ help.account.login }}
+              <span class="font-bold">Автор:</span> {{ help.user_v2.login }}
             </p>
             <p>
               <span class="font-bold">Дата обновления гайда: </span
@@ -43,7 +43,7 @@ interface HelpType {
   id: number;
   title: string;
   date: Date;
-  account: {
+  user_v2: {
     login: string;
   };
 }

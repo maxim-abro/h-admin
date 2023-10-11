@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 import http from "@/modules/api";
 import type { AxiosResponse } from "axios";
+
 type LoginDto = {
   email: string;
   password: string;
@@ -9,8 +10,7 @@ type LoginDto = {
 type UserData = {
   id: number;
   email: string;
-  login: string;
-  avatar: string;
+  name: string;
 };
 
 type ResultAuth = {
@@ -35,12 +35,12 @@ export const useAuthStore = defineStore({
   actions: {
     async login(data: LoginDto): Promise<any> {
       try {
-        const result = await http.post("/user/login", data);
+        const result = await http.post("/user/auth", data);
 
         this.setToken(result.data.token);
         return "ok";
       } catch (e) {
-        console.log(e);
+        console.dir(e);
         // @ts-ignore
         return e.response.status;
       }
@@ -57,8 +57,7 @@ export const useAuthStore = defineStore({
       this.setUserData({
         id: result.data.userId,
         email: result.data.email,
-        login: result.data.login,
-        avatar: result.data.avatar,
+        name: result.data.name,
       });
     },
     logout(): void {
@@ -66,8 +65,7 @@ export const useAuthStore = defineStore({
       this.userData = {
         id: 0,
         email: "",
-        login: "",
-        avatar: "",
+        name: "",
       };
       localStorage.removeItem("jwt_token");
     },

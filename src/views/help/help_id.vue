@@ -4,7 +4,7 @@
   >
     <h1>{{ help.title }}</h1>
     <small class="block"
-      >Автор: <span class="font-bold">{{ help.account.login }}</span></small
+      >Автор: <span class="font-bold">{{ help.user_v2.login }}</span></small
     >
     <small class="block"
       >Последнее обновление:
@@ -30,7 +30,7 @@ interface HelpType {
   title: string;
   date: Date;
   body: string;
-  account: {
+  user_v2: {
     login: string;
   };
 }
@@ -40,7 +40,7 @@ const help: Ref<UnwrapRef<HelpType>> = ref({
   title: "",
   date: new Date(),
   body: "",
-  account: {
+  user_v2: {
     login: "",
   },
 });
