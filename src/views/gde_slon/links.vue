@@ -41,6 +41,7 @@ import { useAlertStore } from "@/stores/alert";
 import { useLoadStore } from "@/stores/load";
 import { computed, onMounted, reactive } from "vue";
 import type { ShopModel } from "@/models/shop.model";
+import logging from "@/modules/logging";
 
 const alertStore = useAlertStore();
 const load = useLoadStore();
@@ -92,6 +93,7 @@ async function handleLink(dto: LinksDto) {
   try {
     load.handleLoad();
     await http.post("/slon/link", dto);
+    await logging("Сделал линк в gde slon", "bind");
     const links = await http.get("/slon/link");
     data.links = links.data;
     load.handleLoad();

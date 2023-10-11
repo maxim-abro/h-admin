@@ -61,6 +61,7 @@ import { useAlertStore } from "@/stores/alert";
 import http from "@/modules/api";
 import { useRouter } from "vue-router";
 import { reactive } from "vue";
+import logging from "@/modules/logging";
 
 interface HolidayDto {
   title: string;
@@ -105,7 +106,9 @@ const handleForm = async () => {
       image: data.holidayData.image,
     });
 
-    alert.handleAlert("Магазин добавлен", "success");
+    await logging("Добавил новый тег", "add");
+
+    alert.handleAlert("Тег добавлен", "success");
     load.handleLoad();
   } catch (e) {
     console.log(e);

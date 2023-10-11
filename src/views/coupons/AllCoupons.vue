@@ -91,6 +91,7 @@ import MPagination from "@/components/_core/MPagination.vue";
 import { useRouter } from "vue-router";
 import MCard from "@/components/_core/MCard.vue";
 import VueMultiselect from "vue-multiselect";
+import logging from "@/modules/logging";
 
 const alert = useAlertStore();
 const load = useLoadStore();
@@ -167,12 +168,17 @@ async function toggleChecked(uin: string, val: boolean): Promise<void> {
   await http.patch(`/admin/post/${uin}`, {
     recomended: val,
   });
+  await logging(
+    `Сделал промокод ${val ? "рекомендуемым" : "не рекомендуемым"}`,
+    "edit"
+  );
   load.handleLoad();
 }
 
 async function deleteCoupon(uin: string) {
   load.handleLoad();
   await http.delete(`/admin/post/${uin}`);
+  await logging(`Удалил промокод`, "delete");
   load.handleLoad();
 }
 </script>

@@ -117,6 +117,7 @@ import type { ShopModel } from "@/models/shop.model";
 import type { CategoryModel } from "@/models/category.model";
 import type { PostModel } from "@/models/post.model";
 import { useRoute, useRouter } from "vue-router";
+import logging from "@/modules/logging";
 
 const load = useLoadStore();
 const alert = useAlertStore();
@@ -150,6 +151,7 @@ async function handleForm(form: PostModel, uin: string): Promise<void> {
   try {
     load.handleLoad();
     await http.patch(`/admin/post/${uin}`, form);
+    await logging(`Изменил промокод промокод`, "edit");
     router.push("/coupons");
     alert.handleAlert("Промокод изменён", "success");
     load.handleLoad();

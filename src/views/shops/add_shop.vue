@@ -95,6 +95,7 @@ import { useLoadStore } from "@/stores/load";
 import { useAlertStore } from "@/stores/alert";
 import MButton from "@/components/_core/MButton.vue";
 import MCard from "@/components/_core/MCard.vue";
+import logging from "@/modules/logging";
 
 const load = useLoadStore();
 const alert = useAlertStore();
@@ -171,6 +172,7 @@ async function handleForm() {
         tags: shopForm.value.tags,
         categories: shopForm.value.categories.join(","),
       });
+      await logging(`Добавил магазин ${shopForm.value.title}`, "add");
       alert.handleAlert("Магазин добавлен", "success");
       load.handleLoad();
     }

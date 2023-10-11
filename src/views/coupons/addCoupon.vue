@@ -56,7 +56,7 @@
             <!--              </option>-->
             <!--            </select>-->
             <vue-multiselect
-                class="rounded-lg box-border w-full focus:outline-0 focus:border-primary placeholder-zinc-300 text-zinc-900 border border-2 border-zinc-300 bg-white"
+              class="rounded-lg box-border w-full focus:outline-0 focus:border-primary placeholder-zinc-300 text-zinc-900 border border-2 border-zinc-300 bg-white"
               v-model="data.postInput.shopUin"
               :options="data.shops"
               track-by="uin"
@@ -119,6 +119,7 @@ import type { CategoryModel } from "@/models/category.model";
 import type { PostModel } from "@/models/post.model";
 import MCard from "@/components/_core/MCard.vue";
 import VueMultiselect from "vue-multiselect";
+import logging from "@/modules/logging";
 
 const load = useLoadStore();
 const alert = useAlertStore();
@@ -147,6 +148,7 @@ async function handleForm(form: PostModel): Promise<string> {
     form.shopUin = form.shopUin.uin;
     await http.post("/admin/post/add", form);
     alert.handleAlert("Промокод добавлен", "success");
+    await logging("Добавил купон", "add");
     load.handleLoad();
     return "ok";
   } catch (e) {

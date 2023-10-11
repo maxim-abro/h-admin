@@ -41,6 +41,7 @@ import { useAlertStore } from "@/stores/alert";
 import { useLoadStore } from "@/stores/load";
 import { computed, onMounted, reactive } from "vue";
 import type { ShopModel } from "@/models/shop.model";
+import logging from "@/modules/logging";
 
 const alertStore = useAlertStore();
 const load = useLoadStore();
@@ -93,6 +94,7 @@ async function handleLink(dto: LinksDto) {
     load.handleLoad();
     await http.post("/adv_cake/link", dto);
     const links = await http.get("/adv_cake/link");
+    await logging("Сделал линк в adv cake", "bind");
     data.links = links.data;
     load.handleLoad();
   } catch (e) {

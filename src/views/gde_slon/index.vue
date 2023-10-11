@@ -186,6 +186,7 @@ import http from "@/modules/api";
 import MInput from "@/components/_core/MInput.vue";
 import { useAlertStore } from "@/stores/alert";
 import { useLoadStore } from "@/stores/load";
+import logging from "@/modules/logging";
 
 interface SlonShop {
   id: string;
@@ -240,6 +241,7 @@ async function updateSlonShops() {
   try {
     load.handleLoad();
     await http.get("/slon/parse");
+    await logging("Запустил обновление магазинов в gde slon", "func");
     alert.handleAlert("Магазины обновлены", "success");
     load.handleLoad();
   } catch (e) {
@@ -253,6 +255,7 @@ async function deleteLinksSlon() {
   try {
     load.handleLoad();
     await http.get("/cron/delete_links_slon");
+    await logging("Запустил удаление линков в gde slon", "func");
     alert.handleAlert("Магазины обновлены", "success");
     load.handleLoad();
   } catch (e) {

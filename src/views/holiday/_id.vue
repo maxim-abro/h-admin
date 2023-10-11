@@ -85,6 +85,7 @@ import http from "@/modules/api";
 import { computed, onMounted, reactive } from "vue";
 import { useRoute } from "vue-router";
 import type { PostModel } from "@/models/post.model";
+import logging from "@/modules/logging";
 
 interface HolidayModel {
   id_holiday: number;
@@ -125,6 +126,8 @@ const linkPostToHoliday = async (post_id: string) => {
       post_id,
       holiday_id: data.holiday.id_holiday,
     });
+
+    await logging(`Сделал линк в теге ${data.holiday.title}`, "bind");
 
     await loadData();
 
