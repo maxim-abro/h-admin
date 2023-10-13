@@ -1,6 +1,6 @@
 <template>
   <m-card
-    class="p-8 max-w-[1000px] mx-auto prose lg:prose-xl prose-stone dark:prose-invert mb-10 prose-a:bg-[#fdb13c60] prose-xl-hr:py-0 prose-xl-hr:my-0"
+    class="p-8 max-w-[1000px] mx-auto prose lg:prose-xl prose-stone mb-10 prose-a:bg-[#fdb13c60] prose-xl-hr:py-0 prose-xl-hr:my-0"
   >
     <h1>{{ help.title }}</h1>
     <small class="block"
