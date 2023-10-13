@@ -142,6 +142,14 @@ const router = createRouter({
         auth: true,
       },
     },
+    {
+      path: "/blog/add",
+      name: "add_blog",
+      component: () => import("@/views/blog/add.vue"),
+      meta: {
+        auth: true,
+      },
+    },
   ],
 });
 
@@ -160,7 +168,7 @@ router.beforeEach(async (to, from, next) => {
     } else {
       next();
     }
-  } catch (e:any) {
+  } catch (e: any) {
     console.log(e);
     if (e.response.status === 401) {
       store.logout();

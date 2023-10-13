@@ -1,6 +1,6 @@
 {
   "name": "h-admin",
-  "version": "2.2.6",
+  "version": "2.3.0",
   "scripts": {
     "dev": "vite",
     "build": "run-p type-check build-only",

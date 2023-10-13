@@ -169,11 +169,11 @@ const data = reactive({
       children: [
         {
           title: "Все блоги",
-          url: "/news",
+          url: "/blog",
         },
         {
           title: "Добавить",
-          url: "/news/add",
+          url: "/blog/add",
         },
       ],
     },
