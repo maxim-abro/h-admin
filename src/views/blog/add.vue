@@ -78,6 +78,7 @@ import { useLoadStore } from "@/stores/load";
 import { useAlertStore } from "@/stores/alert";
 import { useRouter } from "vue-router";
 import http from "@/modules/api";
+import logging from "@/modules/logging";
 
 const load = useLoadStore();
 const alert = useAlertStore();
@@ -122,6 +123,7 @@ async function fetchBlog(data: BlogType) {
       tags: data.tags.split(","),
     });
     alert.handleAlert("Блог добавлен", "success");
+    await logging(`Добавил блог ${data.title}`, "add");
     load.handleLoad();
     await router.push("/");
   } catch (e) {
