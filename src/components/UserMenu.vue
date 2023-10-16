@@ -1,9 +1,9 @@
 <template>
   <div
-    class="absolute bottom-0 right-0 bg-white z-40 translate-y-full min-w-[300px] rounded-lg shadow-lg border"
+    class="absolute bottom-0 right-0 bg-white dark:bg-slate-600 z-40 translate-y-full min-w-[300px] rounded-lg shadow-lg border dark:border-zinc-500"
   >
     <ul>
-      <li class="m-2 py-1 rounded-lg font-bold hover:bg-zinc-200 relative">
+      <li class="m-2 py-1 rounded-lg font-bold hover:bg-zinc-200 dark:hover:bg-slate-500 relative">
         <router-link
           @click.prevent="goLink('/user')"
           to="/user"
@@ -16,7 +16,7 @@
           <span class="ml-10">Профиль</span>
         </router-link>
       </li>
-      <li class="m-2 py-1 rounded-lg font-bold hover:bg-zinc-200 relative">
+      <li class="m-2 py-1 rounded-lg font-bold hover:bg-zinc-200 dark:hover:bg-slate-500 relative">
         <router-link
           @click.prevent="goLink('/users_stat')"
           to="/users_stat"
@@ -30,9 +30,9 @@
         </router-link>
       </li>
 
-      <hr />
+      <hr class="dark:border-zinc-500" />
 
-      <li class="m-2 py-1 rounded-lg font-bold hover:bg-zinc-200 relative">
+      <li class="m-2 py-1 rounded-lg font-bold hover:bg-zinc-200 dark:hover:bg-slate-500 relative">
         <button @click="logout" class="w-full h-full text-start">
           <font-awesome-icon
             icon="right-from-bracket"

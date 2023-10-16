@@ -44,7 +44,7 @@
                   class="flex gap-1.5 items-end mb-2"
                   v-if="data.postCounter"
                 >
-                  <h3 class="font-bold text-black text-2xl leading-none">
+                  <h3 class="font-bold text-black dark:text-white text-2xl leading-none">
                     {{ data.postCounter }}
                   </h3>
                   <p class="font-semibold">Купоны</p>
@@ -107,7 +107,7 @@
                   v-if="data.shopCounter"
                   class="flex gap-1.5 items-end mb-2"
                 >
-                  <h3 class="font-bold text-black text-2xl leading-none">
+                  <h3 class="font-bold text-black dark:text-white text-2xl leading-none">
                     {{ data.shopCounter }}
                   </h3>
                   <p class="font-semibold">Магазины</p>
@@ -170,7 +170,7 @@
                   v-if="data.categoryCounter"
                   class="flex gap-1.5 items-end mb-2"
                 >
-                  <h3 class="font-bold text-black text-2xl leading-none">
+                  <h3 class="font-bold text-black dark:text-white text-2xl leading-none">
                     {{ data.categoryCounter }}
                   </h3>
                   <p class="font-semibold">Категории</p>
@@ -233,7 +233,7 @@
                   v-if="data.blogCounter"
                   class="flex gap-1.5 items-end mb-2"
                 >
-                  <h3 class="font-bold text-black text-2xl leading-none">
+                  <h3 class="font-bold text-black dark:text-white text-2xl leading-none">
                     {{ data.blogCounter }}
                   </h3>
                   <p class="font-semibold">Посты</p>
@@ -313,7 +313,7 @@
         <div class="w-full overflow-x-scroll">
           <table v-if="data.blog.length" class="min-w-full">
             <thead>
-              <tr class="bg-zinc-50 font-[100]">
+              <tr class="bg-zinc-50 dark:bg-gray-800 font-[100]">
                 <th class="text-left">Название</th>
                 <th class="">Статус</th>
                 <th class="">Дата создания</th>
@@ -324,7 +324,7 @@
             <tbody>
               <tr
                 v-for="i of data.blog"
-                class="text-center hover:bg-zinc-50 border-b border-b-collapse"
+                class="text-center hover:bg-zinc-50 dark:hover:bg-slate-600 border-b border-b-collapse dark:border-gray-500"
               >
                 <td class="text-left py-3 min-w-[200px]">{{ i.title }}</td>
                 <td>

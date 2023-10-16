@@ -16,7 +16,7 @@
             <textarea
               v-model="data.holidayData.description"
               placeholder="описание"
-              class="focus:outline-0 rounded-lg p-2 box-border placeholder-zinc-300 h-40 text-zinc-900 border border-2 border-zinc-300 bg-white w-full focus:outline-0 focus:border-primary"
+              class="rounded-lg p-2 box-border placeholder-zinc-300 h-40 text-zinc-900 border-2 border-zinc-300 bg-white w-full focus:outline-0 focus:border-primary dark:focus:border-primary dark:bg-zinc-700 dark:text-zinc-300 dark:border-zinc-600"
             />
           </div>
         </div>
@@ -24,7 +24,7 @@
         <div class="lg:col-span-1">
           <div
             v-if="!data.holidayData.image"
-            class="border border-2 border-dashed rounded-lg relative"
+            class="border-2 border-dashed rounded-lg relative"
           >
             <div class="my-16 flex flex-col items-center justify-center">
               <input
@@ -46,7 +46,7 @@
       </div>
 
       <div
-        class="sticky z-10 border-t-2 -bottom-1 -mx-8 px-8 flex items-center justify-end py-4 bg-white"
+        class="sticky z-10 border-t-2 dark:border-slate-600 -bottom-1 -mx-8 px-8 flex items-center justify-end py-4 bg-white dark:bg-slate-700"
       >
         <m-button type="submit">добавить</m-button>
       </div>

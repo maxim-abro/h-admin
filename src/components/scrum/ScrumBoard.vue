@@ -1,23 +1,23 @@
 <template>
-  <div class="w-full bg-zinc-100 h-full mb-2 overflow-x-scroll relative">
+  <div class="w-full bg-zinc-100 dark:bg-gray-800 h-full mb-2 overflow-x-scroll relative">
     <div class="flex gap-4 h-full mt-4 absolute">
       <div class="w-[300px]" v-for="(board, _idx) of boardsIn" :key="_idx">
         <h2 class="flex justify-between items-center font-bold mb-4">
           <span>{{ board.title }}</span>
           <button
-            class="relative overflow-visible hover:bg-zinc-300 px-2 rounded"
+            class="relative overflow-visible hover:bg-zinc-300 dark:hover:bg-slate-700 px-2 rounded"
             @click="board.isSettingsOpen = !board.isSettingsOpen"
           >
             <font-awesome-icon icon="ellipsis" />
             <ul
               v-if="board.isSettingsOpen"
-              class="absolute right -0 bottom-0 translate-y-full -translate-x-full shadow-sm bg-white p-2 rounded"
+              class="absolute right -0 bottom-0 translate-y-full -translate-x-full shadow-sm bg-white dark:bg-gray-700 p-2 rounded"
             >
-              <li class="hover:bg-zinc-200 rounded px-1 text">Переименовать</li>
-              <li class="hover:bg-zinc-200 rounded px-1 text">
+              <li class="hover:bg-zinc-200 dark:hover:bg-gray-600 rounded px-1 text">Переименовать</li>
+              <li class="hover:bg-zinc-200 dark:hover:bg-gray-600 rounded px-1 text">
                 Новая карточка
               </li>
-              <li class="hover:bg-zinc-200 rounded px-1 text">Удалить</li>
+              <li class="hover:bg-zinc-200 dark:hover:bg-gray-600 rounded px-1 text">Удалить</li>
             </ul>
           </button>
         </h2>
@@ -30,7 +30,7 @@
         >
           <template #item="{ element, idx }">
             <div
-              class="p-2 border rounded bg-white cursor-grab mb-4 hover:drop-shadow-xl"
+              class="p-2 border dark:border-zinc-600 rounded bg-white dark:bg-gray-700 cursor-grab mb-4 hover:drop-shadow-xl"
             >
               <div>
                 <span

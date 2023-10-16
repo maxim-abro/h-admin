@@ -2,7 +2,7 @@
   <div class="relative">
     <div
       v-if="editor"
-      class="flex py-3 px-1 rounded-t flex-wrap gap-1 bg-zinc-800"
+      class="flex py-3 px-1 rounded-t flex-wrap border-x-2 border-t-2 dark:border-x-slate-700 dark:border-t-slate-700 gap-1 bg-zinc-800"
     >
       <button
         class="rounded px-2 text-white hover:bg-zinc-700"
@@ -146,7 +146,7 @@
         <font-awesome-icon icon="rotate-right" />
       </button>
     </div>
-    <editor-content class="border-2 rounded w-full" :editor="editor" />
+    <editor-content class="border-x-2 border-b-2 dark:border-x-slate-700 dark:border-b-slate-700 rounded-x rounded-b w-full" :editor="editor" />
     <div class="absolute right-2 bottom-1 font-bold text-sm">
       {{ countText }}
     </div>
@@ -179,7 +179,7 @@ const editor = useEditor({
   editorProps: {
     attributes: {
       class:
-        "prose dark:prose-invert prose-sm sm:prose-base lg:prose-lg xl:prose-2xl m-5 focus:outline-none w-full",
+        "prose dark:prose-invert prose-sm sm:prose-base lg:prose-lg xl:prose-2xl dark:prose-invert mx-5 mb-5 focus:outline-none w-full",
     },
   },
   onUpdate: () => {

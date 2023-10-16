@@ -1,6 +1,6 @@
 <template>
   <div class="flex fixed top-0 left-0 w-full h-full z-50">
-    <div class="w-9/12 h-full bg-white overflow-auto z-50 p-3">
+    <div class="w-9/12 h-full bg-white dark:bg-slate-900 overflow-auto z-50 p-3">
       <div
         class="h-16 flex items-center justify-center uppercase text-light text-primary-900 text-center"
       >
@@ -10,7 +10,7 @@
       <template v-for="(item, _idx) of props.menu" :key="item.title">
         <div
           @click="$emit('toggleMenu', _idx)"
-          class="flex cursor-pointer items-center justify-between px-2 mb-0.5 rounded-lg py-1 hover:bg-zinc-300 hover:text-black"
+          class="flex cursor-pointer items-center justify-between px-2 mb-0.5 rounded-lg py-1 hover:bg-zinc-300 dark:hover:bg-slate-800 hover:text-black dark:hover:text-white"
         >
           <div class="">
             <font-awesome-icon class="mr-2" :icon="item.icon" />
@@ -26,7 +26,7 @@
             :to="child.url"
             v-for="child of item.children"
             :key="child.title"
-            class="cursor-pointer rounded-lg flex items-center py-1 hover:bg-zinc-300 hover:text-black"
+            class="cursor-pointer rounded-lg flex items-center py-1 hover:bg-zinc-300 dark:hover:bg-slate-800 hover:text-black dark:hover:text-white"
           >
             <div class="px-4">{{ child.title }}</div>
           </router-link>

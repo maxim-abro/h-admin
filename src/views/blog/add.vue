@@ -50,7 +50,7 @@
           <m-button class="w-max" @click="preview = false">Назад</m-button>
         </div>
         <div
-          class="prose lg:prose-xl prose-stone mb-10 max-w-none prose-a:bg-[#fdb13c60]"
+          class="prose lg:prose-xl prose-stone dark:prose-invert mb-10 max-w-none prose-a:bg-[#fdb13c60]"
         >
           <h1>{{ blogInput.title }}</h1>
           <small>{{ getTextDate(blogInput.date) }}</small>
@@ -58,7 +58,7 @@
         </div>
       </div>
     </m-card>
-    <div class="sticky z-10 border-t-2 -bottom-1 -mx-8 px-8 py-4 bg-white">
+    <div class="sticky z-10 border-t-2 dark:border-slate-600 -bottom-1 -mx-8 px-8 py-4 bg-white dark:bg-slate-700">
       <div class="max-w-[1000px] mx-auto flex items-center justify-end">
         <m-button @click="fetchBlog(blogInput)">добавить</m-button>
       </div>

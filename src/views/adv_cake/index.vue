@@ -1,6 +1,6 @@
 <template>
   <div
-    class="relative h-full flex flex-auto flex-col px-4 sm:px-6 md:px-8 py-4 sm:py-6 md:px-8"
+    class="relative h-full flex flex-auto flex-col px-4 sm:px-6 py-4 sm:py-6 md:px-8"
   >
     <h1 class="mb-4 text-2xl font-bold">Дашборд CPA adv cake</h1>
 
@@ -24,7 +24,7 @@
             </div>
             <div>
               <div class="flex gap-1.5 items-end mb-2">
-                <h3 class="font-bold text-black text-2xl leading-none">
+                <h3 class="font-bold text-black text-2xl leading-none dark:text-white">
                   {{ data.slonShop.length }}
                 </h3>
                 <p class="font-semibold">Доступные магазины</p>
@@ -52,7 +52,7 @@
             </div>
             <div>
               <div class="flex gap-1.5 items-end mb-2">
-                <h3 class="font-bold text-black text-2xl leading-none">
+                <h3 class="font-bold text-black text-2xl leading-none dark:text-white">
                   {{ data.slonLink.length }}
                 </h3>
                 <p class="font-semibold">Линки</p>
@@ -81,7 +81,7 @@
             </button>
             <div>
               <div class="flex gap-1.5 items-end mb-2">
-                <h3 class="font-bold text-black text-2xl leading-none">
+                <h3 class="font-bold text-black text-2xl leading-none dark:text-white">
                   Обновить магазины
                 </h3>
                 <p class="font-semibold"></p>
@@ -110,7 +110,7 @@
             </button>
             <div>
               <div class="flex gap-1.5 items-end mb-2">
-                <h3 class="font-bold text-black text-2xl leading-none">
+                <h3 class="font-bold text-black text-2xl leading-none dark:text-white">
                   Удалить старые линки
                 </h3>
                 <p class="font-semibold"></p>
@@ -150,7 +150,7 @@
         <div class="max-w-full overflow-x-scroll">
           <table class="w-full">
             <thead>
-              <tr class="bg-zinc-50 font-[100]">
+              <tr class="bg-zinc-50 dark:bg-gray-800 font-[100]">
                 <th class="text-left">id</th>
                 <th class="">Название</th>
                 <th class="">url</th>
@@ -161,7 +161,7 @@
               <tr
                 v-for="i of data.filteredSlonShop"
                 :key="i.id"
-                class="text-center hover:bg-zinc-50 border-b border-b-collapse"
+                class="text-center hover:bg-zinc-50 dark:hover:bg-gray-700 border-b border-b-collapse dark:border-gray-700"
               >
                 <td class="text-left py-3">{{ i.id }}</td>
                 <td>

@@ -20,7 +20,7 @@
           <div
             v-for="post of data.holiday.posts"
             :key="post.uin"
-            class="rounded rounded-lg shadow-[0_0_4px_1px_rgba(0,0,0,0.1)] bg-white w-full p-5 mb-5"
+            class="rounded-lg shadow-[0_0_4px_1px_rgba(0,0,0,0.1)] bg-white dark:bg-gray-800 w-full p-5 mb-5"
           >
             <img
               :src="`https://za-halyavoi.ru/api/static/${post.shop.image}`"
@@ -30,7 +30,8 @@
             <div class="text-xl font-medium text-center">{{ post.title }}</div>
 
             <div class="text-sm text-zinc-400 mb-3">
-              <span class="text-black">Магазин </span>{{ post.shop.title }}
+              <span class="text-black dark:text-white">Магазин </span
+              >{{ post.shop.title }}
             </div>
             <div class="">Действителен до {{ post.endDate }}</div>
           </div>
@@ -43,9 +44,9 @@
         <h2 class="mb-5 text-xl font-bold">Добавить купон</h2>
 
         <div class="overflow-x-auto">
-          <table class="table-auto w-full" v-if='data.posts.length'>
+          <table class="table-auto w-full" v-if="data.posts.length">
             <thead>
-              <tr class="bg-zinc-50 font-[100]">
+              <tr class="bg-zinc-50 dark:bg-slate-900 font-[100]">
                 <th>id</th>
                 <th>Название</th>
                 <th>Магазин</th>
@@ -57,7 +58,7 @@
               <tr
                 v-for="post of computedPosts"
                 :key="post.id"
-                class="text-center hover:bg-zinc-50 border-b border-b-collapse cursor-pointer"
+                class="text-center hover:bg-zinc-50 dark:hover:bg-slate-700 border-b border-b-collapse dark:border-slate-800 cursor-pointer"
               >
                 <td class="py-3">{{ post.id }}</td>
                 <td class="">{{ post.title }}</td>

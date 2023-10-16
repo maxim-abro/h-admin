@@ -1,9 +1,9 @@
 <template>
   <div
-    class="relative h-full flex flex-auto flex-col px-4 sm:px-6 md:px-8 py-4 sm:py-6 md:px-8"
+    class="relative h-full flex flex-auto flex-col px-4 sm:px-6 py-4 sm:py-6 md:px-8"
   >
     <div class="flex justify-between items-center flex-col sm:flex-row mb-4">
-      <h1 class="text-xl font-bold mb-2 sm: mb-0">Промокоды</h1>
+      <h1 class="text-xl font-bold sm: mb-0">Промокоды</h1>
 
       <div class="flex items-center">
         <VueMultiselect
@@ -27,7 +27,7 @@
     <m-card class="min-w-full overflow-x-scroll p-3">
       <table class="w-full">
         <thead>
-          <tr class="bg-zinc-100">
+          <tr class="bg-zinc-100 dark:bg-gray-800">
             <th>Название</th>
             <th>Магазин</th>
             <th>Просмотры</th>
@@ -39,7 +39,7 @@
         </thead>
 
         <tbody>
-          <tr v-for="post of data.coupons" :key="post.uin" class="border-y">
+          <tr v-for="post of data.coupons" :key="post.uin" class="border-y dark:border-gray-700">
             <th class="py-2 px-2 min-w-[150px]">{{ post.title }}</th>
             <th class="py-2 px-2">{{ post.shop.title }}</th>
             <th class="py-2 px-2">{{ post.counter }}</th>
@@ -49,13 +49,13 @@
             </th>
             <th class="flex min-w-[100px] items-center justify-center">
               <button
-                class="hover:bg-zinc-200 rounded-full w-8 h-8"
+                class="hover:bg-zinc-200 dark:hover:bg-slate-900 rounded-full w-8 h-8"
                 @click="router.push(`/coupons/edit/${post.uin}`)"
               >
                 <font-awesome-icon icon="pen" />
               </button>
               <button
-                class="hover:bg-zinc-200 rounded-full w-8 h-8 text-red-500"
+                class="hover:bg-zinc-200 dark:hover:bg-slate-900 rounded-full w-8 h-8 text-red-500"
                 @click="deleteCoupon(post.uin)"
               >
                 <font-awesome-icon icon="ban" />

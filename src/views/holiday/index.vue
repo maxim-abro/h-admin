@@ -1,6 +1,6 @@
 <template>
   <div
-    class="relative h-full flex flex-auto flex-col px-4 sm:px-6 md:px-8 py-4 sm:py-6 md:px-8"
+    class="relative h-full flex flex-auto flex-col px-4 sm:px-6 py-4 sm:py-6 md:px-8"
   >
     <div class="flex justify-between items-center mb-8">
       <h1 class="mb-4 text-2xl font-bold">Все события</h1>
@@ -17,7 +17,7 @@
         <div class="max-w-full overflow-x-scroll">
           <table class="w-full">
             <thead>
-              <tr class="bg-zinc-50 font-[100]">
+              <tr class="bg-zinc-50 dark:bg-gray-800 font-[100]">
                 <th class="">id</th>
                 <th class="">Название</th>
                 <th class="">Картинка</th>
@@ -30,7 +30,7 @@
                 v-for="i of data.holidays"
                 :key="i.id_holiday"
                 @click="router.push(`/holiday/${i.lat_title}`)"
-                class="text-center hover:bg-zinc-50 border-b border-b-collapse cursor-pointer"
+                class="text-center hover:bg-zinc-50 dark:hover:bg-gray-700 border-b dark:border-gray-700 border-b-collapse cursor-pointer"
               >
                 <td class="py-3">{{ i.id_holiday }}</td>
                 <td>{{ i.title }}</td>

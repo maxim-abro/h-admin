@@ -1,6 +1,6 @@
 <template>
   <div
-    class="relative h-full flex flex-auto flex-col px-4 sm:px-6 md:px-8 py-4 sm:py-6 md:px-8"
+    class="relative h-full flex flex-auto flex-col px-4 sm:px-6 py-4 sm:py-6 md:px-8"
   >
     <h1 class="mb-4 text-2xl font-bold">Добавить линк с CPA gde slon</h1>
     <m-card>
@@ -12,7 +12,7 @@
         <div class="grid grid-cols-2 gap-4">
           <select
             v-model="data.linkDto.id_slon"
-            class="block mb-5 placeholder-zinc-800 text-zinc-900 border border-zinc-300 bg-white focus:outline-0 rounded p-2 box-border w-full focus:outline-0 focus:ring focus:ring-primary"
+            class="block mb-5 placeholder-zinc-800 text-zinc-900 border border-zinc-300 bg-white rounded p-2 box-border w-full focus:outline-0 focus:ring focus:ring-primary dark:focus:border-primary dark:bg-zinc-700 dark:text-zinc-300 dark:border-zinc-600"
           >
             <option :value="i.id" v-for="i of notAddedShops" :key="i.id">
               {{ i.title }}
@@ -20,7 +20,7 @@
           </select>
           <select
             v-model="data.linkDto.uin_shop"
-            class="block mb-5 placeholder-zinc-800 text-zinc-900 border border-zinc-300 bg-white focus:outline-0 rounded p-2 box-border w-full focus:outline-0 focus:ring focus:ring-primary"
+            class="block mb-5 placeholder-zinc-800 text-zinc-900 border border-zinc-300 bg-white rounded p-2 box-border w-full focus:outline-0 focus:ring focus:ring-primary dark:focus:border-primary dark:bg-zinc-700 dark:text-zinc-300 dark:border-zinc-600"
           >
             <option :value="i.uin" v-for="i of orderShops" :key="i.id">
               {{ i.title }}

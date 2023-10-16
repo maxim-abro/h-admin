@@ -1,6 +1,6 @@
 <template>
   <div
-    class="slide-nav px-3 bg-zinc-200"
+    class="slide-nav px-3 bg-zinc-200 dark:bg-slate-700 dark:text-slate-300"
     :class="aside.open ? 'slide-nav-expand' : ''"
     :style="`width:${aside.open ? '290px' : '80px'}`"
   >
@@ -12,7 +12,7 @@
     <template v-for="(item, _idx) of props.menu" :key="item.title">
       <div
         @click="$emit('toggleMenu', _idx)"
-        class="flex cursor-pointer items-center px-2 mb-0.5 rounded-lg py-1 hover:bg-zinc-300 hover:text-black"
+        class="flex cursor-pointer items-center px-2 mb-0.5 rounded-lg py-1 hover:bg-zinc-300 hover:dark:bg-slate-600 hover:text-black dark:hover:text-slate-100"
         :class="aside.open ? 'justify-between' : 'justify-center'"
       >
         <div class="">
@@ -30,7 +30,7 @@
           :to="child.url"
           v-for="child of item.children"
           :key="child.title"
-          class="cursor-pointer rounded-lg flex items-center py-1 hover:bg-zinc-300 hover:text-black"
+          class="cursor-pointer rounded-lg flex items-center py-1 hover:bg-zinc-300 hover:dark:bg-slate-600 hover:text-black dark:hover:text-slate-100"
         >
           <div class="px-4">{{ child.title }}</div>
         </router-link>

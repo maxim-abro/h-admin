@@ -13,7 +13,7 @@
       @toggle-menu="toggleMenu($event)"
     />
     <div
-      class="flex flex-col flex-auto min-h-screen relative w-full bg-zinc-100 border-1 border-gray200"
+      class="flex flex-col flex-auto min-h-screen relative w-full bg-zinc-100 border-1 border-gray-200 dark:border-slate-900 dark:text-slate-300 dark:bg-slate-900"
     >
       <m-head />
       <m-mobile-aside

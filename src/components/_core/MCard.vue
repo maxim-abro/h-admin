@@ -1,18 +1,16 @@
 <template>
-  <div class="card card-border"><slot/></div>
+  <div class="card card-border rounded-[0.5rem]"><slot/></div>
 </template>
 
 <style scoped>
 .card-border {
-  border-color: rgba(229, 231, 235, var(--tw-border-opacity));
-  border-width: 1px;
-}
-.card-border,
-.dark .card-border {
-  --tw-border-opacity: 1;
+  @apply bg-white border dark:border-zinc-900 dark:bg-gray-800;
 }
 .card {
-  background-color: rgba(255,255,255,var(--tw-bg-opacity));
-  border-radius: 0.5rem;
+  @apply bg-white;
+}
+
+body.dark .card {
+  background: rgb(31 41 55);
 }
 </style>

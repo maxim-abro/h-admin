@@ -1,6 +1,6 @@
 <template>
   <div
-    class="relative h-full flex flex-auto flex-col px-4 sm:px-6 md:px-8 py-4 sm:py-6 md:px-8"
+    class="relative h-full flex flex-auto flex-col px-4 sm:px-6 py-4 sm:py-6 md:px-8"
   >
     <div class="flex justify-between flex-col sm:flex-row items-center mb-4">
       <h1 class="text-xl font-bold">Магазины</h1>
@@ -22,7 +22,7 @@
       <div class="max-w-full overflow-x-scroll">
         <table class="w-full">
           <thead>
-            <tr class="bg-zinc-100">
+            <tr class="bg-zinc-100 dark:bg-gray-800">
               <th></th>
               <th
                 @click="handleOrder('title')"
@@ -95,7 +95,7 @@
           </thead>
 
           <tbody>
-            <tr v-for="shop of orderedShops" :key="shop.uin" class="border-y">
+            <tr v-for="shop of orderedShops" :key="shop.uin" class="border-y dark:border-gray-700">
               <td class="py-2 px-2 w-24">
                 <img
                   class="ml-auto"
