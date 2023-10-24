@@ -4,7 +4,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { useConfigStore } from "@/stores/config";
 let configStore = useConfigStore();
 </script>

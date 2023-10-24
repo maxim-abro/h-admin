@@ -1,6 +1,6 @@
 <template>
   <div
-    class="rounded text-white p-2 fixed bottom-3 shadow shadow-lg shadow-zinc-500 left-1/2 z-50 w-11/12 -translate-x-1/2"
+    class="rounded text-white p-2 fixed bottom-3 shadow-lg shadow-zinc-500 left-1/2 z-50 w-11/12 -translate-x-1/2"
     :class="computedType"
     v-if="openProps"
   >

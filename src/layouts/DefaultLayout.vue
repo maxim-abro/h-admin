@@ -35,7 +35,7 @@
 import MAlert from "@/components/_core/MAlert.vue";
 import MGlobalLoad from "@/components/_core/MGlobalLoad.vue";
 import MHead from "@/components/MHead.vue";
-import { onMounted, reactive } from "vue";
+import { onMounted, reactive, watch } from "vue";
 import { useAlertStore } from "@/stores/alert";
 import MAside from "@/components/MAside.vue";
 import { useAsideStore } from "@/stores/aside";
@@ -48,6 +48,14 @@ const aside = useAsideStore();
 const alertStore = useAlertStore();
 const popup = usePopupStore();
 const auth = useAuthStore();
+
+interface Menu {
+  title: string;
+  url: string;
+  icon: string;
+  open?: boolean;
+  children?: Menu[];
+}
 
 const data = reactive({
   openMenu: false as boolean,
@@ -188,7 +196,7 @@ const data = reactive({
         },
       ],
     },
-  ],
+  ] as Menu[],
 });
 
 onMounted(async () => {
@@ -203,6 +211,10 @@ function toggleMenu(idx: number) {
     result.open = !result.open;
   }
 }
-</script>
 
-<style scoped></style>
+watch(() => aside.open, () => {
+  data.menuItems.forEach(i => {
+    i.open = false;
+  });
+});
+</script>

@@ -11,10 +11,28 @@
     </div>
     <template v-for="(item, _idx) of props.menu" :key="item.title">
       <div
-        @click="$emit('toggleMenu', _idx)"
-        class="flex cursor-pointer items-center px-2 mb-0.5 rounded-lg py-1 hover:bg-zinc-300 hover:dark:bg-slate-600 hover:text-black dark:hover:text-slate-100"
+        @click="aside.open ? $emit('toggleMenu', _idx) : ''"
+        @mouseenter="!aside.open ? (item.open = true) : ''"
+        @mouseleave="!aside.open ? (item.open = false) : ''"
+        class="flex cursor-pointer items-center px-2 mb-0.5 rounded-lg py-1 hover:bg-zinc-300 hover:dark:bg-slate-600 hover:text-black dark:hover:text-slate-100 relative overflow-visible"
         :class="aside.open ? 'justify-between' : 'justify-center'"
       >
+        <div
+          v-if="!aside.open && item.open && item.children?.length"
+          class="absolute right-0 top-0 translate-x-full bg-white dark:bg-slate-600 z-50 shadow-xl p-2 rounded-lg"
+        >
+          <ul>
+            <li
+              v-for="child of item.children"
+              :key="child.title"
+              class="my-2 break-keep m-2 p-1 rounded-lg font-bold hover:bg-zinc-200 dark:hover:bg-slate-500"
+            >
+              <router-link :to="child.url" class="whitespace-nowrap px-2">{{
+                child.title
+              }}</router-link>
+            </li>
+          </ul>
+        </div>
         <div class="">
           <font-awesome-icon class="mr-2" :icon="item.icon" />
           <span v-if="aside.open">{{ item.title }}</span>
