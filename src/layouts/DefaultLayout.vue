@@ -153,6 +153,21 @@ const data = reactive({
       ],
     },
     {
+      title: "perfluence",
+      icon: "handshake",
+      open: false,
+      children: [
+        {
+          title: "Дашборд",
+          url: "/perfluence",
+        },
+        {
+          title: "Линки",
+          url: "/perfluence/link",
+        },
+      ],
+    },
+    {
       title: "vk",
       icon: "fa-brands fa-vk",
       open: false,

@@ -150,6 +150,14 @@ const router = createRouter({
         auth: true,
       },
     },
+    {
+      path: "/perfluence/link",
+      name: "perfluence_links",
+      component: () => import("@/views/perfluence/links.vue"),
+      meta: {
+        auth: true,
+      },
+    },
   ],
 });
 
