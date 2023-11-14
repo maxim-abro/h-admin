@@ -158,6 +158,14 @@ const router = createRouter({
         auth: true,
       },
     },
+    {
+      path: "/perfluence",
+      name: "perfluenceDash",
+      component: () => import("@/views/perfluence/index.vue"),
+      meta: {
+        auth: true,
+      },
+    },
   ],
 });
 
