@@ -73,7 +73,7 @@
           <img
             class="w-1/2 mx-auto"
             v-if="shopForm.image"
-            :src="`https://za-halyavoi.ru/api/static/${shopForm.image}`"
+            :src="shopForm.image"
             alt
           />
         </m-card>
@@ -139,8 +139,8 @@ const inputImage = async (event: any) => {
     load.handleLoad();
     const formData = new FormData();
     formData.append("file", event.target.files[0]);
-    const res = await http.post("/upload", formData);
-    shopForm.value.image = res.data;
+    const res = await http.post("/upload?folder=shops", formData);
+    shopForm.value.image = res.data.fileUrl;
     alert.handleAlert("Картинка загружена", "success");
     load.handleLoad();
   } catch (e) {
