@@ -99,7 +99,7 @@
               <td class="py-2 px-2 w-24">
                 <img
                   class="ml-auto"
-                  :src="`https://za-halyavoi.ru/api/static/${shop.image}`"
+                  :src="shop.image"
                   :alt="shop.image"
                 />
               </td>
