@@ -139,8 +139,8 @@ async function fetchImage(event: any) {
     load.handleLoad();
     const formData = new FormData();
     formData.append("file", event.target.files[0]);
-    const res = await http.post("/upload_blog", formData);
-    blogInput.value.preview = `/blog/${res.data}`;
+    const res = await http.post("/upload?folder=blog", formData);
+    blogInput.value.preview = res.data.fileUrl;
     alert.handleAlert("Изображение загружено", "danger");
     load.handleLoad();
   } catch (e) {

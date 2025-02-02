@@ -84,9 +84,9 @@ const inputImage = async (event) => {
     const formData = new FormData();
     formData.append("file", event.target.files[0]);
 
-    const res = await http.post("/upload_holiday", formData);
+    const res = await http.post("/upload?folder=holidays", formData);
 
-    data.holidayData.image = res.data;
+    data.holidayData.image = res.data.fileUrl;
 
     alert.handleAlert("Картинка загружена", "success");
     load.handleLoad();
